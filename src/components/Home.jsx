@@ -1,9 +1,15 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 const Home = () => {
   return (
     <div>
-      <h1>Home</h1>
+      <Typography variant="h1" color="textPrimary">
+        WELCOME
+      </Typography>
     </div>
   );
 };
