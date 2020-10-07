@@ -1,11 +1,17 @@
 import React from "react";
+// eslint-disable-next-line no-unused-vars
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <CssBaseline />
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -1,22 +1,29 @@
 import React from "react";
+// eslint-disable-next-line no-unused-vars
+import { withRoute, Route, Switch } from "react-router-dom";
 import "./App.css";
+import Header from "./components/Header";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import Home from "./components/Home";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <Switch>
+        <Route exact path="/" render={(props) => <Home props={props} />} />
+        <Route
+          exact
+          path="/login"
+          render={(props) => <Login props={props} />}
+        />
+        <Route
+          exact
+          path="/register"
+          render={(props) => <Register props={props} />}
+        />
+      </Switch>
     </div>
   );
 }
