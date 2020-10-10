@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div>
       <Typography variant="h1" color="textPrimary">
-        WELCOME
+        THIS IS THE HOME PAGE
       </Typography>
     </div>
   );

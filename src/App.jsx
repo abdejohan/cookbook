@@ -6,12 +6,13 @@ import Header from "./components/Header";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
-// import Note from "./components/Note";
+import Note from "./components/Note";
 
 function App() {
   return (
     <div>
       <Header />
+      <Note />
       <Switch>
         <Route exact path="/" render={(props) => <Home props={props} />} />
         <Route
