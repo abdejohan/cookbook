@@ -1,6 +1,6 @@
 import React from "react";
 // eslint-disable-next-line no-unused-vars
-import { withRoute, Route, Switch } from "react-router-dom";
+import { withRoute, Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import Register from "./components/Register";
@@ -8,11 +8,13 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import Note from "./components/Note";
 
-function App() {
+const App = () => {
+  const location = useLocation();
+
   return (
     <div>
       <Header />
-      <Note />
+      {location.pathname === "/" && <Note />}
       <Switch>
         <Route exact path="/" render={(props) => <Home props={props} />} />
         <Route
@@ -28,6 +30,6 @@ function App() {
       </Switch>
     </div>
   );
-}
+};
 
 export default App;

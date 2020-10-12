@@ -48,7 +48,6 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Note = (props) => {
-  console.log(props);
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => console.log(data);
   const classes = useStyles();
