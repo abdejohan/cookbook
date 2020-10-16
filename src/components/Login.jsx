@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,6 +12,9 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useForm, Controller } from "react-hook-form";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,7 +38,28 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const history = useHistory();
   const { register, handleSubmit, control } = useForm();
+  const { setUserData } = useContext(UserContext);
+
+  const onSubmit = async (data) => {
+    const { email, password } = data;
+    const loginUser = { email, password };
+    try {
+      const loginRes = await axios.post(
+        "http://localhost:5000/users/login",
+        loginUser
+      );
+      setUserData({
+        token: loginRes.data.token,
+        user: loginRes.data.user,
+      });
+      localStorage.setItem("auth-token", loginRes.data.token);
+      history.push("/");
+    } catch (error) {
+      console.log(`THIS MESSAGE:${error}`);
+    }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -50,7 +74,7 @@ export default function SignIn() {
         <form
           className={classes.form}
           noValidate
-          onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <TextField
             variant="outlined"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -10,6 +10,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,6 +39,7 @@ const Header = (props) => {
   const open = Boolean(anchorEl);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { userData, setUserData } = useContext(UserContext);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -47,6 +49,16 @@ const Header = (props) => {
     // eslint-disable-next-line react/prop-types
     history.push(pageURL);
     setAnchorEl(null);
+  };
+
+  const logOut = () => {
+    setTimeout(() => {
+      setUserData({
+        token: undefined,
+        user: undefined,
+      });
+      localStorage.setItem("auth-token", "");
+    }, 1000);
   };
 
   return (
@@ -86,37 +98,47 @@ const Header = (props) => {
                   onClose={() => setAnchorEl(null)}
                 >
                   <MenuItem onClick={() => handleMenuClick("/")}>Home</MenuItem>
-                  <MenuItem onClick={() => handleMenuClick("/login")}>
-                    Login
-                  </MenuItem>
-                  <MenuItem onClick={() => handleMenuClick("/profile")}>
-                    Profile
-                  </MenuItem>
-                  <MenuItem onClick={() => handleMenuClick("/about")}>
-                    About
-                  </MenuItem>
+                  {userData.user ? (
+                    <MenuItem onClick={() => logOut()}>Logout</MenuItem>
+                  ) : (
+                    <>
+                      <MenuItem onClick={() => handleMenuClick("/login")}>
+                        Login
+                      </MenuItem>
+
+                      <MenuItem onClick={() => handleMenuClick("/register")}>
+                        Register
+                      </MenuItem>
+                    </>
+                  )}
                 </Menu>
               </div>
             ) : (
               <div className={classes.headerOptions}>
-                <Button
-                  variant="contained"
-                  onClick={() => handleMenuClick("/")}
-                >
-                  Home
-                </Button>
-                <Button
-                  variant="contained"
-                  onClick={() => handleMenuClick("/login")}
-                >
-                  Login
-                </Button>
-                <Button
-                  variant="contained"
-                  onClick={() => handleMenuClick("/register")}
-                >
-                  Register
-                </Button>
+                {userData.user ? (
+                  <Button onClick={() => logOut()}>Logout</Button>
+                ) : (
+                  <>
+                    <Button
+                      variant="contained"
+                      onClick={() => handleMenuClick("/")}
+                    >
+                      Home
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={() => handleMenuClick("/login")}
+                    >
+                      Login
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={() => handleMenuClick("/register")}
+                    >
+                      Register
+                    </Button>
+                  </>
+                )}
               </div>
             )}
           </div>

@@ -1,23 +1,14 @@
-/* eslint-disable no-unused-vars */
-import React from "react";
-// import { withRouter } from "react-router-dom";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-// mport { makeStyles, useTheme } from "@material-ui/core/styles";
-// import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import Card from "@material-ui/core/Card";
+// import Card from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";
-import { withRouter } from "react-router-dom";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
+import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import Button from "@material-ui/core/Button";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import axios from "axios";
+import UserContext from "../context/UserContext";
+
 // import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(() => ({
@@ -35,13 +26,14 @@ const useStyles = makeStyles(() => ({
   form: {
     height: "80%",
     flexGrow: "2",
+    maxWidth: "1000px",
     display: "flex",
     flexFlow: "column wrap",
     justifyContent: "space-between",
-    alignItems: "flex-start",
+    alignItems: "center",
   },
   textField: {
-    minWidth: "400px",
+    width: "100%",
     marginBottom: "20px",
   },
   card: {
@@ -52,18 +44,41 @@ const useStyles = makeStyles(() => ({
   section: {
     display: "flex",
     flexFlow: "row nowrap",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
     width: "100%",
     padding: "20px",
   },
+  inputFieldTitles: {
+    display: "flex",
+    alignSelf: "flex-start",
+  },
 }));
 
-const Register = (props) => {
+const Register = () => {
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const { setUserData } = useContext(UserContext);
   const classes = useStyles();
+  const history = useHistory();
 
+  const onSubmit = async (data) => {
+    try {
+      const { email, password } = data;
+      await axios.post("http://localhost:5000/users/register", data);
+      const loginRes = await axios.post("http://localhost:5000/users/login", {
+        email,
+        password,
+      });
+      setUserData({
+        token: loginRes.data.token,
+        user: loginRes.data.user,
+      });
+      localStorage.setItem("auth-token", loginRes.data.token);
+      history.push("/");
+    } catch (error) {
+      console.log(`THIS MESSAGE:${error}`);
+    }
+  };
   return (
     <Paper className={classes.paper}>
       <Typography variant="h1">Register</Typography>
@@ -73,7 +88,20 @@ const Register = (props) => {
           autoComplete="off"
           className={classes.form}
         >
-          <Typography variant="subtitle1" display="block" aling="left">
+          <Typography variant="subtitle1" className={classes.inputFieldTitles}>
+            Enter Email
+          </Typography>
+          <TextField
+            className={classes.textField}
+            name="email"
+            inputRef={register({ required: true })}
+            id="outlined-basic"
+            label="Ex. steve@gmail.com"
+            variant="outlined"
+          />
+          {errors.email && <span>This field is required</span>}
+
+          <Typography variant="subtitle1" className={classes.inputFieldTitles}>
             Select Username
           </Typography>
           <TextField
@@ -85,40 +113,34 @@ const Register = (props) => {
             variant="outlined"
           />
 
-          <Typography variant="subtitle1" display="block" aling="left">
+          <Typography variant="subtitle1" className={classes.inputFieldTitles}>
             Select Password (must be more than 6 caracters)
           </Typography>
           <TextField
             className={classes.textField}
             name="password"
-            inputRef={register}
+            inputRef={register({ required: true })}
             id="outlined-basic"
             label="**********"
             variant="outlined"
           />
-          <Typography variant="subtitle1" display="block" aling="left">
-            Enter your emailadress (optional)
+          {errors.password && <span>This field is required</span>}
+
+          <Typography variant="subtitle1" className={classes.inputFieldTitles}>
+            Enter password again
           </Typography>
           <TextField
             className={classes.textField}
-            name="email"
-            inputRef={register}
+            name="passwordCheck"
+            inputRef={register({ required: true })}
             id="outlined-basic"
-            label="Ex. steve@gmail.com"
+            label="**********"
             variant="outlined"
           />
+          {errors.passwordCheck && <span>This field is required</span>}
 
           <input type="submit" />
         </form>
-        <Card className={classes.card}>
-          <Typography>As a registerd user:</Typography>
-          <p>
-            You will have your own outlet for your culinary work You will have
-            your own outlet for your culinary work You will have your own outlet
-            for your culinary work You will have your own outlet for your
-            culinary work
-          </p>
-        </Card>
       </section>
     </Paper>
   );

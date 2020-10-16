@@ -1,33 +1,54 @@
-import React from "react";
-// eslint-disable-next-line no-unused-vars
-import { withRoute, Route, Switch, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+import axios from "axios";
 import Header from "./components/Header";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
+// eslint-disable-next-line no-unused-vars
 import Note from "./components/Note";
+import UserContext from "./context/UserContext";
 
 const App = () => {
-  const location = useLocation();
+  const [userData, setUserData] = useState({
+    token: undefined,
+    user: undefined,
+  });
 
+  useEffect(() => {
+    const checkLoggedIn = async () => {
+      let token = localStorage.getItem("auth-token");
+      if (token === null) {
+        localStorage.setItem("auth-token", "");
+        token = "";
+      }
+      const tokenRes = await axios.post(
+        "http://localhost:5000/users/tokenIsValid",
+        null,
+        { headers: { "x-auth-token": token } }
+      );
+      if (tokenRes.data) {
+        const userRes = await axios.get("http://localhost:5000/users/", {
+          headers: { "x-auth-token": token },
+        });
+        setUserData({ token, user: userRes.data });
+      }
+    };
+    checkLoggedIn();
+  }, []);
   return (
     <div>
-      <Header />
-      {location.pathname === "/" && <Note />}
-      <Switch>
-        <Route exact path="/" render={(props) => <Home props={props} />} />
-        <Route
-          exact
-          path="/login"
-          render={(props) => <Login props={props} />}
-        />
-        <Route
-          exact
-          path="/register"
-          render={(props) => <Register props={props} />}
-        />
-      </Switch>
+      <Router>
+        <UserContext.Provider value={{ userData, setUserData }}>
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+          </Switch>
+        </UserContext.Provider>
+      </Router>
     </div>
   );
 };
