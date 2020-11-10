@@ -99,9 +99,14 @@ const Header = (props) => {
                 >
                   <MenuItem onClick={() => handleMenuClick("/")}>Home</MenuItem>
                   {userData.user ? (
-                    <MenuItem onClick={() => logOut()}>Logout</MenuItem>
+                    <div>
+                      <MenuItem onClick={() => handleMenuClick("/profile")}>
+                        My Profile
+                      </MenuItem>
+                      <MenuItem onClick={() => logOut()}>Logout</MenuItem>
+                    </div>
                   ) : (
-                    <>
+                    <div>
                       <MenuItem onClick={() => handleMenuClick("/login")}>
                         Login
                       </MenuItem>
@@ -109,16 +114,21 @@ const Header = (props) => {
                       <MenuItem onClick={() => handleMenuClick("/register")}>
                         Register
                       </MenuItem>
-                    </>
+                    </div>
                   )}
                 </Menu>
               </div>
             ) : (
               <div className={classes.headerOptions}>
                 {userData.user ? (
-                  <Button onClick={() => logOut()}>Logout</Button>
+                  <div>
+                    <Button onClick={() => handleMenuClick("/profile")}>
+                      Profile
+                    </Button>
+                    <Button onClick={() => logOut()}>Logout</Button>
+                  </div>
                 ) : (
-                  <>
+                  <div>
                     <Button
                       variant="contained"
                       onClick={() => handleMenuClick("/")}
@@ -137,7 +147,7 @@ const Header = (props) => {
                     >
                       Register
                     </Button>
-                  </>
+                  </div>
                 )}
               </div>
             )}

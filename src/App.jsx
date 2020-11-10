@@ -9,6 +9,7 @@ import Home from "./components/Home";
 // eslint-disable-next-line no-unused-vars
 import Note from "./components/Note";
 import UserContext from "./context/UserContext";
+import UserProfile from "./components/UserProfile";
 
 const App = () => {
   const [userData, setUserData] = useState({
@@ -46,6 +47,7 @@ const App = () => {
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/profile" component={UserProfile} />
           </Switch>
         </UserContext.Provider>
       </Router>
