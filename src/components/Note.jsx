@@ -24,26 +24,34 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
     display: "flex",
     flexFlow: "column nowrap",
-    width: "80%",
-    margin: "0 auto",
-    marginTop: "100px",
-    minHeight: "500px",
+    width: "100%",
     justifyContent: "center",
   },
   form: {
-    width: "80%",
-    height: "80%",
+    width: "100%",
     display: "flex",
-    flexFlow: "column wrap",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexFlow: "column nowrap",
+    alignItems: "flex-start",
   },
-  textField: {
-    width: "80%",
-    marginBottom: "20px",
-  },
-  content: {
+  textarea: {
+    padding: "10px",
+    width: "100%",
     height: "300px",
+  },
+  textFieldHeader: {
+    marginTop: "20px",
+    marginBottom: "5px",
+  },
+  ingredients: {
+    height: "300px",
+  },
+  instructions: {
+    height: "300px",
+  },
+  submitBttn: {
+    marginTop: "20px",
+    padding: "10px 60px",
+    alignSelf: "flex-end",
   },
 }));
 
@@ -53,31 +61,30 @@ const Note = (props) => {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.paper}>
-      <Typography variant="h1">Create Note</Typography>
+    <div className={classes.paper}>
+      <Typography variant="h4">Create Note</Typography>
       <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-        <TextField
-          className={classes.textField}
-          name="title"
-          inputRef={register}
-          id="outlined-basic"
-          label="Outlined"
-          variant="outlined"
+        <Typography className={classes.textFieldHeader}>Ingredients</Typography>
+        <textarea
+          className={(classes.ingredients, classes.textarea)}
+          name="ingredients"
+          placeholder="Write ingredients in a list format"
         />
-
-        <TextField
-          className={classes.textField}
-          name="content"
-          inputRef={register}
-          inputProps={{ className: classes.content }}
-          id="outlined-basic"
-          label="Enter your text here.. ."
-          variant="outlined"
+        <Typography className={classes.textFieldHeader}>
+          Instructions
+        </Typography>
+        <textarea
+          className={(classes.instructions, classes.textarea)}
+          name="instructions"
+          placeholder="Try and give as clear and direct instructions"
         />
-
-        <input type="submit" />
+        <input
+          type="submit"
+          className={classes.submitBttn}
+          value="Generate &#x21E8;"
+        />
       </form>
-    </Paper>
+    </div>
   );
 };
 
