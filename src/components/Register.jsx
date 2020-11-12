@@ -64,8 +64,8 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       const { email, password } = data;
-      await axios.post("http://localhost:5000/users/register", data);
-      const loginRes = await axios.post("http://localhost:5000/users/login", {
+      await axios.post("http://localhost:5000/user/register", data);
+      const loginRes = await axios.post("http://localhost:5000/user/login", {
         email,
         password,
       });
