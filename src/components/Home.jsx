@@ -3,6 +3,7 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useContext, useState } from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -67,9 +68,19 @@ const Home = () => {
   const [value, setValue] = React.useState(0);
   const [inputValue, setInputValue] = useState("");
 
-  const handleSearchChange = (e) => {
-    setFilter(e.target.value);
-    return filter;
+  const handleSearchChange = async (e) => {
+    const searchResponse = e.target.value;
+    console.log(searchResponse);
+    try {
+      const searchRequest = await axios.get(
+        `http://localhost:5000/search?term=${e.target.value}`
+      );
+      searchRequest.data.forEach((element) => {
+        console.log(element);
+      });
+    } catch (error) {
+      console.log(`THIS MESSAGE:${error}`);
+    }
   };
 
   // useEffect(() => {
