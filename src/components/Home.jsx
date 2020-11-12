@@ -2,7 +2,7 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -12,15 +12,14 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { useHistory } from "react-router-dom";
+import SearchIcon from "@material-ui/icons/Search";
+import InputBase from "@material-ui/core/InputBase";
 import UserContext from "../context/UserContext";
 import Note from "./Note";
 import Login from "./Login";
 import UserProfile from "./UserProfile";
 
-// import { withRouter } from "react-router-dom";
-// import { makeStyles, useTheme } from "@material-ui/core/styles";
-// import Button from "@material-ui/core/Button";
-
+// tab stuff starts here -----------------------------------------------------------------------------------
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -48,19 +47,30 @@ function a11yProps(index) {
     "aria-controls": `full-width-tabpanel-${index}`,
   };
 }
+// tab stuff ends here -----------------------------------------------------------------------------------
 
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
   },
+  searchField: {
+    marginBottom: "20px",
+  },
 }));
 
 const Home = () => {
+  const [filter, setFilter] = useState("");
   const { userData } = useContext(UserContext);
   const history = useHistory();
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
+  const [inputValue, setInputValue] = useState("");
+
+  const handleSearchChange = (e) => {
+    setFilter(e.target.value);
+    return filter;
+  };
 
   // useEffect(() => {
   //    if (!userData.user) {
@@ -98,7 +108,20 @@ const Home = () => {
           onChangeIndex={handleChangeIndex}
         >
           <TabPanel value={value} index={0} dir={theme.direction}>
-            <Note />
+            <section>
+              <div className={classes.searchField}>
+                <label htmlFor="search">
+                  Search for User or Recipe
+                  <input
+                    id="search"
+                    type="text"
+                    placeholder="Search"
+                    onChange={handleSearchChange}
+                  />
+                </label>
+              </div>
+              <Note />
+            </section>
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
             {!userData.user ? <Login /> : <UserProfile />}

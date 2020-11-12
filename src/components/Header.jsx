@@ -10,8 +10,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import SearchIcon from "@material-ui/icons/Search";
-import InputBase from "@material-ui/core/InputBase";
 import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -77,7 +75,6 @@ const Header = (props) => {
   const { history } = props;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [filter, setFilter] = useState("");
   const open = Boolean(anchorEl);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -103,11 +100,6 @@ const Header = (props) => {
     }, 1000);
   };
 
-  const handleChange = (e) => {
-    setFilter(e.target.value);
-    console.log(filter);
-  };
-
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.AppBar}>
@@ -115,21 +107,6 @@ const Header = (props) => {
           <Typography variant="h6" className={classes.title}>
             Photos
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              id="searchField"
-              onChange={handleChange}
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
           <div>
             {isMobile ? (
               <div>
