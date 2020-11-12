@@ -1,22 +1,9 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
 // import { withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
-// mport { makeStyles, useTheme } from "@material-ui/core/styles";
-// import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
-import { withRouter } from "react-router-dom";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
+import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import Button from "@material-ui/core/Button";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+
 // import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(() => ({
@@ -24,60 +11,87 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
     display: "flex",
     flexFlow: "column nowrap",
-    width: "80%",
-    margin: "0 auto",
-    marginTop: "100px",
-    minHeight: "500px",
+    width: "100%",
     justifyContent: "center",
   },
   form: {
-    width: "80%",
-    height: "80%",
+    width: "100%",
     display: "flex",
-    flexFlow: "column wrap",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexFlow: "column nowrap",
+    alignItems: "flex-start",
   },
-  textField: {
-    width: "80%",
-    marginBottom: "20px",
+  textarea: {
+    padding: "10px",
+    width: "100%",
   },
-  content: {
-    height: "300px",
+  title: {
+    padding: "10px",
+    width: "100%",
+  },
+  textFieldHeader: {
+    marginTop: "20px",
+    marginBottom: "5px",
+  },
+  ingredients: {
+    height: "200px",
+  },
+  instructions: {
+    height: "200px",
+  },
+  description: {
+    height: "100px",
+  },
+  submitBttn: {
+    marginTop: "20px",
+    padding: "10px 60px",
+    alignSelf: "flex-end",
   },
 }));
 
-const Note = (props) => {
-  const { register, handleSubmit, errors } = useForm();
+const Note = () => {
+  const { handleSubmit } = useForm();
   const onSubmit = (data) => console.log(data);
   const classes = useStyles();
 
   return (
-    <Paper className={classes.paper}>
-      <Typography variant="h1">Create Note</Typography>
+    <div className={classes.paper}>
+      <Typography variant="h4">Create Note</Typography>
       <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-        <TextField
-          className={classes.textField}
+        <Typography className={classes.textFieldHeader}>Title</Typography>
+        <textarea
+          className={`${classes.title} ${classes.textarea}`}
           name="title"
-          inputRef={register}
-          id="outlined-basic"
-          label="Outlined"
-          variant="outlined"
+          placeholder="Keep the title short and as descriptive as possible."
         />
-
-        <TextField
-          className={classes.textField}
-          name="content"
-          inputRef={register}
-          inputProps={{ className: classes.content }}
-          id="outlined-basic"
-          label="Enter your text here.. ."
-          variant="outlined"
+        <Typography className={classes.textFieldHeader}>
+          Description (Optional)
+        </Typography>
+        <textarea
+          className={`${classes.description} ${classes.textarea}`}
+          name="description"
+          placeholder="if description is needed; please keep it short."
         />
-
-        <input type="submit" />
+        <Typography className={classes.textFieldHeader}>Ingredients</Typography>
+        <textarea
+          className={`${classes.ingredients} ${classes.textarea}`}
+          name="ingredients"
+          placeholder="Write your ingredients in a list format"
+        />
+        <Typography className={classes.textFieldHeader}>
+          Instructions
+        </Typography>
+        <textarea
+          className={`${classes.instructions} ${classes.textarea}`}
+          name="instructions"
+          placeholder="Try and give as clear and direct instructions"
+        />
+        <input
+          type="submit"
+          className={classes.submitBttn}
+          value="Generate &#x21E8;"
+        />
       </form>
-    </Paper>
+    </div>
   );
 };
 
