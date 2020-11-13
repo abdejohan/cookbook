@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/forbid-prop-types */
@@ -17,6 +18,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import UserContext from "../context/UserContext";
 import Note from "./Note";
+import Posts from "./Posts";
 import Login from "./Login";
 import UserProfile from "./UserProfile";
 
@@ -60,24 +62,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Home = () => {
-  const [filter, setFilter] = useState("");
   const { userData } = useContext(UserContext);
   const history = useHistory();
   const classes = useStyles();
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
-  const [inputValue, setInputValue] = useState("");
+  const [value, setValue] = useState(0);
+  const [searchResponseList, setSearchResponseList] = useState([]);
+  console.log(searchResponseList);
 
-  const handleSearchChange = async (e) => {
-    const searchResponse = e.target.value;
-    console.log(searchResponse);
+  const handleSearchClick = async () => {
+    const searchElement = document.getElementById("search");
     try {
       const searchRequest = await axios.get(
-        `http://localhost:5000/search?term=${e.target.value}`
+        `http://localhost:5000/search?term=${searchElement.value}`
       );
-      searchRequest.data.forEach((element) => {
-        console.log(element);
-      });
+      setSearchResponseList(searchRequest.data);
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);
     }
@@ -123,13 +122,25 @@ const Home = () => {
               <div className={classes.searchField}>
                 <label htmlFor="search">
                   Search for User or Recipe
-                  <input
-                    id="search"
-                    type="text"
-                    placeholder="Search"
-                    onChange={handleSearchChange}
-                  />
+                  <input id="search" type="text" placeholder="Search" />
+                  <button type="submit" onClick={handleSearchClick}>
+                    Skicka
+                  </button>
                 </label>
+              </div>
+              <div>
+                <ul id="resultsContainer">
+                  {searchResponseList &&
+                    searchResponseList.map((searchResult) => {
+                      return (
+                        <li key={searchResult._id}>
+                          <a href={`${"posts/"} ${searchResult._id}`}>
+                            {searchResult.title}
+                          </a>
+                        </li>
+                      );
+                    })}
+                </ul>
               </div>
               <Note />
             </section>
