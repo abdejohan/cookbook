@@ -58,6 +58,9 @@ export default function SignIn() {
       history.push("/");
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
     }
   };
 
