@@ -13,7 +13,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import UserContext from "../context/UserContext";
@@ -68,7 +68,6 @@ const Home = () => {
   const theme = useTheme();
   const [value, setValue] = useState(0);
   const [searchResponseList, setSearchResponseList] = useState([]);
-  console.log(searchResponseList);
 
   const handleSearchClick = async () => {
     const searchElement = document.getElementById("search");
@@ -98,58 +97,34 @@ const Home = () => {
 
   return (
     <div>
-      <div className={classes.root}>
-        <AppBar position="static" color="default">
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            variant="fullWidth"
-            aria-label="full width tabs example"
-          >
-            <Tab label="Home" {...a11yProps(0)} />
-            <Tab label="Profile" {...a11yProps(1)} />
-          </Tabs>
-        </AppBar>
-        <SwipeableViews
-          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-          index={value}
-          onChangeIndex={handleChangeIndex}
-        >
-          <TabPanel value={value} index={0} dir={theme.direction}>
-            <section>
-              <div className={classes.searchField}>
-                <label htmlFor="search">
-                  Search for User or Recipe
-                  <input id="search" type="text" placeholder="Search" />
-                  <button type="submit" onClick={handleSearchClick}>
-                    Skicka
-                  </button>
-                </label>
-              </div>
-              <div>
-                <ul id="resultsContainer">
-                  {searchResponseList &&
-                    searchResponseList.map((searchResult) => {
-                      return (
-                        <li key={searchResult._id}>
-                          <a href={`${"posts/"} ${searchResult._id}`}>
-                            {searchResult.title}
-                          </a>
-                        </li>
-                      );
-                    })}
-                </ul>
-              </div>
+      <section>
+        <div className={classes.searchField}>
+          <label htmlFor="search">
+            Search for User or Recipe
+            <input id="search" type="text" placeholder="Search" />
+            <button type="submit" onClick={handleSearchClick}>
+              Skicka
+            </button>
+          </label>
+        </div>
+        <div>
+          <ul id="resultsContainer">
+            {searchResponseList ? (
+              searchResponseList.map((searchResult) => {
+                return (
+                  <li key={searchResult._id}>
+                    <Link to={`/posts/${searchResult._id}`}>
+                      {searchResult.title}
+                    </Link>
+                  </li>
+                );
+              })
+            ) : (
               <Note />
-            </section>
-          </TabPanel>
-          <TabPanel value={value} index={1} dir={theme.direction}>
-            {!userData.user ? <Login /> : <UserProfile />}
-          </TabPanel>
-        </SwipeableViews>
-      </div>
+            )}
+          </ul>
+        </div>
+      </section>
     </div>
   );
 };
