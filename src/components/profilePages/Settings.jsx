@@ -1,8 +1,8 @@
 import React from "react";
 import Note from "../Note";
 
-const AddPost = () => {
+const Settings = () => {
   return <Note />;
 };
 
-export default AddPost;
+export default Settings;

@@ -31,7 +31,9 @@ const LoggedInButtons = () => {
       <button onClick={DeletePost} type="submit">
         Delete
       </button>
-      <button type="submit">Edit</button>
+      <button onClick={null} type="submit">
+        Edit
+      </button>
     </>
   );
 };

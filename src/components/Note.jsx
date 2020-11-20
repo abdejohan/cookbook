@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
   },
   form: {
-    width: "100%",
+    width: "50%",
     display: "flex",
     flexFlow: "column nowrap",
     alignItems: "flex-start",
@@ -23,6 +23,7 @@ const useStyles = makeStyles(() => ({
   textarea: {
     padding: "10px",
     width: "100%",
+    resize: "none",
   },
   title: {
     padding: "10px",

@@ -20,7 +20,7 @@ import UserContext from "../context/UserContext";
 import Note from "./Note";
 import Posts from "./Posts";
 import Login from "./Login";
-import UserProfile from "./UserProfile";
+import Profile from "./Profile";
 
 // tab stuff starts here -----------------------------------------------------------------------------------
 function TabPanel(props) {
@@ -65,7 +65,7 @@ const Home = () => {
   const { userData } = useContext(UserContext);
   const history = useHistory();
   const classes = useStyles();
-  const theme = useTheme();
+  // const theme = useTheme();
   const [value, setValue] = useState(0);
   const [searchResponseList, setSearchResponseList] = useState([]);
 
@@ -81,11 +81,11 @@ const Home = () => {
     }
   };
 
-  // useEffect(() => {
-  //    if (!userData.user) {
-  //      history.push("/login");
-  //    }
-  //  });
+  useEffect(() => {
+    if (!userData.user) {
+      history.push("/login");
+    }
+  });
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
