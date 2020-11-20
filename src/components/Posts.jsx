@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import LoggedInButtons from "./LoggedInButtons";
+import UserContext from "../context/UserContext";
 
 // title: fetchedPost.data.title,
 // description: fetchedPost.data.description,
@@ -9,8 +12,10 @@ import axios from "axios";
 
 const Posts = () => {
   const { id } = useParams();
-  // eslint-disable-next-line no-unused-vars
+  const { userData } = useContext(UserContext);
+
   const [post, setPost] = useState({});
+  const [postId, setPostId] = useState(null);
 
   useEffect(() => {
     async function fetchPost() {
@@ -24,6 +29,7 @@ const Posts = () => {
           ingredients: fetchedPost.data.ingredients,
           instructions: fetchedPost.data.instructions,
         });
+        setPostId(fetchedPost.data.userId);
       } catch (error) {
         console.log(`THIS MESSAGE:${error}`);
       }
@@ -43,7 +49,10 @@ const Posts = () => {
         <h4>Instructions</h4>
         <p>{post.instructions}</p>
       </article>
-      <button type="button">Add to List</button>
+      <div className="LoggedInButtons">
+        <button type="button">Add to List</button>
+        {userData.token ? <LoggedInButtons id={postId} /> : "HEJEHEJE"}
+      </div>
     </div>
   );
 };

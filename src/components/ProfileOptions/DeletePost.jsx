@@ -1,8 +1,11 @@
 import React from "react";
-import Note from "../Note";
 
 const DeletePost = () => {
-  return <Note />;
+  return (
+    <div>
+      <h1>Delete</h1>
+    </div>
+  );
 };
 
 export default DeletePost;
