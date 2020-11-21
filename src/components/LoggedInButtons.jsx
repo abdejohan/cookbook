@@ -19,7 +19,7 @@ const LoggedInButtons = () => {
           },
         }
       );
-      history.push("/posts");
+      history.push("/profile/library");
       console.log("post deleted");
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);

@@ -6,8 +6,9 @@ import axios from "axios";
 import UserContext from "../../context/UserContext";
 
 const Library = () => {
-  const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = useState([]);
   const { userData } = useContext(UserContext);
+  console.log(posts);
 
   useEffect(() => {
     const { history } = useHistory;
@@ -22,6 +23,7 @@ const Library = () => {
             },
           }
         );
+        console.log(allUserPosts.data);
         setPosts(allUserPosts.data);
       } catch (error) {
         console.log(`THIS MESSAGE:${error}`);
@@ -34,17 +36,15 @@ const Library = () => {
     <div>
       <h3>Your posts</h3>
       <ul>
-        {posts ? (
+        {posts.length > 0 &&
           posts.map((post) => {
             return (
               <li key={post._id}>
                 <Link to={`/posts/${post._id}`}>{post.title}</Link>
               </li>
             );
-          })
-        ) : (
-          <h2>wait for it..</h2>
-        )}
+          })}
+        {posts.length === 0 && <p>seems like you dont have any posts yet :/</p>}
       </ul>
     </div>
   );
