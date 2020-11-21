@@ -48,9 +48,8 @@ const App = () => {
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/profile" component={Profile} />
-            <Route exact path="/posts" component={Posts} />
             <Route exact path="/posts/:id" component={Posts} />
+            <Route path="/profile" component={Profile} />
           </Switch>
         </UserContext.Provider>
       </Router>

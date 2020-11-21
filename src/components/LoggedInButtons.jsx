@@ -5,7 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import UserContext from "../context/UserContext";
 
 const LoggedInButtons = () => {
-  const { history } = useHistory;
+  const history = useHistory();
   const { id } = useParams();
   const { userData } = useContext(UserContext);
 

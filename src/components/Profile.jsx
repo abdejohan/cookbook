@@ -1,12 +1,15 @@
-import React, { useContext, useState } from "react";
-import Note from "./Note";
+import React, { useContext } from "react";
+import { Link, useRouteMatch, Route } from "react-router-dom";
+// import Note from "./Note";
 import UserContext from "../context/UserContext";
 import Library from "./profilePages/Library";
 import Settings from "./profilePages/Settings";
+import UserProfileView from "./profilePages/UserProfileView";
 
 const Profile = () => {
-  const [profilePage, setProfilePage] = useState("");
   const { userData } = useContext(UserContext);
+  const { url, path } = useRouteMatch();
+  // console.log(`page, ${page}`);
 
   return (
     <>
@@ -15,23 +18,25 @@ const Profile = () => {
           <nav>
             <ul>
               <li>
-                <button type="submit" onClick={() => setProfilePage("library")}>
-                  Library
-                </button>
+                <Link to={`${url}`}>My Profile</Link>
               </li>
               <li>
-                <button
-                  type="submit"
-                  onClick={() => setProfilePage("Settings")}
-                >
-                  Settings
-                </button>
+                <Link to={`${url}/library`}>Library</Link>
+              </li>
+              <li>
+                <Link to={`${url}/settings`}>Settings</Link>
               </li>
             </ul>
           </nav>
-          {profilePage === "library" && <Library />}
-          {profilePage === "Settings" && <Settings />}
-          {profilePage === "" && <Note />}
+          <Route exact path={path}>
+            <UserProfileView />
+          </Route>
+          <Route path={`${path}/library`}>
+            <Library />
+          </Route>
+          <Route path={`${path}/settings`}>
+            <Settings />
+          </Route>
         </section>
       ) : (
         <p>there is nothing here right now.. :disappointed: try logging in!</p>
