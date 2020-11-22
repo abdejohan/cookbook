@@ -6,10 +6,11 @@ import Header from "./components/Header";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
+import Posts from "./components/Posts";
 // eslint-disable-next-line no-unused-vars
 import Note from "./components/Note";
 import UserContext from "./context/UserContext";
-import UserProfile from "./components/UserProfile";
+import Profile from "./components/Profile";
 
 const App = () => {
   const [userData, setUserData] = useState({
@@ -25,12 +26,12 @@ const App = () => {
         token = "";
       }
       const tokenRes = await axios.post(
-        "http://localhost:5000/users/tokenIsValid",
+        "http://localhost:5000/user/tokenIsValid",
         null,
         { headers: { "x-auth-token": token } }
       );
       if (tokenRes.data) {
-        const userRes = await axios.get("http://localhost:5000/users/", {
+        const userRes = await axios.get("http://localhost:5000/user/", {
           headers: { "x-auth-token": token },
         });
         setUserData({ token, user: userRes.data });
@@ -47,7 +48,8 @@ const App = () => {
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/profile" component={UserProfile} />
+            <Route exact path="/posts/:id" component={Posts} />
+            <Route path="/profile" component={Profile} />
           </Switch>
         </UserContext.Provider>
       </Router>

@@ -139,7 +139,7 @@ const Header = (props) => {
                   {userData.user ? (
                     <div>
                       <MenuItem onClick={() => handleMenuClick("/profile")}>
-                        My Profile
+                        gg
                       </MenuItem>
                       <MenuItem onClick={() => logOut()}>Logout</MenuItem>
                     </div>
@@ -160,6 +160,7 @@ const Header = (props) => {
               <div className={classes.headerOptions}>
                 {userData.user ? (
                   <div>
+                    <Button onClick={() => handleMenuClick("/")}>Home</Button>
                     <Button onClick={() => handleMenuClick("/profile")}>
                       Profile
                     </Button>

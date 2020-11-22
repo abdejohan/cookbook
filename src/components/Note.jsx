@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
   },
   form: {
-    width: "100%",
+    width: "50%",
     display: "flex",
     flexFlow: "column nowrap",
     alignItems: "flex-start",
@@ -23,6 +23,7 @@ const useStyles = makeStyles(() => ({
   textarea: {
     padding: "10px",
     width: "100%",
+    resize: "none",
   },
   title: {
     padding: "10px",
@@ -49,7 +50,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Note = () => {
-  const { handleSubmit } = useForm();
+  const { handleSubmit, register } = useForm();
   const onSubmit = (data) => console.log(data);
   const classes = useStyles();
 
@@ -59,6 +60,7 @@ const Note = () => {
       <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
         <Typography className={classes.textFieldHeader}>Title</Typography>
         <textarea
+          type="input"
           className={`${classes.title} ${classes.textarea}`}
           name="title"
           placeholder="Keep the title short and as descriptive as possible."
@@ -68,12 +70,14 @@ const Note = () => {
         </Typography>
         <textarea
           className={`${classes.description} ${classes.textarea}`}
+          ref={register}
           name="description"
           placeholder="if description is needed; please keep it short."
         />
         <Typography className={classes.textFieldHeader}>Ingredients</Typography>
         <textarea
           className={`${classes.ingredients} ${classes.textarea}`}
+          ref={register}
           name="ingredients"
           placeholder="Write your ingredients in a list format"
         />
@@ -82,6 +86,7 @@ const Note = () => {
         </Typography>
         <textarea
           className={`${classes.instructions} ${classes.textarea}`}
+          ref={register}
           name="instructions"
           placeholder="Try and give as clear and direct instructions"
         />
