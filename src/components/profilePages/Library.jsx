@@ -8,7 +8,6 @@ import UserContext from "../../context/UserContext";
 const Library = () => {
   const [posts, setPosts] = useState([]);
   const { userData } = useContext(UserContext);
-  console.log(posts);
 
   useEffect(() => {
     const { history } = useHistory;
@@ -23,7 +22,6 @@ const Library = () => {
             },
           }
         );
-        console.log(allUserPosts.data);
         setPosts(allUserPosts.data);
       } catch (error) {
         console.log(`THIS MESSAGE:${error}`);
