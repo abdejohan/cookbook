@@ -9,8 +9,6 @@ import UserProfileView from "./profilePages/UserProfileView";
 const Profile = () => {
   const { userData } = useContext(UserContext);
   const { url, path } = useRouteMatch();
-  console.log(`path, ${path}`);
-  console.log(`url, ${url}`);
 
   return (
     <>
