@@ -56,7 +56,8 @@ const UserProfileView = () => {
 
   return (
     <section className={classes.section}>
-      <h4>{user.userName}</h4>
+      <h4>hello!</h4>
+      {user && <h4>{user.userName}</h4>}
       <div className={classes.contentContainer}>
         <img
           className={classes.imageContainer}

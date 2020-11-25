@@ -9,15 +9,16 @@ import UserProfileView from "./profilePages/UserProfileView";
 const Profile = () => {
   const { userData } = useContext(UserContext);
   const { url, path } = useRouteMatch();
+  console.log(userData);
 
   return (
     <>
-      {userData ? (
+      {userData.token ? (
         <section>
           <nav>
             <ul>
               <li>
-                <Link to={`${url}`}>My Profile</Link>
+                <Link to={`${url}/${userData.user.id}`}>My Profile</Link>
               </li>
               <li>
                 <Link to={`${url}/library`}>Library</Link>
@@ -27,7 +28,7 @@ const Profile = () => {
               </li>
             </ul>
           </nav>
-          <Route exact path={path}>
+          <Route exact path={`${path}/:id`}>
             <UserProfileView />
           </Route>
           <Route path={`${path}/library`}>
