@@ -1,6 +1,8 @@
-import React from "react";
+/* eslint-disable no-underscore-dangle */
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useRouteMatch } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import profile from "../../media/profile.jpg";
 
 // import Note from "../Note";
@@ -30,14 +32,31 @@ const useStyles = makeStyles(() => ({
 
 const UserProfileView = () => {
   const classes = useStyles();
-  const userName = "username";
-  const { path, url } = useRouteMatch();
-  console.log(`url, ${url}`);
-  console.log(`path, ${path}`);
+  const [user, setUser] = useState({});
+  const { id } = useParams();
+
+  // const { path, url } = useRouteMatch();
+  // console.log(`url, ${url}`);
+  // console.log(`path, ${path}`);
+
+  useEffect(() => {
+    const try1 = async () => {
+      try {
+        const fetchedUser = await axios.get(`http://localhost:5000/user/${id}`);
+        setUser({
+          userName: fetchedUser.data.userName,
+          email: fetchedUser.data.email,
+        });
+      } catch (error) {
+        console.log(`THIS MESSAGE:${error}`);
+      }
+    };
+    try1();
+  }, [id]);
 
   return (
     <section className={classes.section}>
-      <h2>{userName}</h2>
+      <h4>{user.userName}</h4>
       <div className={classes.contentContainer}>
         <img
           className={classes.imageContainer}
@@ -47,7 +66,7 @@ const UserProfileView = () => {
         <h2>Social</h2>
         <ul>
           <li>Totalt Visits:</li>
-          <li>Total Posts:</li>
+          <li>Total users:</li>
         </ul>
       </div>
     </section>
