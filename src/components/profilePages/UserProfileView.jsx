@@ -9,17 +9,16 @@ import profile from "../../media/profile.jpg";
 
 const useStyles = makeStyles(() => ({
   section: {
+    padding: "20px",
     display: "flex",
     justifyContent: "center",
     flexFlow: "column wrap",
-    alignItems: "center",
+    alignItems: "flex-start",
   },
   contentContainer: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     flexFlow: "column wrap",
-    alignItems: "center",
-    width: "70%",
   },
   imageContainer: {
     display: "block",
@@ -56,7 +55,7 @@ const UserProfileView = () => {
 
   return (
     <section className={classes.section}>
-      <h4>hello!</h4>
+      <h2>Welcome Back!</h2>
       {user && <h4>{user.userName}</h4>}
       <div className={classes.contentContainer}>
         <img

@@ -14,7 +14,7 @@ import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
   AppBar: {
-    backgroundColor: "grey",
+    backgroundColor: "white",
   },
   root: {
     flexGrow: 1,
@@ -23,6 +23,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
+    color: "black",
+    flex: 1,
     [theme.breakpoints.down("sm")]: {
       flexGrow: 1,
     },
@@ -105,7 +107,7 @@ const Header = (props) => {
       <AppBar position="static" className={classes.AppBar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Photos
+            bakeNOTES
           </Typography>
           <div>
             {isMobile ? (

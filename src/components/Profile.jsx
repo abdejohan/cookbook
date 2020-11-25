@@ -1,29 +1,64 @@
 import React, { useContext } from "react";
 import { Link, useRouteMatch, Route } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import "../App.css";
 // import Note from "./Note";
 import UserContext from "../context/UserContext";
 import Library from "./profilePages/Library";
 import Settings from "./profilePages/Settings";
 import UserProfileView from "./profilePages/UserProfileView";
 
+const useStyles = makeStyles(() => ({
+  navigationContainer: {
+    width: "100%",
+  },
+  navigationList: {
+    display: "flex",
+    flexFlow: "row wrap",
+    listStyleType: "none",
+  },
+  navigationButton: {
+    marginRight: "20px",
+  },
+  navigationLink: {
+    fontSize: "20px",
+  },
+}));
+
 const Profile = () => {
+  const classes = useStyles();
   const { userData } = useContext(UserContext);
   const { url, path } = useRouteMatch();
 
   return (
     <>
       {userData.token ? (
-        <section>
+        <section className={classes.navigationContainer}>
           <nav>
-            <ul>
-              <li>
-                <Link to={`${url}/${userData.user.id}`}>My Profile</Link>
+            <ul className={classes.navigationList}>
+              <li className={classes.navigationButton}>
+                <Link
+                  className={`navigationLink ${classes.navigationLink}`}
+                  to={`${url}/${userData.user.id}`}
+                >
+                  Overview
+                </Link>
               </li>
-              <li>
-                <Link to={`${url}/library`}>Library</Link>
+              <li className={classes.navigationButton}>
+                <Link
+                  className={`navigationLink ${classes.navigationLink}`}
+                  to={`${url}/library`}
+                >
+                  Library
+                </Link>
               </li>
-              <li>
-                <Link to={`${url}/settings`}>Settings</Link>
+              <li className={classes.navigationButton}>
+                <Link
+                  className={`navigationLink ${classes.navigationLink}`}
+                  to={`${url}/settings`}
+                >
+                  Settings
+                </Link>
               </li>
             </ul>
           </nav>

@@ -28,6 +28,24 @@
   color: #61dafb;
 }
 
+.mainContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: column nowrap;
+  padding-top: 20px;
+  min-height: 500px;
+}
+
+.navigationLink {
+  color: black;
+  text-decoration: none;
+}
+
+.navigationLink:hover {
+  color: darkgrey;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
