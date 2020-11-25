@@ -28,7 +28,7 @@ const Profile = () => {
               </li>
             </ul>
           </nav>
-          <Route exact path={`${path}/:id`}>
+          <Route exact path={`${path}/${userData.user.id}`}>
             <UserProfileView />
           </Route>
           <Route path={`${path}/library`}>
