@@ -3,7 +3,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ListItem = ({ searchResponseList, userSearchResponseList }) => {
+const SearchItem = ({ searchResponseList, userSearchResponseList }) => {
   return (
     <div>
       {searchResponseList &&
@@ -30,4 +30,4 @@ const ListItem = ({ searchResponseList, userSearchResponseList }) => {
   );
 };
 
-export default ListItem;
+export default SearchItem;

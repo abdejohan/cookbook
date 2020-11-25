@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext";
-import ListItem from "./ListItem";
+import SearchItem from "./SearchItem";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,7 +60,7 @@ const SearchList = (props) => {
             <>
               <ul>
                 <h4>Recipes found..</h4>
-                <ListItem searchResponseList={searchResponseList} />
+                <SearchItem searchResponseList={searchResponseList} />
               </ul>
             </>
           )}
@@ -68,7 +68,7 @@ const SearchList = (props) => {
             <>
               <ul>
                 <h4>Users found..</h4>
-                <ListItem userSearchResponseList={userSearchResponseList} />
+                <SearchItem userSearchResponseList={userSearchResponseList} />
               </ul>
             </>
           )}
