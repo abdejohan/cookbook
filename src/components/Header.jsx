@@ -138,7 +138,11 @@ const Header = (props) => {
                   <MenuItem onClick={() => handleMenuClick("/")}>Home</MenuItem>
                   {userData.user ? (
                     <div>
-                      <MenuItem onClick={() => handleMenuClick("/profile")}>
+                      <MenuItem
+                        onClick={() =>
+                          handleMenuClick(`/profile/${userData.user.id}`)
+                        }
+                      >
                         gg
                       </MenuItem>
                       <MenuItem onClick={() => logOut()}>Logout</MenuItem>
@@ -161,7 +165,11 @@ const Header = (props) => {
                 {userData.user ? (
                   <div>
                     <Button onClick={() => handleMenuClick("/")}>Home</Button>
-                    <Button onClick={() => handleMenuClick("/profile")}>
+                    <Button
+                      onClick={() =>
+                        handleMenuClick(`/profile/${userData.user.id}`)
+                      }
+                    >
                       Profile
                     </Button>
                     <Button onClick={() => logOut()}>Logout</Button>
