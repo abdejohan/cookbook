@@ -2,9 +2,9 @@
 import React, { useContext } from "react";
 import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
-import UserContext from "../context/UserContext";
+import UserContext from "../../context/UserContext";
 
-const LoggedInButtons = () => {
+const PostButtons = () => {
   const history = useHistory();
   const { id } = useParams();
   const { userData } = useContext(UserContext);
@@ -38,4 +38,4 @@ const LoggedInButtons = () => {
   );
 };
 
-export default LoggedInButtons;
+export default PostButtons;

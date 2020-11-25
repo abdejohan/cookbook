@@ -11,6 +11,7 @@ import Posts from "./components/Posts";
 import Note from "./components/Note";
 import UserContext from "./context/UserContext";
 import Profile from "./components/Profile";
+import UserProfileView from "./components/profilePages/UserProfileView";
 
 const App = () => {
   const [userData, setUserData] = useState({
@@ -49,6 +50,7 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/posts/:id" component={Posts} />
+            <Route exact path="/user/:id" component={UserProfileView} />
             <Route path="/profile" component={Profile} />
             <Route path="/search" component={Home} />
           </Switch>

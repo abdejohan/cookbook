@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useContext, createElement } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import LoggedInButtons from "./LoggedInButtons";
+import PostButtons from "./loggedInUser/PostButtons";
 import UserContext from "../context/UserContext";
 
 // title: fetchedPost.data.title,
@@ -48,9 +48,9 @@ const Posts = () => {
         <h4>Instructions</h4>
         <p>{post.instructions}</p>
       </article>
-      <div className="LoggedInButtons">
+      <div className="PostButtons">
         <button type="button">Copy to ClipBoard</button>
-        {userData.token ? <LoggedInButtons id={postId} /> : "HEJEHEJE"}
+        {userData.token ? <PostButtons id={postId} /> : "HEJEHEJE"}
       </div>
     </div>
   );

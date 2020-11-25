@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { useRouteMatch } from "react-router-dom";
 import profile from "../../media/profile.jpg";
 
 // import Note from "../Note";
@@ -30,6 +31,9 @@ const useStyles = makeStyles(() => ({
 const UserProfileView = () => {
   const classes = useStyles();
   const userName = "username";
+  const { path, url } = useRouteMatch();
+  console.log(`url, ${url}`);
+  console.log(`path, ${path}`);
 
   return (
     <section className={classes.section}>
