@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, createElement } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import LoggedInButtons from "./LoggedInButtons";
@@ -13,7 +13,6 @@ import UserContext from "../context/UserContext";
 const Posts = () => {
   const { id } = useParams();
   const { userData } = useContext(UserContext);
-
   const [post, setPost] = useState({});
   const [postId, setPostId] = useState(null);
 
@@ -50,7 +49,7 @@ const Posts = () => {
         <p>{post.instructions}</p>
       </article>
       <div className="LoggedInButtons">
-        <button type="button">Add to List</button>
+        <button type="button">Copy to ClipBoard</button>
         {userData.token ? <LoggedInButtons id={postId} /> : "HEJEHEJE"}
       </div>
     </div>

@@ -1,26 +1,9 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/require-default-props */
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useContext, useState } from "react";
 import axios from "axios";
-import PropTypes from "prop-types";
-import SwipeableViews from "react-swipeable-views";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import { useHistory, Link } from "react-router-dom";
-import SearchIcon from "@material-ui/icons/Search";
-import InputBase from "@material-ui/core/InputBase";
+import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext";
-import Note from "./Note";
-import Posts from "./Posts";
-import Login from "./Login";
-import Profile from "./Profile";
+import ListItem from "./ListItem";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,17 +19,29 @@ const Home = () => {
   const history = useHistory();
   const classes = useStyles();
   // const theme = useTheme();
-  const [value, setValue] = useState(0);
   const [searchResponseList, setSearchResponseList] = useState([]);
+  const [userSearchResponseList, setUserSearchResponseList] = useState([]);
 
   const handleSearchClick = async () => {
+    console.log(searchResponseList);
+    console.log(userSearchResponseList);
+
     const searchElement = document.getElementById("search");
+    console.log(searchElement.value);
     try {
       const searchRequest = await axios.get(
         `http://localhost:5000/search?term=${searchElement.value}`
       );
+
+      const userSearchRequest = await axios.get(
+        `http://localhost:5000/search/user?term=${searchElement.value}`
+      );
+
       setSearchResponseList(searchRequest.data);
+      setUserSearchResponseList(userSearchRequest.data);
     } catch (error) {
+      setSearchResponseList(0);
+      setUserSearchResponseList(0);
       console.log(`THIS MESSAGE:${error}`);
     }
   };
@@ -56,14 +51,6 @@ const Home = () => {
       history.push("/login");
     }
   });
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
 
   return (
     <div>
@@ -78,21 +65,22 @@ const Home = () => {
           </label>
         </div>
         <div>
-          <ul id="resultsContainer">
-            {searchResponseList ? (
-              searchResponseList.map((searchResult) => {
-                return (
-                  <li key={searchResult._id}>
-                    <Link to={`/posts/${searchResult._id}`}>
-                      {searchResult.title}
-                    </Link>
-                  </li>
-                );
-              })
-            ) : (
-              <Note />
-            )}
-          </ul>
+          {searchResponseList.length > 0 && (
+            <>
+              <ul>
+                <h4>Recipes found..</h4>
+                <ListItem searchResponseList={searchResponseList} />
+              </ul>
+            </>
+          )}
+          {userSearchResponseList.length > 0 && (
+            <>
+              <ul>
+                <h4>Users found..</h4>
+                <ListItem userSearchResponseList={userSearchResponseList} />
+              </ul>
+            </>
+          )}
         </div>
       </section>
     </div>
