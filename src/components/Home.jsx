@@ -1,9 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useContext, useState } from "react";
-import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link, Route, useRouteMatch } from "react-router-dom";
 import UserContext from "../context/UserContext";
-import ListItem from "./ListItem";
+import SearchList from "./SearchList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,39 +18,21 @@ const Home = () => {
   const { userData } = useContext(UserContext);
   const history = useHistory();
   const classes = useStyles();
+  const [searchInput, setSearchInput] = useState("");
   // const theme = useTheme();
-  const [searchResponseList, setSearchResponseList] = useState([]);
-  const [userSearchResponseList, setUserSearchResponseList] = useState([]);
-
-  const handleSearchClick = async () => {
-    console.log(searchResponseList);
-    console.log(userSearchResponseList);
-
-    const searchElement = document.getElementById("search");
-    console.log(searchElement.value);
-    try {
-      const searchRequest = await axios.get(
-        `http://localhost:5000/search?term=${searchElement.value}`
-      );
-
-      const userSearchRequest = await axios.get(
-        `http://localhost:5000/search/user?term=${searchElement.value}`
-      );
-
-      setSearchResponseList(searchRequest.data);
-      setUserSearchResponseList(userSearchRequest.data);
-    } catch (error) {
-      setSearchResponseList(0);
-      setUserSearchResponseList(0);
-      console.log(`THIS MESSAGE:${error}`);
-    }
-  };
+  // const { path, url } = useRouteMatch();
+  // console.log(`path, ${path}`);
 
   useEffect(() => {
     if (!userData.user) {
       history.push("/login");
     }
   });
+
+  const handleClick = () => {
+    const searchElement = document.getElementById("search");
+    setSearchInput(searchElement.value);
+  };
 
   return (
     <div>
@@ -59,29 +41,14 @@ const Home = () => {
           <label htmlFor="search">
             Search for User or Recipe
             <input id="search" type="text" placeholder="Search" />
-            <button type="submit" onClick={handleSearchClick}>
+            <Link onClick={handleClick} to="/search">
               Skicka
-            </button>
+            </Link>
           </label>
         </div>
-        <div>
-          {searchResponseList.length > 0 && (
-            <>
-              <ul>
-                <h4>Recipes found..</h4>
-                <ListItem searchResponseList={searchResponseList} />
-              </ul>
-            </>
-          )}
-          {userSearchResponseList.length > 0 && (
-            <>
-              <ul>
-                <h4>Users found..</h4>
-                <ListItem userSearchResponseList={userSearchResponseList} />
-              </ul>
-            </>
-          )}
-        </div>
+        <Route exact path="/search">
+          <SearchList searchInput={searchInput} />
+        </Route>
       </section>
     </div>
   );

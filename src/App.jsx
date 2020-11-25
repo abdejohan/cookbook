@@ -50,6 +50,7 @@ const App = () => {
             <Route exact path="/register" component={Register} />
             <Route exact path="/posts/:id" component={Posts} />
             <Route path="/profile" component={Profile} />
+            <Route path="/search" component={Home} />
           </Switch>
         </UserContext.Provider>
       </Router>
