@@ -55,7 +55,7 @@ export default function SignIn() {
         user: loginRes.data.user,
       });
       localStorage.setItem("auth-token", loginRes.data.token);
-      history.push("/");
+      history.push(`/profile/${loginRes.data.user.id}`);
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);
       console.log(error.response.data);
