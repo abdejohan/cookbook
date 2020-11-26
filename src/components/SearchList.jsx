@@ -46,12 +46,6 @@ const SearchList = (props) => {
     getSearchResults();
   }, [searchInput]);
 
-  useEffect(() => {
-    if (!userData.user) {
-      history.push("/login");
-    }
-  });
-
   return (
     <div>
       <section>

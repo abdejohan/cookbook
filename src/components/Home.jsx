@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const { userData } = useContext(UserContext);
+  console.log(userData);
   const history = useHistory();
   const classes = useStyles();
   const [searchInput, setSearchInput] = useState("");
@@ -58,12 +59,10 @@ const Home = () => {
 
   return (
     <>
-      {userData.token === undefined && (
-        <div className={classes.newUserInfo}>
-          <h2>WEOLCOME TEXT</h2>
-          <p>display this div to users that are not logged in</p>
-        </div>
-      )}
+      <div className={classes.newUserInfo}>
+        <h2>WEOLCOME TEXT</h2>
+        <p>display this div to users that are not logged in</p>
+      </div>
       <section className={classes.contentContainer}>
         <div className={classes.searchContainer}>
           <label htmlFor="search" className={classes.searchLabel}>
