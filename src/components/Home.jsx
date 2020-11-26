@@ -4,13 +4,32 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useHistory, Link, Route, useRouteMatch } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import SearchList from "./SearchList";
+import Note from "./Note";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.background.paper,
+  contentContainer: {
+    backgroundColor: "white",
+    width: "100%",
+  },
+  searchContainer: {
+    width: "100%",
+    flexGrow: "2",
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: "20px",
+  },
+  searchLabel: {
+    display: "flex",
+    flexFlow: "column nowrap",
+    width: "100%",
   },
   searchField: {
-    marginBottom: "20px",
+    display: "flex",
+    flexGrow: 2,
+  },
+  searchButton: {
+    display: "flex",
+    justifyContent: "center",
   },
 }));
 
@@ -35,22 +54,30 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <section>
-        <div className={classes.searchField}>
-          <label htmlFor="search">
-            Search for User or Recipe
-            <input id="search" type="text" placeholder="Search" />
-            <Link onClick={handleClick} to="/search">
-              Skicka
-            </Link>
-          </label>
-        </div>
-        <Route exact path="/search">
-          <SearchList searchInput={searchInput} />
-        </Route>
-      </section>
-    </div>
+    <section className={classes.contentContainer}>
+      <div className={classes.searchContainer}>
+        <label htmlFor="search" className={classes.searchLabel}>
+          Search for User or Recipe
+          <input
+            className={classes.searchField}
+            id="search"
+            type="text"
+            placeholder="Search"
+          />
+        </label>
+        <Link
+          onClick={handleClick}
+          to="/search"
+          className={classes.searchButton}
+        >
+          Skicka
+        </Link>
+      </div>
+      <Route exact path="/search">
+        <SearchList searchInput={searchInput} />
+      </Route>
+      <Note />
+    </section>
   );
 };
 
