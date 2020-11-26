@@ -112,6 +112,13 @@ const Register = () => {
             label="Ex. StevesGems"
             variant="outlined"
           />
+          {errors.userName && <span>This field is required</span>}
+
+          <select name="userRole" ref={register}>
+            <option value="Normal user">Normal user</option>
+            <option value="Content Creator">Content Creator</option>
+            <option value="Sponsor">Sponsor</option>
+          </select>
 
           <Typography variant="subtitle1" className={classes.inputFieldTitles}>
             Select Password (must be more than 6 caracters)
