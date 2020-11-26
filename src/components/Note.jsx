@@ -1,8 +1,12 @@
-import React from "react";
-// import { withRouter } from "react-router-dom";
+/* eslint-disable react/prop-types */
+/* eslint-disable no-underscore-dangle */
+import React, { useContext } from "react";
+import axios from "axios";
+import { withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import UserContext from "../context/UserContext";
 
 // import Button from "@material-ui/core/Button";
 
@@ -49,10 +53,28 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Note = () => {
+const Note = (props) => {
+  const { history } = props;
   const { handleSubmit, register } = useForm();
-  const onSubmit = (data) => console.log(data);
   const classes = useStyles();
+  const { userData } = useContext(UserContext);
+
+  const onSubmit = async (data) => {
+    try {
+      const addedPost = await axios.post("http://localhost:5000/posts", data, {
+        headers: {
+          "x-auth-token": userData.token,
+        },
+      });
+      if (userData.token) {
+        history.push(`/profile/${addedPost.data.userId}`);
+      } else {
+        history.push("/home");
+      }
+    } catch (error) {
+      console.log(`THIS MESSAGE:${error}`);
+    }
+  };
 
   return (
     <div className={classes.paper}>
@@ -60,8 +82,8 @@ const Note = () => {
       <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
         <Typography className={classes.textFieldHeader}>Title</Typography>
         <textarea
-          type="input"
           className={`${classes.title} ${classes.textarea}`}
+          ref={register}
           name="title"
           placeholder="Keep the title short and as descriptive as possible."
         />
@@ -100,4 +122,4 @@ const Note = () => {
   );
 };
 
-export default Note;
+export default withRouter(Note);
