@@ -9,11 +9,12 @@ import profile from "../../media/profile.jpg";
 
 const useStyles = makeStyles(() => ({
   section: {
+    backgroundColor: "#60AFFF",
     padding: "20px",
     display: "flex",
     justifyContent: "center",
     flexFlow: "column wrap",
-    alignItems: "flex-start",
+    alignItems: "center",
   },
   contentContainer: {
     display: "flex",
@@ -52,6 +53,7 @@ const UserProfileView = () => {
     };
     try1();
   }, [id]);
+  // {followerCount} across {totalPosts} Recipes
 
   return (
     <section className={classes.section}>
@@ -64,10 +66,10 @@ const UserProfileView = () => {
           alt="user profile"
         />
         <h2>Social</h2>
-        <ul>
-          <li>Totalt Visits:</li>
-          <li>Total users:</li>
-        </ul>
+        <article>
+          <p>Totalt Visits:</p>
+          <p>Total Followers:</p>
+        </article>
       </div>
     </section>
   );
