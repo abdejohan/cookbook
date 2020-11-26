@@ -62,8 +62,9 @@ const Register = () => {
   const history = useHistory();
 
   const onSubmit = async (data) => {
+    const { email, password } = data;
+    console.log(data);
     try {
-      const { email, password } = data;
       await axios.post("http://localhost:5000/user/register", data);
       const loginRes = await axios.post("http://localhost:5000/user/login", {
         email,
@@ -74,7 +75,7 @@ const Register = () => {
         user: loginRes.data.user,
       });
       localStorage.setItem("auth-token", loginRes.data.token);
-      history.push("/");
+      history.push("/profile");
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);
     }
@@ -106,7 +107,7 @@ const Register = () => {
           </Typography>
           <TextField
             className={classes.textField}
-            name="username"
+            name="userName"
             inputRef={register}
             id="outlined-basic"
             label="Ex. StevesGems"
@@ -114,7 +115,7 @@ const Register = () => {
           />
           {errors.userName && <span>This field is required</span>}
 
-          <select name="userRole" ref={register}>
+          <select name="role" ref={register}>
             <option value="Normal user">Normal user</option>
             <option value="Content Creator">Content Creator</option>
             <option value="Sponsor">Sponsor</option>
