@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     width: "100%",
   },
+  newUserInfo: {
+    backgroundColor: "transparent",
+  },
   searchContainer: {
     width: "100%",
     flexGrow: "2",
@@ -42,11 +45,11 @@ const Home = () => {
   // const { path, url } = useRouteMatch();
   // console.log(`path, ${path}`);
 
-  useEffect(() => {
-    if (!userData.user) {
-      history.push("/login");
-    }
-  });
+  // useEffect(() => {
+  //  if (!userData.user) {
+  //    history.push("/login");
+  //  }
+  // });
 
   const handleClick = () => {
     const searchElement = document.getElementById("search");
@@ -54,30 +57,38 @@ const Home = () => {
   };
 
   return (
-    <section className={classes.contentContainer}>
-      <div className={classes.searchContainer}>
-        <label htmlFor="search" className={classes.searchLabel}>
-          Search for User or Recipe
-          <input
-            className={classes.searchField}
-            id="search"
-            type="text"
-            placeholder="Search"
-          />
-        </label>
-        <Link
-          onClick={handleClick}
-          to="/search"
-          className={classes.searchButton}
-        >
-          Skicka
-        </Link>
-      </div>
-      <Route exact path="/search">
-        <SearchList searchInput={searchInput} />
-      </Route>
-      <Note />
-    </section>
+    <>
+      {userData.token === undefined && (
+        <div className={classes.newUserInfo}>
+          <h2>WEOLCOME TEXT</h2>
+          <p>display this div to users that are not logged in</p>
+        </div>
+      )}
+      <section className={classes.contentContainer}>
+        <div className={classes.searchContainer}>
+          <label htmlFor="search" className={classes.searchLabel}>
+            Search for User or Recipe
+            <input
+              className={classes.searchField}
+              id="search"
+              type="text"
+              placeholder="Search"
+            />
+          </label>
+          <Link
+            onClick={handleClick}
+            to="/search"
+            className={classes.searchButton}
+          >
+            Skicka
+          </Link>
+        </div>
+        <Route exact path="/search">
+          <SearchList searchInput={searchInput} />
+        </Route>
+        <Note />
+      </section>
+    </>
   );
 };
 
