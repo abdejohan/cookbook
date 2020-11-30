@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
@@ -18,7 +19,8 @@ const SearchList = (props) => {
   const { searchInput } = props;
   const [searchResponseList, setSearchResponseList] = useState([]);
   const [userSearchResponseList, setUserSearchResponseList] = useState([]);
-  // const classes = useStyles();
+  const classes = useStyles();
+  const history = useHistory();
 
   useEffect(() => {
     const getSearchResults = async () => {
