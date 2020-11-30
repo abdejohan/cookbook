@@ -1,58 +1,56 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect, useContext, createElement } from "react";
+/* eslint-disable no-underscore-dangle */
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import PostButtons from "./loggedInUser/PostButtons";
-import UserContext from "../context/UserContext";
 
-// title: fetchedPost.data.title,
-// description: fetchedPost.data.description,
-// ingredients: fetchedPost.data.ingredients,
-// instructions: fetchedPost.data.instructions,
+const useStyles = makeStyles(() => ({
+  postContainer: {
+    backgroundColor: "green",
+    display: "flex",
+    width: "100%",
+    flexFlow: "column nowrap",
+  },
+}));
 
 const Posts = () => {
-  const { id } = useParams();
-  const { userData } = useContext(UserContext);
-  const [post, setPost] = useState({});
-  const [postId, setPostId] = useState(null);
+  const [postData, setPostData] = useState({});
+  const classes = useStyles();
+  const { postId } = useParams();
 
   useEffect(() => {
-    async function fetchPost() {
-      try {
-        const fetchedPost = await axios.get(
-          `http://localhost:5000/posts/${id}`
-        );
-        setPost({
-          title: fetchedPost.data.title,
-          description: fetchedPost.data.description,
-          ingredients: fetchedPost.data.ingredients,
-          instructions: fetchedPost.data.instructions,
-        });
-        setPostId(fetchedPost.data.userId);
-      } catch (error) {
-        console.log(`THIS MESSAGE:${error}`);
+    setTimeout(() => {
+      async function fetchPost() {
+        try {
+          const fetchedPost = await axios.get(
+            `http://localhost:5000/posts/${postId}`
+          );
+          setPostData(fetchedPost.data);
+        } catch (error) {
+          console.log(`THIS MESSAGE:${error}`);
+        }
       }
-    }
-    fetchPost();
-  }, [id]);
+      fetchPost();
+    }, 500);
+  }, [postId]);
 
   return (
-    <div>
+    <section className={classes.postContainer}>
       <article>
         <h4>Title</h4>
-        <p>{post.title}</p>
+        <p>{postData.title}</p>
         <h4>Description</h4>
-        <p>{post.description}</p>
+        <p>{postData.description}</p>
         <h4>Ingredients</h4>
-        <p>{post.ingredients}</p>
+        <p>{postData.ingredients}</p>
         <h4>Instructions</h4>
-        <p>{post.instructions}</p>
+        <p>{postData.instructions}</p>
       </article>
-      <div className="PostButtons">
-        <button type="button">Copy to ClipBoard</button>
-        {userData.token ? <PostButtons id={postId} /> : "HEJEHEJE"}
-      </div>
-    </div>
+      {Object.entries(postData).length > 0 && (
+        <PostButtons postData={postData} />
+      )}
+    </section>
   );
 };
 

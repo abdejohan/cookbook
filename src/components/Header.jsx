@@ -93,6 +93,8 @@ const Header = (props) => {
   };
 
   const logOut = () => {
+    // eslint-disable-next-line react/prop-types
+    history.push("/");
     setTimeout(() => {
       setUserData({
         token: undefined,

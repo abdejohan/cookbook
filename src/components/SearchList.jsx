@@ -1,11 +1,9 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
-import UserContext from "../context/UserContext";
-import SearchItem from "./SearchItem";
+import { useHistory, Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,9 +18,7 @@ const SearchList = (props) => {
   const { searchInput } = props;
   const [searchResponseList, setSearchResponseList] = useState([]);
   const [userSearchResponseList, setUserSearchResponseList] = useState([]);
-  const classes = useStyles();
-  const history = useHistory();
-  const { userData } = useContext(UserContext);
+  // const classes = useStyles();
 
   useEffect(() => {
     const getSearchResults = async () => {
@@ -38,8 +34,6 @@ const SearchList = (props) => {
         setSearchResponseList(searchRequest.data);
         setUserSearchResponseList(userSearchRequest.data);
       } catch (error) {
-        setSearchResponseList(0);
-        setUserSearchResponseList(0);
         console.log(`THIS MESSAGE:${error}`);
       }
     };
@@ -52,9 +46,17 @@ const SearchList = (props) => {
         <div>
           {searchResponseList.length > 0 && (
             <>
+              <h4>Recipes found..</h4>
               <ul>
-                <h4>Recipes found..</h4>
-                <SearchItem searchResponseList={searchResponseList} />
+                {searchResponseList.map((searchResult) => {
+                  return (
+                    <li key={searchResult._id}>
+                      <Link to={`/posts/${searchResult._id}`}>
+                        {searchResult.title}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </>
           )}
@@ -62,7 +64,15 @@ const SearchList = (props) => {
             <>
               <ul>
                 <h4>Users found..</h4>
-                <SearchItem userSearchResponseList={userSearchResponseList} />
+                {userSearchResponseList.map((searchResult) => {
+                  return (
+                    <li key={searchResult._id}>
+                      <Link to={`/user/${searchResult._id}`}>
+                        {searchResult.userName}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </>
           )}
