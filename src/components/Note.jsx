@@ -12,28 +12,37 @@ import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles(() => ({
   paper: {
+    width: "50%",
+    backgroundColor: "#C9DBBA",
+    borderRadius: "30px",
+    padding: "20px",
     alignItems: "center",
+    alignSelf: "flex-start",
     display: "flex",
     flexFlow: "column nowrap",
-    width: "100%",
     justifyContent: "center",
   },
   form: {
-    width: "50%",
+    width: "100%",
+    padding: "20px",
     display: "flex",
     flexFlow: "column nowrap",
     alignItems: "flex-start",
   },
   textarea: {
+    borderRadius: "10px 0px 10px 0px",
+    border: "none",
     padding: "10px",
     width: "100%",
     resize: "none",
   },
   title: {
     padding: "10px",
-    width: "100%",
+    width: "80%",
   },
   textFieldHeader: {
+    fontWeight: "700",
+    color: "#525252",
     marginTop: "20px",
     marginBottom: "5px",
   },
@@ -45,6 +54,7 @@ const useStyles = makeStyles(() => ({
   },
   description: {
     height: "100px",
+    width: "90%",
   },
   submitBttn: {
     marginTop: "20px",

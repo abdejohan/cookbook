@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
   },
   root: {
+    width: "100%",
+    position: "fixed",
+    zIndex: "3",
     flexGrow: 1,
   },
   menuButton: {

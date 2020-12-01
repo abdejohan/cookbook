@@ -6,14 +6,17 @@ import UserContext from "../context/UserContext";
 import SearchList from "./SearchList";
 import Note from "./Note";
 import frontpageBackground from "../media/frontpageBackground.jpg";
+
+// color: #f00;
+// -webkit-filter: invert(100%);
+// filter: invert(100%);//
+
+// Images
 import record from "../media/record.svg";
 import notes from "../media/notes.svg";
-import pot from "../media/pot.svg";
-import file from "../media/file.svg";
+import merge from "../media/merge.svg";
+import share from "../media/share.svg";
 import baking from "../media/baking.svg";
-// <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-// <div>Icons made by <a href="https://www.flaticon.com/authors/surang" title="surang">surang</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-// <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 const useStyles = makeStyles((theme) => ({
   contentContainer: {
@@ -24,12 +27,15 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     width: "100%",
     padding: "20px",
+    borderRadius: "30px",
+    top: "-50px",
+    position: "relative",
   },
   newUserInfo: {
+    zIndex: "-2",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-
     width: "100%",
     backgroundImage: `url(${frontpageBackground})`,
     backgroundAttachment: "fixed",
@@ -40,10 +46,23 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "transparent",
   },
   article: {
+    visibility: "hidden",
+    padding: "20px",
+    display: "flex",
+    justifyContent: "center",
+    alignItem: "center",
+    flexFlow: "column nowrap",
     width: "90%",
     backgroundColor: "rgba(255, 255, 255, 0.9)",
-    padding: "20px",
+    marginBottom: "50px",
     borderRadius: "3px",
+    color: "#25252",
+    fontSize: "1rem",
+    fontStyle: "italic",
+  },
+  articleSubText: {
+    padding: "0px",
+    margin: "0px",
   },
   iconContainer: {
     padding: "20px 0px",
@@ -60,6 +79,18 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     flexFlow: "column nowrap",
+  },
+  ulList: {
+    listStyleType: "none",
+    display: "flex",
+    flexFlow: "row wrap",
+    alignItems: "center",
+    justifyContent: "space-around",
+  },
+  listImg: {
+    width: "20px",
+    height: "20px",
+    marginRight: "20px",
   },
   searchContainer: {
     backgroundColor: "#C9DBBA",
@@ -78,6 +109,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   searchField: {
+    marginLeft: "20px",
     backgroundColor: "#C9DBBA",
     display: "flex",
     border: "none",
@@ -96,6 +128,26 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "50px",
     borderRadius: "30px",
   },
+  hr: {
+    marginTop: "100px",
+    width: "100%",
+    height: "30px",
+    borderStyle: "solid",
+    borderColor: "#095484",
+    borderWidth: "1px 0 0 0",
+    borderRadius: "20px",
+  },
+  hr2: {
+    display: "block",
+    content: "",
+    height: "30px",
+    width: "100%",
+    marginTop: "20px",
+    borderStyle: "solid",
+    borderColor: "#095484",
+    borderWidth: "0 0 1px 0",
+    borderRadius: "20px",
+  },
 }));
 
 const Home = () => {
@@ -103,16 +155,28 @@ const Home = () => {
   const history = useHistory();
   const classes = useStyles();
   const [searchInput, setSearchInput] = useState("");
-  const imageArray = [baking, notes, pot, file];
-  // const theme = useTheme();
-  // const { path, url } = useRouteMatch();
-  // console.log(`path, ${path}`);
-
-  // useEffect(() => {
-  //  if (!userData.user) {
-  //    history.push("/login");
-  //  }
-  // });
+  const imageArray = [
+    {
+      id: 0,
+      title: "Create",
+      img: record,
+    },
+    {
+      id: 1,
+      title: "Document",
+      img: notes,
+    },
+    {
+      id: 2,
+      title: "merge",
+      img: merge,
+    },
+    {
+      id: 3,
+      title: "Share!",
+      img: share,
+    },
+  ];
 
   const handleClick = () => {
     const searchElement = document.getElementById("search");
@@ -123,18 +187,29 @@ const Home = () => {
     <>
       <div className={classes.newUserInfo}>
         <article className={classes.article}>
-          <h2>WEOLCOME TEXT</h2>
-          <p>display this div to users that are not logged in</p>
-          <div className={classes.iconContainer}>
-            {imageArray.map((image) => {
-              return (
-                <div className={classes.icon2text}>
-                  <img className={classes.icons} src={image} alt={image.key} />
-                  <h1>gg</h1>
-                </div>
-              );
-            })}
-          </div>
+          <ul className={classes.ulList}>
+            <li>
+              <img className={classes.listImg} src={baking} alt="cooking hat" />
+              Help structuring content
+            </li>
+            <li>
+              <img className={classes.listImg} src={baking} alt="cooking hat" />
+              Lifelong virtual storage of your favorite recipes
+            </li>
+            <li>
+              <img className={classes.listImg} src={baking} alt="cooking hat" />
+              Find inspriation
+            </li>
+          </ul>
+          <p className={classes.articleSubText}>
+            Either if you are someone thats looking to present your content
+            nicely to your followers. Or looking for way to store your recipes
+            Or simply just a foodie at heart{" "}
+            <span role="img" aria-label="emoji heart">
+              ❤️
+            </span>
+            , we think you will find bakeNOTES useful! Enjoy
+          </p>
         </article>
       </div>
       <section className={classes.contentContainer}>
@@ -155,10 +230,26 @@ const Home = () => {
             &rarr;
           </Link>
         </div>
+        <hr className={classes.hr} />
         <Route exact path="/search">
           <SearchList searchInput={searchInput} />
         </Route>
+        <div className={classes.iconContainer}>
+          {imageArray.map((image) => {
+            return (
+              <div key={image.id} className={classes.icon2text}>
+                <img
+                  className={classes.icons}
+                  src={image.img}
+                  alt={image.key}
+                />
+                <h2>{image.title}</h2>
+              </div>
+            );
+          })}
+        </div>
         <Note />
+        <hr className={classes.hr2} />
       </section>
     </>
   );
