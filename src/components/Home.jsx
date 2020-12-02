@@ -1,24 +1,19 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory, Link, Route, useRouteMatch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext";
-import SearchList from "./SearchList";
 import Note from "./Note";
-import frontpageBackground from "../media/frontpageBackground.jpg";
-
-// color: #f00;
-// -webkit-filter: invert(100%);
-// filter: invert(100%);//
+import Search from "./Search";
 
 // Images
+import frontpageBackground from "../media/frontpageBackground.jpg";
 import record from "../media/record.svg";
 import notes from "../media/notes.svg";
 import merge from "../media/merge.svg";
 import share from "../media/share.svg";
 import baking from "../media/baking.svg";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   contentContainer: {
     display: "flex",
     flexFlow: "column nowrap",
@@ -92,42 +87,6 @@ const useStyles = makeStyles((theme) => ({
     height: "20px",
     marginRight: "20px",
   },
-  searchContainer: {
-    backgroundColor: "#C9DBBA",
-    width: "76%",
-    flexGrow: "2",
-    display: "flex",
-    justifyContent: "center",
-    marginBottom: "20px",
-    padding: "10px",
-    borderRadius: "50px",
-  },
-  searchLabel: {
-    display: "flex",
-    justifyContent: "center",
-    flexFlow: "column nowrap",
-    width: "100%",
-  },
-  searchField: {
-    marginLeft: "20px",
-    backgroundColor: "#C9DBBA",
-    display: "flex",
-    border: "none",
-    color: "#525252",
-    minHeight: "35px",
-    fontSize: "1.3rem",
-    borderRadius: "30px",
-  },
-  searchButton: {
-    backgroundColor: "grey",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    minWidth: "50px",
-    color: "white",
-    minHeight: "50px",
-    borderRadius: "30px",
-  },
   hr: {
     marginTop: "100px",
     width: "100%",
@@ -154,7 +113,6 @@ const Home = () => {
   const { userData } = useContext(UserContext);
   const history = useHistory();
   const classes = useStyles();
-  const [searchInput, setSearchInput] = useState("");
   const imageArray = [
     {
       id: 0,
@@ -178,10 +136,13 @@ const Home = () => {
     },
   ];
 
-  const handleClick = () => {
-    const searchElement = document.getElementById("search");
-    setSearchInput(searchElement.value);
-  };
+  useEffect(() => {
+    if (userData.user) {
+      if (userData.user.role === "admin") {
+        history.push("/admin");
+      }
+    }
+  }, [history, userData.token, userData.user]);
 
   return (
     <>
@@ -213,27 +174,8 @@ const Home = () => {
         </article>
       </div>
       <section className={classes.contentContainer}>
-        <div className={classes.searchContainer}>
-          <label htmlFor="search" className={classes.searchLabel}>
-            <input
-              className={classes.searchField}
-              id="search"
-              type="text"
-              placeholder="Search"
-            />
-          </label>
-          <Link
-            onClick={handleClick}
-            to="/search"
-            className={classes.searchButton}
-          >
-            &rarr;
-          </Link>
-        </div>
+        <Search />
         <hr className={classes.hr} />
-        <Route exact path="/search">
-          <SearchList searchInput={searchInput} />
-        </Route>
         <div className={classes.iconContainer}>
           {imageArray.map((image) => {
             return (
