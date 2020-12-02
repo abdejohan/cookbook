@@ -70,14 +70,24 @@ const Note = (props) => {
   const { userData } = useContext(UserContext);
 
   const onSubmit = async (data) => {
+    const dataSend = data;
+    if (userData.token) {
+      if (userData.user.userName) {
+        dataSend.postOwner = userData.user.userName;
+      }
+    }
     try {
-      const addedPost = await axios.post("http://localhost:5000/posts", data, {
-        headers: {
-          "x-auth-token": userData.token,
-        },
-      });
+      const addedPost = await axios.post(
+        "http://localhost:5000/posts",
+        dataSend,
+        {
+          headers: {
+            "x-auth-token": userData.token,
+          },
+        }
+      );
       if (userData.token) {
-        history.push(`/profile/${addedPost.data.userId}`);
+        history.push(`/posts/${addedPost.data._id}`);
       } else {
         history.push("/home");
       }

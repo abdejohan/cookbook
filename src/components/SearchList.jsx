@@ -7,11 +7,37 @@ import axios from "axios";
 import { useHistory, Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.background.paper,
+  mainContainer: {
+    display: "flex",
+    flexFlow: "column nowrap",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    width: "90%",
+    padding: "20px",
   },
-  searchField: {
-    marginBottom: "20px",
+  contentContainer: {
+    width: "100%",
+  },
+  title: {
+    fontSize: "1.3rem",
+  },
+  listContainer: {
+    width: "100%",
+    paddingLeft: "0px",
+    listStyleType: "none",
+  },
+  listItem: {
+    color: "#525252",
+    border: "1px solid lightgrey",
+    borderRadius: "30px",
+    marginBottom: "5px",
+    padding: "10px 15px",
+    display: "flex",
+    justifyContent: "center",
+    flexFlow: "column nowrap",
+    width: "100%",
+    fontSize: "1.1rem",
+    textDecoration: "none",
   },
 }));
 
@@ -28,7 +54,7 @@ const SearchList = (props) => {
         const searchRequest = await axios.get(
           `http://localhost:5000/search?term=${searchInput}`
         );
-
+        console.log(searchRequest);
         const userSearchRequest = await axios.get(
           `http://localhost:5000/search/user?term=${searchInput}`
         );
@@ -43,44 +69,47 @@ const SearchList = (props) => {
   }, [searchInput]);
 
   return (
-    <div>
-      <section>
-        <div>
-          {searchResponseList.length > 0 && (
-            <>
-              <h4>Recipes found..</h4>
-              <ul>
-                {searchResponseList.map((searchResult) => {
-                  return (
-                    <li key={searchResult._id}>
-                      <Link to={`/posts/${searchResult._id}`}>
-                        {searchResult.title}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </>
-          )}
-          {userSearchResponseList.length > 0 && (
-            <>
-              <ul>
-                <h4>Users found..</h4>
-                {userSearchResponseList.map((searchResult) => {
-                  return (
-                    <li key={searchResult._id}>
-                      <Link to={`/user/${searchResult._id}`}>
-                        {searchResult.userName}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </>
-          )}
+    <section className={classes.mainContainer}>
+      {searchResponseList.length > 0 && (
+        <div className={classes.contentContainer}>
+          <h4 className={classes.title}>Recipes found..</h4>
+          <ul className={classes.listContainer}>
+            {searchResponseList.map((searchResult) => {
+              return (
+                <li key={searchResult._id}>
+                  <Link
+                    className={classes.listItem}
+                    to={`/posts/${searchResult._id}`}
+                  >
+                    {searchResult.title}
+                    {searchResult.postOwner}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
-      </section>
-    </div>
+      )}
+      {userSearchResponseList.length > 0 && (
+        <div className={classes.contentContainer}>
+          <h4 className={classes.title}>Users found..</h4>
+          <ul className={classes.listContainer}>
+            {userSearchResponseList.map((searchResult) => {
+              return (
+                <li key={searchResult._id}>
+                  <Link
+                    className={classes.listItem}
+                    to={`/user/${searchResult._id}`}
+                  >
+                    {searchResult.userName}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+    </section>
   );
 };
 

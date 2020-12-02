@@ -5,6 +5,15 @@ import AdminList from "./AdminList";
 import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles(() => ({
+  contentContainer: {
+    display: "flex",
+    flexFlow: "column nowrap",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    padding: "20px",
+    borderRadius: "30px",
+  },
   searchContainer: {
     backgroundColor: "#C9DBBA",
     width: "76%",
