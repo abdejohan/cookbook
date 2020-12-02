@@ -1,11 +1,11 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import UserContext from "../../context/UserContext";
 import profile from "../../media/profile.jpg";
-
-// import Note from "../Note";
 
 const useStyles = makeStyles(() => ({
   section: {
@@ -28,6 +28,13 @@ const useStyles = makeStyles(() => ({
     width: "200px",
     backgroundColor: "red",
   },
+  mainText: {
+    fontSize: "1.4rem",
+  },
+  subText: {
+    color: "darkgrey",
+    fontSize: "1.2rem",
+  },
 }));
 
 const UserProfileView = () => {
@@ -35,30 +42,21 @@ const UserProfileView = () => {
   const [user, setUser] = useState({});
   const { id } = useParams();
 
-  // const { path, url } = useRouteMatch();
-  // console.log(`url, ${url}`);
-  // console.log(`path, ${path}`);
-
   useEffect(() => {
-    const try1 = async () => {
+    const getUser = async () => {
       try {
         const fetchedUser = await axios.get(`http://localhost:5000/user/${id}`);
-        setUser({
-          userName: fetchedUser.data.userName,
-          email: fetchedUser.data.email,
-        });
+        setUser(fetchedUser.data);
       } catch (error) {
         console.log(`THIS MESSAGE:${error}`);
       }
     };
-    try1();
+    getUser();
   }, [id]);
-  // {followerCount} across {totalPosts} Recipes
 
   return (
     <section className={classes.section}>
-      <h2>Welcome Back!</h2>
-      {user && <h4>{user.userName}</h4>}
+      <h4>{user.userName}</h4>
       <div className={classes.contentContainer}>
         <img
           className={classes.imageContainer}
@@ -67,8 +65,12 @@ const UserProfileView = () => {
         />
         <h2>Social</h2>
         <article>
-          <p>Totalt Visits:</p>
-          <p>Total Followers:</p>
+          <p className={classes.mainText}>
+            Totalt Visits: <span className={classes.subText}>250 000</span>
+          </p>
+          <p className={classes.mainText}>
+            Total Followers: <span className={classes.subText}>3 000</span>
+          </p>
         </article>
       </div>
     </section>

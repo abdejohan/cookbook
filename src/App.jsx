@@ -11,6 +11,7 @@ import Posts from "./components/Posts";
 import Note from "./components/Note";
 import UserContext from "./context/UserContext";
 import Profile from "./components/Profile";
+import Admin from "./components/Admin";
 import UserProfileView from "./components/profilePages/UserProfileView";
 
 const App = () => {
@@ -54,6 +55,7 @@ const App = () => {
               <Route exact path="/user/:id" component={UserProfileView} />
               <Route path="/profile" component={Profile} />
               <Route path="/search" component={Home} />
+              <Route exact path="/admin" component={Admin} />
             </Switch>
           </section>
         </UserContext.Provider>

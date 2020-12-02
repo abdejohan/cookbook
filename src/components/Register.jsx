@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Paper from "@material-ui/core/Paper";
@@ -58,8 +58,15 @@ const useStyles = makeStyles(() => ({
 const Register = () => {
   const { register, handleSubmit, errors } = useForm();
   const { setUserData } = useContext(UserContext);
+  const { userData } = useContext(UserContext);
   const classes = useStyles();
   const history = useHistory();
+
+  useEffect(() => {
+    if (userData.user) {
+      history.push("/");
+    }
+  }, [history, userData.user]);
 
   const onSubmit = async (data) => {
     const { email, password } = data;

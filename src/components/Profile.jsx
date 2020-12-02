@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Link, useRouteMatch, Route } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, useRouteMatch, Route, useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import "../App.css";
 // import Note from "./Note";
@@ -29,6 +29,15 @@ const Profile = () => {
   const classes = useStyles();
   const { userData } = useContext(UserContext);
   const { url, path } = useRouteMatch();
+  const history = useHistory();
+
+  useEffect(() => {
+    if (userData.user) {
+      if (userData.user.role === "admin") {
+        history.push("/admin");
+      }
+    }
+  }, [history, userData.user]);
 
   return (
     <>
