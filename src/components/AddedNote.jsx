@@ -17,6 +17,7 @@ const useStyles = makeStyles(() => ({
     flexFlow: "column nowrap",
   },
   fadedtext: {
+    display: "contents",
     opacity: "0.5",
   },
 }));

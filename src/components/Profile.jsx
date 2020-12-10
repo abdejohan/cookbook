@@ -9,8 +9,14 @@ import Settings from "./profilePages/Settings";
 import UserProfileView from "./profilePages/UserProfileView";
 
 const useStyles = makeStyles(() => ({
+  routerContainer: {
+    display: "flex",
+    flexFlow: "row wrap",
+    justifyContent: "center",
+  },
   navigationContainer: {
     width: "100%",
+    padding: "20px",
   },
   navigationList: {
     display: "flex",
@@ -71,15 +77,17 @@ const Profile = () => {
               </li>
             </ul>
           </nav>
-          <Route exact path={`${path}/${userData.user.id}`}>
-            <UserProfileView />
-          </Route>
-          <Route path={`${path}/library`}>
-            <Library />
-          </Route>
-          <Route path={`${path}/settings`}>
-            <Settings />
-          </Route>
+          <div className={classes.routerContainer}>
+            <Route exact path={`${path}/${userData.user.id}`}>
+              <UserProfileView />
+            </Route>
+            <Route path={`${path}/library`}>
+              <Library />
+            </Route>
+            <Route path={`${path}/settings`}>
+              <Settings />
+            </Route>
+          </div>
         </section>
       ) : (
         <p>there is nothing here right now.. :disappointed: try logging in!</p>

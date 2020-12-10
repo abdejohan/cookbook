@@ -63,6 +63,7 @@ const useStyles = makeStyles(() => ({
     flexGrow: 2,
   },
   paper: {
+    margin: "10px",
     backgroundColor: "#FDFFFC",
     padding: "10px",
     alignItems: "center",
@@ -161,7 +162,6 @@ const Note = (props) => {
       }
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);
-      console.alert("GGG");
     }
   };
 
