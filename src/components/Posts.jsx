@@ -43,7 +43,6 @@ const Posts = () => {
         <h4>Description</h4>
         <p>{postData.description}</p>
         <h4>Ingredients</h4>
-        <p>{postData.ingredients}</p>
         <h4>Instructions</h4>
         <p>{postData.instructions}</p>
       </article>

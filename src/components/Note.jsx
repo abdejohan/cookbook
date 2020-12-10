@@ -9,7 +9,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
+import Collapse from "@material-ui/core/Collapse";
 import UserContext from "../context/UserContext";
+import AddedNote from "./AddedNote";
 
 // import Button from "@material-ui/core/Button";
 
@@ -102,14 +104,11 @@ const Note = (props) => {
   const { handleSubmit, register } = useForm();
   const classes = useStyles();
   const { userData } = useContext(UserContext);
+  const [checked, setChecked] = useState(false);
+  const [noteLink, setNoteLink] = useState(false);
   const [inputFields, setInputFields] = useState([
     { volume: "", ingredient: "" },
   ]);
-  // const [value, setValue] = React.useState("Controlled");
-
-  // const handleChange = (event) => {
-  //   setValue(event.target.value);
-  // };
 
   const handleInputChange = (index, event) => {
     const values = [...inputFields];
@@ -137,11 +136,13 @@ const Note = (props) => {
   const onSubmit = async (data) => {
     const dataSend = data;
     dataSend.ingredients = inputFields;
-    console.log(dataSend);
     if (userData.token) {
       if (userData.user.userName) {
         dataSend.postOwner = userData.user.userName;
+        dataSend.expire = false;
       }
+    } else {
+      dataSend.expire = true;
     }
     try {
       const addedPost = await axios.post(
@@ -153,13 +154,14 @@ const Note = (props) => {
           },
         }
       );
+      setChecked(!checked);
+      setNoteLink(addedPost.data._id);
       if (userData.token) {
-        history.push(`/posts/${addedPost.data._id}`);
-      } else {
-        history.push("/home");
+        history.push(`/profile/library`);
       }
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);
+      console.alert("GGG");
     }
   };
 
@@ -232,6 +234,7 @@ const Note = (props) => {
                       />
                     </label>
                   </div>
+
                   <div className={classes.empty}>
                     <button
                       className={classes.plusMinusBttn}
@@ -255,11 +258,16 @@ const Note = (props) => {
             variant="filled"
             defaultValue="Instructions"
           />
-          <input
-            type="submit"
-            className={classes.submitBttn}
-            value="Generate &#x21E8;"
-          />
+          <div className={classes.linkContainer}>
+            <input
+              type="submit"
+              className={classes.submitBttn}
+              value="Generate &#x21E8;"
+            />
+            <Collapse in={checked} collapsedHeight={0}>
+              <AddedNote noteLink={noteLink} />
+            </Collapse>
+          </div>
         </form>
       </Paper>
     </div>
