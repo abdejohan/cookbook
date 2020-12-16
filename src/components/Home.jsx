@@ -3,15 +3,17 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import Note from "./Note";
+import Login from "./Login";
 import Search from "./Search";
+import UserProfileView from "./profilePages/UserProfileView";
 
 // Images
-import frontpageBackground from "../media/frontpageBackground.jpg";
-import record from "../media/record.svg";
-import notes from "../media/notes.svg";
-import merge from "../media/merge.svg";
-import share from "../media/share.svg";
-import baking from "../media/baking.svg";
+// import frontpageBackground from "../media/frontpageBackground.jpg";
+// import record from "../media/record.svg";
+// import notes from "../media/notes.svg";
+// import merge from "../media/merge.svg";
+// import share from "../media/share.svg";
+// import baking from "../media/baking.svg";
 
 const useStyles = makeStyles(() => ({
   contentContainer: {
@@ -32,13 +34,12 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    backgroundImage: `url(${frontpageBackground})`,
+    backgroundColor: "#BB4430",
     backgroundAttachment: "fixed",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     height: "500px",
-    backgroundColor: "transparent",
   },
   article: {
     visibility: "hidden",
@@ -107,34 +108,18 @@ const useStyles = makeStyles(() => ({
     borderWidth: "0 0 1px 0",
     borderRadius: "20px",
   },
+  components: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+  },
 }));
 
 const Home = () => {
   const { userData } = useContext(UserContext);
   const history = useHistory();
   const classes = useStyles();
-  const imageArray = [
-    {
-      id: 0,
-      title: "Create",
-      img: record,
-    },
-    {
-      id: 1,
-      title: "Document",
-      img: notes,
-    },
-    {
-      id: 2,
-      title: "merge",
-      img: merge,
-    },
-    {
-      id: 3,
-      title: "Share!",
-      img: share,
-    },
-  ];
 
   useEffect(() => {
     if (userData.user) {
@@ -146,51 +131,15 @@ const Home = () => {
 
   return (
     <>
-      <div className={classes.newUserInfo}>
-        <article className={classes.article}>
-          <ul className={classes.ulList}>
-            <li>
-              <img className={classes.listImg} src={baking} alt="cooking hat" />
-              Help structuring content
-            </li>
-            <li>
-              <img className={classes.listImg} src={baking} alt="cooking hat" />
-              Lifelong virtual storage of your favorite recipes
-            </li>
-            <li>
-              <img className={classes.listImg} src={baking} alt="cooking hat" />
-              Find inspriation
-            </li>
-          </ul>
-          <p className={classes.articleSubText}>
-            Either if you are someone thats looking to present your content
-            nicely to your followers. Or looking for way to store your recipes
-            Or simply just a foodie at heart{" "}
-            <span role="img" aria-label="emoji heart">
-              ❤️
-            </span>
-            , we think you will find bakeNOTES useful! Enjoy
-          </p>
-        </article>
-      </div>
+      <div className={classes.newUserInfo} />
       <section className={classes.contentContainer}>
         <Search />
         <hr className={classes.hr} />
-        <div className={classes.iconContainer}>
-          {imageArray.map((image) => {
-            return (
-              <div key={image.id} className={classes.icon2text}>
-                <img
-                  className={classes.icons}
-                  src={image.img}
-                  alt={image.key}
-                />
-                <h2>{image.title}</h2>
-              </div>
-            );
-          })}
+        <div className={classes.components}>
+          {userData.token && <UserProfileView />}
+          {!userData.token && <Login />}
+          <Note />
         </div>
-        <Note />
         <hr className={classes.hr2} />
       </section>
     </>

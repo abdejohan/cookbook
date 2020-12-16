@@ -3,13 +3,17 @@
 import React, { useEffect, useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router-dom";
+import Paper from "@material-ui/core/Paper";
+
 import axios from "axios";
 import UserContext from "../../context/UserContext";
 import profile from "../../media/profile.jpg";
 
 const useStyles = makeStyles(() => ({
-  section: {
-    backgroundColor: "#60AFFF",
+  paper: {
+    flexGrow: 2,
+    margin: "10px",
+    backgroundColor: "#FDFFFC",
     padding: "20px",
     display: "flex",
     justifyContent: "center",
@@ -55,7 +59,7 @@ const UserProfileView = () => {
   }, [id]);
 
   return (
-    <section className={classes.section}>
+    <Paper elevation={3} className={classes.paper}>
       <h4>{user.userName}</h4>
       <div className={classes.contentContainer}>
         <img
@@ -73,7 +77,7 @@ const UserProfileView = () => {
           </p>
         </article>
       </div>
-    </section>
+    </Paper>
   );
 };
 

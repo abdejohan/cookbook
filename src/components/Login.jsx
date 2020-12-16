@@ -14,12 +14,14 @@ import Container from "@material-ui/core/Container";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import Paper from "@material-ui/core/Paper";
 import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    margin: "10px",
     display: "flex",
+    padding: "20xp",
     flexDirection: "column",
     alignItems: "center",
   },
@@ -69,79 +71,81 @@ export default function SignIn() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form
-          className={classes.form}
-          noValidate
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <TextField
-            variant="outlined"
-            margin="normal"
-            inputRef={register}
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            inputRef={register}
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={
-              <Controller
-                as={Checkbox}
-                control={control}
-                name="remember"
-                color="primary"
-                defaultValue={false}
-              />
-            }
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
+    <Paper elevation={3} className={classes.paper}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <form
+            className={classes.form}
+            noValidate
+            onSubmit={handleSubmit(onSubmit)}
           >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="/register" variant="body2">
-                Forgot password?
-              </Link>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              inputRef={register}
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              inputRef={register}
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={
+                <Controller
+                  as={Checkbox}
+                  control={control}
+                  name="remember"
+                  color="primary"
+                  defaultValue={false}
+                />
+              }
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="/register" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/register" variant="body2">
+                  Dont have an account? Sign Up
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Link href="/register" variant="body2">
-                Dont have an account? Sign Up
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container>
+          </form>
+        </div>
+      </Container>
+    </Paper>
   );
 }
