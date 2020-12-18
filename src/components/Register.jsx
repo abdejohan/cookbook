@@ -2,25 +2,20 @@ import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Paper from "@material-ui/core/Paper";
-// import Card from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
 import UserContext from "../context/UserContext";
 
-// import Button from "@material-ui/core/Button";
-
 const useStyles = makeStyles(() => ({
   paper: {
     alignItems: "center",
     display: "flex",
     flexFlow: "column nowrap",
-    width: "95%",
     margin: "0 auto",
     padding: "20px",
     marginTop: "20px",
-    minHeight: "1000px",
     justifyContent: "flex-start",
   },
   form: {
@@ -28,30 +23,36 @@ const useStyles = makeStyles(() => ({
     flexGrow: "2",
     maxWidth: "1000px",
     display: "flex",
-    flexFlow: "column wrap",
+    flexFlow: "column nowrap",
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "flex-start",
   },
   textField: {
     width: "100%",
     marginBottom: "20px",
   },
-  card: {
-    flexGrow: "1",
-    display: "flex",
-    flexFlow: "column nowrap",
-  },
   section: {
     display: "flex",
-    flexFlow: "row nowrap",
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
     padding: "20px",
   },
-  inputFieldTitles: {
+  roleContainer: {
     display: "flex",
-    alignSelf: "flex-start",
+    flexFlow: "row nowrap",
+    justifyContent: "space-bewteen",
+  },
+  selectContainer: {
+    border: "0px solid transparent",
+  },
+  submitBtn: {
+    border: "none",
+    fontSize: "1.2rem",
+    display: "flex",
+    alignSelf: "flex-end",
+    padding: "10px",
+    backgroundColor: "#C9DBBA",
   },
 }));
 
@@ -82,79 +83,73 @@ const Register = () => {
         user: loginRes.data.user,
       });
       localStorage.setItem("auth-token", loginRes.data.token);
-      history.push("/profile");
+      history.push("/");
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);
     }
   };
   return (
     <Paper className={classes.paper}>
-      <Typography variant="h1">Register</Typography>
+      <Typography variant="h2">Register Account</Typography>
+      <Typography variant="subtitle1">
+        Collect all your content in one place and keep track of your progress
+      </Typography>
+
       <section className={classes.section}>
         <form
           onSubmit={handleSubmit(onSubmit)}
           autoComplete="off"
           className={classes.form}
         >
-          <Typography variant="subtitle1" className={classes.inputFieldTitles}>
-            Enter Email
-          </Typography>
           <TextField
             className={classes.textField}
             name="email"
             inputRef={register({ required: true })}
-            id="outlined-basic"
-            label="Ex. steve@gmail.com"
-            variant="outlined"
+            label="Email"
           />
           {errors.email && <span>This field is required</span>}
-
-          <Typography variant="subtitle1" className={classes.inputFieldTitles}>
-            Select Username
-          </Typography>
           <TextField
             className={classes.textField}
             name="userName"
             inputRef={register}
-            id="outlined-basic"
-            label="Ex. StevesGems"
-            variant="outlined"
+            label="Username"
           />
           {errors.userName && <span>This field is required</span>}
-
-          <select name="role" ref={register}>
-            <option value="Normal user">Normal user</option>
-            <option value="Content Creator">Content Creator</option>
-            <option value="Sponsor">Sponsor</option>
-          </select>
-
-          <Typography variant="subtitle1" className={classes.inputFieldTitles}>
-            Select Password (must be more than 6 caracters)
-          </Typography>
+          <div className={classes.roleContainer}>
+            <Typography variant="subtitle1">Role:</Typography>
+            <select
+              className={classes.selectContainer}
+              name="role"
+              ref={register}
+            >
+              <option value="Normal user">Normal user</option>
+              <option value="Content Creator">Content Creator</option>
+              <option value="Sponsor">Sponsor</option>
+              <option value="Sponsor" disabled>
+                Admin
+              </option>
+            </select>
+            <br />
+          </div>
           <TextField
             className={classes.textField}
+            type="password"
             name="password"
             inputRef={register({ required: true })}
-            id="outlined-basic"
-            label="**********"
-            variant="outlined"
+            label="Select password"
           />
           {errors.password && <span>This field is required</span>}
 
-          <Typography variant="subtitle1" className={classes.inputFieldTitles}>
-            Enter password again
-          </Typography>
           <TextField
             className={classes.textField}
+            type="password"
             name="passwordCheck"
             inputRef={register({ required: true })}
-            id="outlined-basic"
-            label="**********"
-            variant="outlined"
+            label="Repeat password"
           />
           {errors.passwordCheck && <span>This field is required</span>}
 
-          <input type="submit" />
+          <input type="submit" className={classes.submitBtn} value="Register" />
         </form>
       </section>
     </Paper>
