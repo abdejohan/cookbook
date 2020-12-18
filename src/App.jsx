@@ -7,8 +7,6 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Posts from "./components/Posts";
-// eslint-disable-next-line no-unused-vars
-import Note from "./components/Note";
 import UserContext from "./context/UserContext";
 import Profile from "./components/Profile";
 import Admin from "./components/Admin";
@@ -42,7 +40,7 @@ const App = () => {
     checkLoggedIn();
   }, []);
   return (
-    <div>
+    <div className="siteContainer">
       <Router>
         <UserContext.Provider value={{ userData, setUserData }}>
           <Header />
