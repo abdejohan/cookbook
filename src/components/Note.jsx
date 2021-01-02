@@ -12,14 +12,20 @@ import Paper from "@material-ui/core/Paper";
 import Collapse from "@material-ui/core/Collapse";
 import UserContext from "../context/UserContext";
 import AddedNote from "./AddedNote";
+import "../App.css";
 
 // import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(() => ({
   empty: {},
-  root: {
+  paper: {
+    flexGrow: "2",
+    backgroundColor: "white",
+    padding: "10px",
+    alignItems: "flex-start",
     display: "flex",
-    flexWrap: "wrap",
+    flexFlow: "column nowrap",
+    justifyContent: "center",
   },
   ingredientContainer: {
     minWidth: "300px",
@@ -54,6 +60,7 @@ const useStyles = makeStyles(() => ({
   },
   amount: {
     maxWidth: "50px",
+    minHeight: "25px",
     border: "1px lightgrey solid",
   },
   ingredient: {
@@ -62,19 +69,11 @@ const useStyles = makeStyles(() => ({
     width: "200px",
     flexGrow: 2,
   },
-  paper: {
-    margin: "10px",
-    backgroundColor: "#FDFFFC",
-    padding: "10px",
-    alignItems: "center",
-    alignSelf: "flex-start",
-    display: "flex",
-    flexFlow: "column nowrap",
-    justifyContent: "center",
-  },
+
   form: {
     padding: "10px",
     width: "100%",
+    maxWidth: "1000px",
     display: "flex",
     flexFlow: "column nowrap",
     alignItems: "flex-start",
@@ -97,6 +96,19 @@ const useStyles = makeStyles(() => ({
     marginTop: "20px",
     padding: "10px 60px",
     alignSelf: "flex-end",
+  },
+  growLine: {
+    display: "flex",
+    flexGrow: "2",
+    paddingRight: "5px",
+    paddingLeft: "5px",
+  },
+  labelGrow: {
+    flexGrow: "2",
+    display: "flex",
+  },
+  headText: {
+    padding: "10px",
   },
 }));
 
@@ -166,111 +178,117 @@ const Note = (props) => {
   };
 
   return (
-    <div className={classes.root}>
-      <Paper elevation={3} className={classes.paper}>
-        <Typography variant="h4">Create Note</Typography>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className={classes.form}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            className={`${classes.title} ${classes.textarea}`}
-            name="title"
-            id="title"
-            inputRef={register}
-            variant="filled"
-            defaultValue="Title"
-          />
-          <TextField
-            className={`${classes.description} ${classes.textarea}`}
-            name="description"
-            id="description"
-            multiline
-            rows={4}
-            inputRef={register}
-            variant="filled"
-            defaultValue="Description (Optional)"
-          />
-          <h3>Ingredients</h3>
-          <div className={classes.ingredientContainer}>
-            <p className={classes.ingredientHeader}>
-              <span className={classes.ingredientHeaderText}>
-                Amount | Ingredient
-              </span>
-              <button
-                className={classes.plusMinusBttn}
-                type="button"
-                onClick={() => handleAddFields()}
-              >
-                +
-              </button>
-            </p>
-            {inputFields.map((inputField, index) => (
-              <div className={classes.ingredientGroup}>
-                <Fragment key={`${inputField}~${index}`}>
-                  <div className={classes.empty}>
-                    <label htmlFor="volume">
-                      <input
-                        type="text"
-                        className={classes.amount}
-                        id="volume"
-                        name="volume"
-                        value={inputField.volume}
-                        onChange={(event) => handleInputChange(index, event)}
-                      />
-                    </label>
-                  </div>
-                  <div className={classes.empty}>
-                    <label htmlFor="ingredient">
-                      <input
-                        type="text"
-                        className={classes.ingredient}
-                        id="ingredient"
-                        name="ingredient"
-                        value={inputField.ingredient}
-                        onChange={(event) => handleInputChange(index, event)}
-                      />
-                    </label>
-                  </div>
+    <Paper elevation={0} className={classes.paper}>
+      <p className={classes.headText}>
+        <Typography variant="h4">Lets Cook Together!</Typography>
+        <Typography variant="subtitle1">
+          Share your love for cooking with your friends and followers.
+        </Typography>
+        <Typography variant="subtitle2">
+          You will recive a link to share at the end!
+        </Typography>
+      </p>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={classes.form}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          className={`${classes.title} ${classes.textarea}`}
+          name="title"
+          id="title"
+          inputRef={register}
+          variant="filled"
+          defaultValue="Title"
+        />
+        <TextField
+          className={`${classes.description} ${classes.textarea}`}
+          name="description"
+          id="description"
+          multiline
+          rows={4}
+          inputRef={register}
+          variant="filled"
+          defaultValue="Description (Optional)"
+        />
+        <h3>Ingredients</h3>
+        <div className={classes.ingredientContainer}>
+          <p className={classes.ingredientHeader}>
+            <span className={classes.ingredientHeaderText}>
+              Amount | Ingredient
+            </span>
+            <button
+              className={classes.plusMinusBttn}
+              type="button"
+              onClick={() => handleAddFields()}
+            >
+              +
+            </button>
+          </p>
+          {inputFields.map((inputField, index) => (
+            <div className={classes.ingredientGroup}>
+              <Fragment key={`${inputField}~${index}`}>
+                <div className={classes.empty}>
+                  <label htmlFor="volume">
+                    <input
+                      type="text"
+                      className={classes.amount}
+                      id="volume"
+                      name="volume"
+                      value={inputField.volume}
+                      onChange={(event) => handleInputChange(index, event)}
+                    />
+                  </label>
+                </div>
+                <div className={classes.growLine}>
+                  <label className={classes.labelGrow} htmlFor="ingredient">
+                    <input
+                      type="text"
+                      className={classes.ingredient}
+                      id="ingredient"
+                      name="ingredient"
+                      value={inputField.ingredient}
+                      onChange={(event) => handleInputChange(index, event)}
+                    />
+                  </label>
+                </div>
 
-                  <div className={classes.empty}>
-                    <button
-                      className={classes.plusMinusBttn}
-                      type="button"
-                      onClick={() => handleRemoveFields(index)}
-                    >
-                      -
-                    </button>
-                  </div>
-                </Fragment>
-              </div>
-            ))}
-          </div>
-          <TextField
-            className={`${classes.instructions} ${classes.textarea}`}
-            id="instructions"
-            name="instructions"
-            multiline
-            rows={8}
-            inputRef={register}
-            variant="filled"
-            defaultValue="Instructions"
+                <div className={classes.empty}>
+                  <button
+                    className={classes.plusMinusBttn}
+                    type="button"
+                    onClick={() => handleRemoveFields(index)}
+                  >
+                    -
+                  </button>
+                </div>
+              </Fragment>
+            </div>
+          ))}
+        </div>
+        <TextField
+          className={`${classes.instructions} ${classes.textarea}`}
+          id="instructions"
+          name="instructions"
+          multiline
+          rows={8}
+          inputRef={register}
+          variant="filled"
+          defaultValue="Instructions"
+        />
+        <div className={classes.linkContainer}>
+          <input
+            type="submit"
+            className={classes.submitBttn}
+            value="Generate &#x21E8;"
           />
-          <div className={classes.linkContainer}>
-            <input
-              type="submit"
-              className={classes.submitBttn}
-              value="Generate &#x21E8;"
-            />
-            <Collapse in={checked} collapsedHeight={0}>
-              <AddedNote noteLink={noteLink} />
-            </Collapse>
-          </div>
-        </form>
-      </Paper>
-    </div>
+          <Collapse in={checked} collapsedHeight={0}>
+            <AddedNote noteLink={noteLink} />
+          </Collapse>
+        </div>
+      </form>
+    </Paper>
   );
 };
 

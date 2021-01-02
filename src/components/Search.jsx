@@ -3,16 +3,17 @@ import { makeStyles } from "@material-ui/core/styles";
 import SearchList from "./SearchList";
 import AdminList from "./AdminList";
 import UserContext from "../context/UserContext";
+import "../App.css";
 
 const useStyles = makeStyles(() => ({
   contentContainer: {
+    backgroundColor: "#white",
     display: "flex",
     flexFlow: "column nowrap",
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
     padding: "20px",
-    borderRadius: "30px",
   },
   searchContainer: {
     backgroundColor: "#C9DBBA",

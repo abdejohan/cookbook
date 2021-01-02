@@ -5,15 +5,12 @@ import UserContext from "../context/UserContext";
 import Note from "./Note";
 import Login from "./Login";
 import Search from "./Search";
+import SideNotes from "./SideNotes";
 import UserProfileView from "./profilePages/UserProfileView";
-import mobileImage from "../media/mobileImage.jpg";
+import "../App.css";
 
-// Images
-// import record from "../media/record.svg";
-// import notes from "../media/notes.svg";
-// import merge from "../media/merge.svg";
-// import share from "../media/share.svg";
-// import baking from "../media/baking.svg";
+// import mobileImage from "../media/mobileImage.jpg";
+// backgroundImage: `url(${mobileImage})`,
 
 const useStyles = makeStyles(() => ({
   contentContainer: {
@@ -22,7 +19,6 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    padding: "20px",
     borderRadius: "30px",
     position: "relative",
   },
@@ -35,18 +31,26 @@ const useStyles = makeStyles(() => ({
   },
   components: {
     width: "100%",
+    flexFlow: "column nowrap",
     display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
+    justifyContent: "center",
+    alignItems: "center",
   },
   frontPageImg: {
     width: "100%",
     height: "300px",
-    backgroundImage: `url(${mobileImage})`,
+    backgroundColor: "grey",
     backgroundAttachment: "fixed",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
+  },
+  sideways: {
+    padding: "20px",
+    width: "100%",
+    display: "flex",
+    flexFlow: "row wrap",
+    marginBottom: "50px",
   },
 }));
 
@@ -70,8 +74,11 @@ const Home = () => {
         <Search />
         <div className={classes.components}>
           {userData.token && <UserProfileView />}
+          <div className={classes.sideways}>
+            <Note />
+            <SideNotes />
+          </div>
           {!userData.token && <Login />}
-          <Note />
         </div>
       </section>
     </>
