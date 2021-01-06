@@ -19,8 +19,10 @@ body {
   color: #61dafb;
 }
 
+.siteContainer {
+}
+
 .mainContainer {
-  background-color: white;
   padding-bottom: 200px;
   position: relative;
   display: flex;
@@ -28,7 +30,7 @@ body {
   align-items: center;
   flex-flow: column nowrap;
   height: 100%;
-  top: 64px;
+  top: 104px;
 }
 
 .navigationLink {
@@ -48,6 +50,13 @@ body {
 .noteLink:hover {
   color: blue;
   text-decoration: underline;
+}
+
+.shadow {
+  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 }
 
 a {

@@ -5,24 +5,52 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import UserContext from "../context/UserContext";
 import "../App.css";
+import frypan from "../media/frypan.svg";
 
 const useStyles = makeStyles(() => ({
   AppBar: {
+    color: "lightgrey",
     backgroundColor: "white",
     boxShadow: "none",
     display: "flex",
-    alignItems: "flex-end",
+    alignItems: "center",
+    justifyContent: "center",
   },
   menuButton: {
+    padding: "5px",
+    marginLeft: "50px",
     boxShadow: "none",
-    fontSize: "1.5rem",
+    fontSize: "1rem",
+    fontWeight: "500",
+    color: "#696969",
     backgroundColor: "white",
+    textTransform: "none",
+  },
+  black: {
+    padding: "20px",
+    backgroundColor: "black",
+    width: "100%",
+    height: "35px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  icon: {
+    width: "50px",
+    height: "50px",
+  },
+  loginBttn: {
+    borderRadius: "10px",
+    padding: "4px 10px",
+    backgroundColor: "blue",
+    color: "white",
   },
 }));
 
@@ -61,7 +89,13 @@ const Header = (props) => {
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.AppBar}>
+        <div className={classes.black}>
+          <Typography variant="body1">
+            Focus on the create side of cooking!
+          </Typography>
+        </div>
         <Toolbar>
+          <img src={frypan} className={classes.icon} alt="frypan" />
           <div>
             {isMobile ? (
               <div>
@@ -97,7 +131,7 @@ const Header = (props) => {
                           handleMenuClick(`/profile/${userData.user.id}`)
                         }
                       >
-                        gg
+                        loginBttn
                       </MenuItem>
                       <MenuItem onClick={() => logOut()}>Logout</MenuItem>
                     </div>
@@ -149,15 +183,21 @@ const Header = (props) => {
                     </Button>
                     <Button
                       className={classes.menuButton}
-                      onClick={() => handleMenuClick("/login")}
+                      onClick={() => handleMenuClick("/about")}
                     >
-                      Login
+                      About Us
                     </Button>
                     <Button
                       className={classes.menuButton}
                       onClick={() => handleMenuClick("/register")}
                     >
                       Register
+                    </Button>
+                    <Button
+                      className={`${classes.menuButton} + ${classes.loginBttn}`}
+                      onClick={() => handleMenuClick("/login")}
+                    >
+                      Login
                     </Button>
                   </div>
                 )}

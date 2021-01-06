@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 .env
+gg.text
 
 # testing
 /coverage

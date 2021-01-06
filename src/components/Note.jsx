@@ -13,16 +13,18 @@ import Collapse from "@material-ui/core/Collapse";
 import UserContext from "../context/UserContext";
 import AddedNote from "./AddedNote";
 import "../App.css";
+import bake from "../media/bake.svg";
 
 // import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(() => ({
   empty: {},
   paper: {
+    maxWidth: "1000px",
+    padding: "20px 100px",
     flexGrow: "2",
     backgroundColor: "white",
-    padding: "10px",
-    alignItems: "flex-start",
+    alignItems: "flex-end",
     display: "flex",
     flexFlow: "column nowrap",
     justifyContent: "center",
@@ -110,6 +112,10 @@ const useStyles = makeStyles(() => ({
   headText: {
     padding: "10px",
   },
+  icon: {
+    width: "50px",
+    height: "50px",
+  },
 }));
 
 const Note = (props) => {
@@ -179,15 +185,11 @@ const Note = (props) => {
 
   return (
     <Paper elevation={0} className={classes.paper}>
-      <p className={classes.headText}>
-        <Typography variant="h4">Lets Cook Together!</Typography>
-        <Typography variant="subtitle1">
-          Share your love for cooking with your friends and followers.
-        </Typography>
-        <Typography variant="subtitle2">
-          You will recive a link to share at the end!
-        </Typography>
-      </p>
+      <img className={classes.icon} src={bake} alt="bake-icon" />
+      <Typography variant="h4">CREATE NOTE</Typography>
+      <Typography variant="subtitle1">
+        YOU WILL BE GIVEN A LINK TO SHARE AT THE END.
+      </Typography>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={classes.form}

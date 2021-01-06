@@ -7,22 +7,22 @@ import "../App.css";
 
 const useStyles = makeStyles(() => ({
   contentContainer: {
-    backgroundColor: "#white",
+    padding: "30px",
+    backgroundColor: "white",
     display: "flex",
     flexFlow: "column nowrap",
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    padding: "20px",
   },
   searchContainer: {
     backgroundColor: "#C9DBBA",
-    width: "76%",
+    width: "56%",
     flexGrow: "2",
     display: "flex",
     justifyContent: "center",
     marginBottom: "20px",
-    padding: "10px",
+    padding: "6px",
     borderRadius: "50px",
   },
   searchLabel: {
@@ -37,18 +37,17 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     border: "none",
     color: "#525252",
-    minHeight: "35px",
-    fontSize: "1.3rem",
-    borderRadius: "30px",
+    fontSize: "1.1rem",
+    borderRadius: "20px",
   },
   searchButton: {
     backgroundColor: "grey",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    minWidth: "50px",
+    minWidth: "40px",
     color: "white",
-    minHeight: "50px",
+    minHeight: "40px",
     borderRadius: "30px",
   },
 }));
@@ -71,7 +70,7 @@ const Search = () => {
   }, [role, userData.user]);
 
   return (
-    <section className={classes.contentContainer}>
+    <section className={`${classes.contentContainer}`}>
       <div className={classes.searchContainer}>
         <label htmlFor="search" className={classes.searchLabel}>
           <input
