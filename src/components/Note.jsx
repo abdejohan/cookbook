@@ -6,10 +6,10 @@ import axios from "axios";
 import { withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Collapse from "@material-ui/core/Collapse";
+import { Typography } from "@material-ui/core";
 import UserContext from "../context/UserContext";
 import AddedNote from "./AddedNote";
 import "../App.css";
@@ -20,11 +20,12 @@ import bake from "../media/bake.svg";
 const useStyles = makeStyles(() => ({
   empty: {},
   paper: {
+    width: "100%",
     maxWidth: "1000px",
     padding: "20px 100px",
     flexGrow: "2",
     backgroundColor: "white",
-    alignItems: "flex-end",
+    alignItems: "center",
     display: "flex",
     flexFlow: "column nowrap",
     justifyContent: "center",
@@ -88,16 +89,21 @@ const useStyles = makeStyles(() => ({
     resize: "none",
     display: "flex",
   },
-  textFieldHeader: {
-    fontWeight: "700",
-    color: "#525252",
-    marginTop: "20px",
-    marginBottom: "5px",
+  linkContainer: {
+    width: "100%",
+    alignSelf: "flex-end",
+    backgroundColor: "lightblue",
+    borderRadius: "5px",
+    display: "flex",
+    flexFlow: "column nowrap",
   },
   submitBttn: {
-    marginTop: "20px",
-    padding: "10px 60px",
-    alignSelf: "flex-end",
+    fontWeight: "900",
+    fontSize: "1.5rem",
+    color: "white",
+    border: "none",
+    padding: "20px",
+    backgroundColor: "lightblue",
   },
   growLine: {
     display: "flex",
@@ -113,8 +119,31 @@ const useStyles = makeStyles(() => ({
     padding: "10px",
   },
   icon: {
+    margin: "20px",
     width: "50px",
     height: "50px",
+  },
+  headTextContainer: {
+    display: "flex",
+    flexFlow: "row nowrap",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  textContainer: {
+    padding: "20px",
+    marginLeft: "40px",
+    borderRadius: "5px",
+    display: "flex",
+    flexFlow: "column nowrap",
+  },
+  noteHeaderText: {
+    color: "#FF7F51",
+    fontWeight: "900",
+  },
+  noteHeaderSubText: {
+    color: "#FF9B54",
+    fontWeight: "800",
+    fontSize: "0.8rem",
   },
 }));
 
@@ -184,12 +213,19 @@ const Note = (props) => {
   };
 
   return (
-    <Paper elevation={0} className={classes.paper}>
-      <img className={classes.icon} src={bake} alt="bake-icon" />
-      <Typography variant="h4">CREATE NOTE</Typography>
-      <Typography variant="subtitle1">
-        YOU WILL BE GIVEN A LINK TO SHARE AT THE END.
-      </Typography>
+    <Paper elevation={0} className={`shadowSharp ${classes.paper}`}>
+      <div className={classes.headTextContainer}>
+        <img className={classes.icon} src={bake} alt="bake-icon" />
+        <div className={`${classes.textContainer} shadowSharp`}>
+          <Typography className={classes.noteHeaderText} variant="h6">
+            GENERATE LINK
+          </Typography>
+          <Typography className={classes.noteHeaderSubText} variant="subtitle2">
+            YOUR NOTE WILL BE SAVED FOR 24H, SIGN IN AND ADD IT TO YOUR
+            COLLECTION TO KEEP IT FOREVER.
+          </Typography>
+        </div>
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={classes.form}
@@ -229,8 +265,8 @@ const Note = (props) => {
             </button>
           </p>
           {inputFields.map((inputField, index) => (
-            <div className={classes.ingredientGroup}>
-              <Fragment key={`${inputField}~${index}`}>
+            <div key={index} className={classes.ingredientGroup}>
+              <Fragment key={inputField}>
                 <div className={classes.empty}>
                   <label htmlFor="volume">
                     <input
@@ -279,7 +315,7 @@ const Note = (props) => {
           variant="filled"
           defaultValue="Instructions"
         />
-        <div className={classes.linkContainer}>
+        <div className={`shadow ${classes.linkContainer}`}>
           <input
             type="submit"
             className={classes.submitBttn}

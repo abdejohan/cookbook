@@ -32,6 +32,7 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
   },
   sideways: {
+    paddingBottom: "100px",
     padding: "20px",
     backgroundColor: "white",
     paddingLeft: "0px",
@@ -40,7 +41,6 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
     alignItems: "center",
     flexFlow: "column nowrap",
-    marginBottom: "50px",
   },
   textContainer: {
     marginBottom: "100px",
@@ -100,12 +100,12 @@ const Home = () => {
         <div className={classes.components}>
           {userData.token && <UserProfileView />}
           <div className={classes.sideways}>
-            <p className={classes.textContainer}>
+            <article className={classes.textContainer}>
               <Typography className={classes.headText} variant="h4">
                 YOU CREATE, WE STORE!
               </Typography>
               <Typography className={classes.subText}>
-                FORT NOX FOR RECIPES ONLINE.
+                YOUR OWN VIRTUAL COOKBOOK
               </Typography>
               <div className={classes.iconContainer}>
                 <div className={classes.iconRows}>
@@ -115,7 +115,7 @@ const Home = () => {
                     alt="youtube-icon"
                   />
                   <Typography className={classes.subText1} variant="body2">
-                    LET&apos;S YOU FOCUS ON CREATING CONTENT
+                    GET SHAREABLE LINK FOR YOUR PLATFORM
                   </Typography>
                 </div>
                 <div className={classes.iconRows}>
@@ -125,11 +125,11 @@ const Home = () => {
                     alt="folder-icon"
                   />
                   <Typography className={classes.subText1} variant="body2">
-                    LIFE LONG STORAGE OF RECIPE COLLECTIONS
+                    LIFE LONG STORAGE FOR YOUR RECIPE COLLECTIONS
                   </Typography>
                 </div>
               </div>
-            </p>
+            </article>
             <Note />
           </div>
           {!userData.token && <Login />}
