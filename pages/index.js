@@ -1,11 +1,14 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import axios from "axios";
 import Home from "../components/Home";
 import UserContext from "../context/UserContext";
 
 const App = () => {
-  const { userData, setUserData } = useContext(UserContext);
+  const { setUserData } = useContext(UserContext);
 
+  // if (typeof window !== "undefined") {
+  //   localStorage.setItem(key, value);
+  // }
   useEffect(() => {
     const checkLoggedIn = async () => {
       let token = localStorage.getItem("auth-token");
@@ -26,11 +29,11 @@ const App = () => {
       }
     };
     checkLoggedIn();
-  }, []);
-  
+  }, [setUserData]);
+
   return (
     <>
-      <Home/>
+      <Home />
     </>
   );
 };

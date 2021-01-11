@@ -7,7 +7,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
 import UserContext from "../context/UserContext";
-import Header from "../components/Header";
 
 const useStyles = makeStyles(() => ({
   paper: {
@@ -84,76 +83,76 @@ const Register = () => {
         user: loginRes.data.user,
       });
       localStorage.setItem("auth-token", loginRes.data.token);
-      history.push("/");
+      router.push("/");
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);
     }
   };
   return (
-      <Paper className={classes.paper}>
-        <Typography variant="h2">Register Account</Typography>
-        <Typography variant="subtitle1">
-          Collect all your content in one place and keep track of your progress
-        </Typography>
+    <Paper className={classes.paper}>
+      <Typography variant="h2">Register Account</Typography>
+      <Typography variant="subtitle1">
+        Collect all your content in one place and keep track of your progress
+      </Typography>
 
-        <section className={classes.section}>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            autoComplete="off"
-            className={classes.form}
-          >
-            <TextField
-              className={classes.textField}
-              name="email"
-              inputRef={register({ required: true })}
-              label="Email"
-            />
-            {errors.email && <span>This field is required</span>}
-            <TextField
-              className={classes.textField}
-              name="userName"
-              inputRef={register}
-              label="Username"
-            />
-            {errors.userName && <span>This field is required</span>}
-            <div className={classes.roleContainer}>
-              <Typography variant="subtitle1">Role:</Typography>
-              <select
-                className={classes.selectContainer}
-                name="role"
-                ref={register}
-              >
-                <option value="Normal user">Normal user</option>
-                <option value="Content Creator">Content Creator</option>
-                <option value="Sponsor">Sponsor</option>
-                <option value="Sponsor" disabled>
-                  Admin
-                </option>
-              </select>
-              <br />
-            </div>
-            <TextField
-              className={classes.textField}
-              type="password"
-              name="password"
-              inputRef={register({ required: true })}
-              label="Select password"
-            />
-            {errors.password && <span>This field is required</span>}
+      <section className={classes.section}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          autoComplete="off"
+          className={classes.form}
+        >
+          <TextField
+            className={classes.textField}
+            name="email"
+            inputRef={register({ required: true })}
+            label="Email"
+          />
+          {errors.email && <span>This field is required</span>}
+          <TextField
+            className={classes.textField}
+            name="userName"
+            inputRef={register}
+            label="Username"
+          />
+          {errors.userName && <span>This field is required</span>}
+          <div className={classes.roleContainer}>
+            <Typography variant="subtitle1">Role:</Typography>
+            <select
+              className={classes.selectContainer}
+              name="role"
+              ref={register}
+            >
+              <option value="Normal user">Normal user</option>
+              <option value="Content Creator">Content Creator</option>
+              <option value="Sponsor">Sponsor</option>
+              <option value="Sponsor" disabled>
+                Admin
+              </option>
+            </select>
+            <br />
+          </div>
+          <TextField
+            className={classes.textField}
+            type="password"
+            name="password"
+            inputRef={register({ required: true })}
+            label="Select password"
+          />
+          {errors.password && <span>This field is required</span>}
 
-            <TextField
-              className={classes.textField}
-              type="password"
-              name="passwordCheck"
-              inputRef={register({ required: true })}
-              label="Repeat password"
-            />
-            {errors.passwordCheck && <span>This field is required</span>}
+          <TextField
+            className={classes.textField}
+            type="password"
+            name="passwordCheck"
+            inputRef={register({ required: true })}
+            label="Repeat password"
+          />
+          {errors.passwordCheck && <span>This field is required</span>}
 
-            <input type="submit" className={classes.submitBtn} value="Register" />
-          </form>
-        </section>
-      </Paper>
+          <input type="submit" className={classes.submitBtn} value="Register" />
+        </form>
+      </section>
+    </Paper>
   );
 };
 

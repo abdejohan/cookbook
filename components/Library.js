@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -25,6 +24,7 @@ const useStyles = makeStyles(() => ({
 
 const Library = () => {
   const [posts, setPosts] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [followPosts, setFollowPosts] = useState([]);
   const { userData } = useContext(UserContext);
   const classes = useStyles();

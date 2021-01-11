@@ -11,7 +11,6 @@ import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Paper from "@material-ui/core/Paper";
-import Header from "../components/Header";
 import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -76,7 +75,6 @@ export default function SignIn() {
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);
       console.log(error);
-  
     }
   };
 
@@ -142,11 +140,11 @@ export default function SignIn() {
         </Button>
         <Link href="/register" variant="body2">
           Forgot password?
-          </Link>
+        </Link>
         <Link href="/register" variant="body2">
           Dont have an account? Sign Up
         </Link>
       </form>
     </Paper>
-  )
-};
+  );
+}

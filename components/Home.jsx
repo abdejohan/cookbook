@@ -1,6 +1,7 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
+import { useRouter } from "next/router";
 import UserContext from "../context/UserContext";
 import Note from "./Note";
 import Search from "./Search";
@@ -75,18 +76,18 @@ const useStyles = makeStyles(() => ({
 const Home = () => {
   const { userData } = useContext(UserContext);
   const classes = useStyles();
+  const router = useRouter();
 
-//  useEffect(() => {
-//    if (userData.user) {
-//      if (userData.user.role === "admin") {
-//        history.push("/admin");
-//      }
-//    }
-//  }, [history, userData.user]);
+  useEffect(() => {
+    if (userData.user) {
+      if (userData.user.role === "admin") {
+        router.push("/admin");
+      }
+    }
+  }, [router, userData.user]);
 
   return (
     <>
-
       <Search />
       <section className={classes.contentContainer}>
         <div className={classes.components}>

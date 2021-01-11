@@ -3,7 +3,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useContext, useState, Fragment } from "react";
 import axios from "axios";
-//import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
   empty: {},
   paper: {
     width: "100%",
-    maxWidth: "1000px",
+    maxWidth: "800px",
     padding: "20px 20px",
     flexGrow: "2",
     backgroundColor: "white",
@@ -146,10 +146,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Note = (props) => {
+const Note = () => {
   const { handleSubmit, register } = useForm();
   const classes = useStyles();
-  //const router = useRouter();
+  // const router = useRouter();
   const { userData } = useContext(UserContext);
   const [checked, setChecked] = useState(false);
   const [noteLink, setNoteLink] = useState(false);
@@ -204,7 +204,7 @@ const Note = (props) => {
       setChecked(!checked);
       setNoteLink(addedPost.data._id);
       if (userData.token) {
-        //history.push(`/profile/library`);
+        // history.push(`/profile/library`);
       }
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);

@@ -42,6 +42,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const UserProfileView = (props) => {
+  // eslint-disable-next-line react/prop-types
   const { userId } = props;
   const classes = useStyles();
   const router = useRouter();
@@ -50,7 +51,9 @@ const UserProfileView = (props) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const fetchedUser = await axios.get(`http://localhost:5000/user/${userId}`);
+        const fetchedUser = await axios.get(
+          `http://localhost:5000/user/${userId}`
+        );
         setUser(fetchedUser.data);
       } catch (error) {
         console.log(`THIS MESSAGE:${error}`);
