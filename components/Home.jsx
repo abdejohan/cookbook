@@ -1,17 +1,11 @@
 import React, { useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 import UserContext from "../context/UserContext";
 import Note from "./Note";
-import Login from "./Login";
 import Search from "./Search";
-// import SideNotes from "./SideNotes";
-import UserProfileView from "./profilePages/UserProfileView";
-import "../App.css";
-
-import youtube from "../media/youtube.svg";
-import folder from "../media/folder.svg";
+import youtube from "../public/youtube.svg";
+import folder from "../public/folder.svg";
 // backgroundImage: `url(${mobileImage})`,
 
 const useStyles = makeStyles(() => ({
@@ -32,8 +26,6 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
   },
   sideways: {
-    paddingBottom: "100px",
-    padding: "20px",
     backgroundColor: "white",
     paddingLeft: "0px",
     width: "100%",
@@ -43,7 +35,7 @@ const useStyles = makeStyles(() => ({
     flexFlow: "column nowrap",
   },
   textContainer: {
-    marginBottom: "100px",
+    marginBottom: "50px",
   },
   headText: {
     fontSize: "4rem",
@@ -82,23 +74,22 @@ const useStyles = makeStyles(() => ({
 
 const Home = () => {
   const { userData } = useContext(UserContext);
-  const history = useHistory();
   const classes = useStyles();
 
-  useEffect(() => {
-    if (userData.user) {
-      if (userData.user.role === "admin") {
-        history.push("/admin");
-      }
-    }
-  }, [history, userData.token, userData.user]);
+//  useEffect(() => {
+//    if (userData.user) {
+//      if (userData.user.role === "admin") {
+//        history.push("/admin");
+//      }
+//    }
+//  }, [history, userData.user]);
 
   return (
     <>
+
       <Search />
       <section className={classes.contentContainer}>
         <div className={classes.components}>
-          {userData.token && <UserProfileView />}
           <div className={classes.sideways}>
             <article className={classes.textContainer}>
               <Typography className={classes.headText} variant="h4">
@@ -130,9 +121,8 @@ const Home = () => {
                 </div>
               </div>
             </article>
-            <Note />
           </div>
-          {!userData.token && <Login />}
+          <Note />
         </div>
       </section>
     </>

@@ -3,7 +3,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useContext, useState, Fragment } from "react";
 import axios from "axios";
-import { withRouter } from "react-router-dom";
+//import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -12,8 +12,7 @@ import Collapse from "@material-ui/core/Collapse";
 import { Typography } from "@material-ui/core";
 import UserContext from "../context/UserContext";
 import AddedNote from "./AddedNote";
-import "../App.css";
-import bake from "../media/bake.svg";
+import bake from "../public/bake.svg";
 
 // import Button from "@material-ui/core/Button";
 
@@ -22,7 +21,7 @@ const useStyles = makeStyles(() => ({
   paper: {
     width: "100%",
     maxWidth: "1000px",
-    padding: "20px 100px",
+    padding: "20px 20px",
     flexGrow: "2",
     backgroundColor: "white",
     alignItems: "center",
@@ -148,9 +147,9 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Note = (props) => {
-  const { history } = props;
   const { handleSubmit, register } = useForm();
   const classes = useStyles();
+  //const router = useRouter();
   const { userData } = useContext(UserContext);
   const [checked, setChecked] = useState(false);
   const [noteLink, setNoteLink] = useState(false);
@@ -205,7 +204,7 @@ const Note = (props) => {
       setChecked(!checked);
       setNoteLink(addedPost.data._id);
       if (userData.token) {
-        history.push(`/profile/library`);
+        //history.push(`/profile/library`);
       }
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);
@@ -330,4 +329,4 @@ const Note = (props) => {
   );
 };
 
-export default withRouter(Note);
+export default Note;

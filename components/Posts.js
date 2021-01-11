@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import PostButtons from "./loggedInUser/PostButtons";
+import PostButtons from "./PostButtons";
 
 const useStyles = makeStyles(() => ({
   postContainer: {
