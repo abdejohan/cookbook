@@ -1,42 +1,93 @@
-import React, { useContext } from "react";
-import { Link, useRouteMatch, Route } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, useRouteMatch, Route, useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import "../App.css";
 // import Note from "./Note";
 import UserContext from "../context/UserContext";
 import Library from "./profilePages/Library";
 import Settings from "./profilePages/Settings";
 import UserProfileView from "./profilePages/UserProfileView";
 
+const useStyles = makeStyles(() => ({
+  routerContainer: {
+    display: "flex",
+    flexFlow: "row wrap",
+    justifyContent: "center",
+  },
+  navigationContainer: {
+    width: "100%",
+    padding: "20px",
+  },
+  navigationList: {
+    display: "flex",
+    flexFlow: "row wrap",
+    listStyleType: "none",
+  },
+  navigationButton: {
+    marginRight: "20px",
+  },
+  navigationLink: {
+    fontSize: "20px",
+  },
+}));
+
 const Profile = () => {
+  const classes = useStyles();
   const { userData } = useContext(UserContext);
   const { url, path } = useRouteMatch();
-  // console.log(`page, ${page}`);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (userData.user) {
+      if (userData.user.role === "admin") {
+        history.push("/admin");
+      }
+    }
+  }, [history, userData.user]);
 
   return (
     <>
-      {userData ? (
-        <section>
+      {userData.token ? (
+        <section className={classes.navigationContainer}>
           <nav>
-            <ul>
-              <li>
-                <Link to={`${url}`}>My Profile</Link>
+            <ul className={classes.navigationList}>
+              <li className={classes.navigationButton}>
+                <Link
+                  className={`navigationLink ${classes.navigationLink}`}
+                  to={`${url}/${userData.user.id}`}
+                >
+                  Overview
+                </Link>
               </li>
-              <li>
-                <Link to={`${url}/library`}>Library</Link>
+              <li className={classes.navigationButton}>
+                <Link
+                  className={`navigationLink ${classes.navigationLink}`}
+                  to={`${url}/library`}
+                >
+                  Library
+                </Link>
               </li>
-              <li>
-                <Link to={`${url}/settings`}>Settings</Link>
+              <li className={classes.navigationButton}>
+                <Link
+                  className={`navigationLink ${classes.navigationLink}`}
+                  to={`${url}/settings`}
+                >
+                  Settings
+                </Link>
               </li>
             </ul>
           </nav>
-          <Route exact path={path}>
-            <UserProfileView />
-          </Route>
-          <Route path={`${path}/library`}>
-            <Library />
-          </Route>
-          <Route path={`${path}/settings`}>
-            <Settings />
-          </Route>
+          <div className={classes.routerContainer}>
+            <Route exact path={`${path}/${userData.user.id}`}>
+              <UserProfileView />
+            </Route>
+            <Route path={`${path}/library`}>
+              <Library />
+            </Route>
+            <Route path={`${path}/settings`}>
+              <Settings />
+            </Route>
+          </div>
         </section>
       ) : (
         <p>there is nothing here right now.. :disappointed: try logging in!</p>

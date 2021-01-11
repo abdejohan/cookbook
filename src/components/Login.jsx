@@ -1,38 +1,51 @@
 import React, { useContext } from "react";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import Paper from "@material-ui/core/Paper";
 import UserContext from "../context/UserContext";
+import "../App.css";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    width: "100%",
+    padding: "20px",
+    borderRadius: "0px",
+    backgroundColor: "#9E8FB2",
     display: "flex",
-    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    flexDirection: "column",
   },
   form: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexFlow: "column nowrap",
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    maxWidth: "500px",
+  },
+  inputContainer: {
+    display: "flex",
+    flexFlow: "row wrap",
+    width: "70%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  inputField: {
+    width: "48%",
+    minWidth: "150px",
   },
 }));
 
@@ -55,7 +68,11 @@ export default function SignIn() {
         user: loginRes.data.user,
       });
       localStorage.setItem("auth-token", loginRes.data.token);
-      history.push("/");
+      if (loginRes.data.user.role === "admin") {
+        history.push("/admin");
+      } else {
+        history.push(`/profile/${loginRes.data.user.id}`);
+      }
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);
       console.log(error.response.data);
@@ -65,21 +82,19 @@ export default function SignIn() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Paper elevation={0} className={classes.paper}>
       <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form
-          className={classes.form}
-          noValidate
-          onSubmit={handleSubmit(onSubmit)}
-        >
+      <Typography component="h1" variant="h5">
+        Sign in
+      </Typography>
+      <form
+        className={classes.form}
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className={classes.inputContainer}>
           <TextField
+            className={classes.inputField}
             variant="outlined"
             margin="normal"
             inputRef={register}
@@ -89,9 +104,9 @@ export default function SignIn() {
             label="Email Address"
             name="email"
             autoComplete="email"
-            autoFocus
           />
           <TextField
+            className={classes.inputField}
             variant="outlined"
             margin="normal"
             inputRef={register}
@@ -103,41 +118,37 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={
-              <Controller
-                as={Checkbox}
-                control={control}
-                name="remember"
-                color="primary"
-                defaultValue={false}
-              />
-            }
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="/register" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="/register" variant="body2">
-                Dont have an account? Sign Up
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container>
+        </div>
+
+        <FormControlLabel
+          control={
+            <Controller
+              as={Checkbox}
+              control={control}
+              name="remember"
+              color="primary"
+              defaultValue={false}
+            />
+          }
+          label="Remember me"
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+        >
+          Sign In
+        </Button>
+
+        <Link href="/register" variant="body2">
+          Forgot password?
+        </Link>
+        <Link href="/register" variant="body2">
+          Dont have an account? Sign Up
+        </Link>
+      </form>
+    </Paper>
   );
 }

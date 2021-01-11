@@ -7,10 +7,10 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Posts from "./components/Posts";
-// eslint-disable-next-line no-unused-vars
-import Note from "./components/Note";
 import UserContext from "./context/UserContext";
 import Profile from "./components/Profile";
+import Admin from "./components/Admin";
+import UserProfileView from "./components/profilePages/UserProfileView";
 
 const App = () => {
   const [userData, setUserData] = useState({
@@ -40,17 +40,22 @@ const App = () => {
     checkLoggedIn();
   }, []);
   return (
-    <div>
+    <div className="siteContainer">
       <Router>
         <UserContext.Provider value={{ userData, setUserData }}>
           <Header />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/posts/:id" component={Posts} />
-            <Route path="/profile" component={Profile} />
-          </Switch>
+          <section className="mainContainer">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/posts/:postId" component={Posts} />
+              <Route exact path="/user/:id" component={UserProfileView} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/search" component={Home} />
+              <Route exact path="/admin" component={Admin} />
+            </Switch>
+          </section>
         </UserContext.Provider>
       </Router>
     </div>

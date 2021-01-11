@@ -1,72 +1,56 @@
 import React, { useContext, useState } from "react";
 import { withRouter } from "react-router-dom";
-import { makeStyles, fade, useTheme } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import UserContext from "../context/UserContext";
+import "../App.css";
+import frypan from "../media/frypan.svg";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   AppBar: {
-    backgroundColor: "grey",
-  },
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    [theme.breakpoints.down("sm")]: {
-      flexGrow: 1,
-    },
-  },
-  headerOptions: {
-    display: "flex",
-    flex: 1,
-    justifyContent: "center",
-  },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto",
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
+    color: "lightgrey",
+    backgroundColor: "white",
+    boxShadow: "none",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
+  menuButton: {
+    padding: "5px",
+    marginLeft: "50px",
+    boxShadow: "none",
+    fontSize: "1rem",
+    fontWeight: "500",
+    color: "#696969",
+    backgroundColor: "white",
+    textTransform: "none",
+  },
+  black: {
+    padding: "20px",
+    backgroundColor: "black",
     width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
+    height: "35px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  icon: {
+    width: "50px",
+    height: "50px",
+  },
+  loginBttn: {
+    borderRadius: "10px",
+    padding: "4px 10px",
+    backgroundColor: "blue",
+    color: "white",
   },
 }));
 
@@ -91,6 +75,8 @@ const Header = (props) => {
   };
 
   const logOut = () => {
+    // eslint-disable-next-line react/prop-types
+    history.push("/");
     setTimeout(() => {
       setUserData({
         token: undefined,
@@ -102,17 +88,19 @@ const Header = (props) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes.AppBar}>
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            Photos
+      <AppBar position="fixed" className={classes.AppBar}>
+        <div className={classes.black}>
+          <Typography variant="body1">
+            Focus on the create side of cooking!
           </Typography>
+        </div>
+        <Toolbar>
+          <img src={frypan} className={classes.icon} alt="frypan" />
           <div>
             {isMobile ? (
               <div>
                 <IconButton
-                  edge="start"
-                  className={classes.menuButton}
+                  edge="end"
                   color="inherit"
                   aria-label="menu"
                   onClick={handleMenu}
@@ -138,8 +126,12 @@ const Header = (props) => {
                   <MenuItem onClick={() => handleMenuClick("/")}>Home</MenuItem>
                   {userData.user ? (
                     <div>
-                      <MenuItem onClick={() => handleMenuClick("/profile")}>
-                        gg
+                      <MenuItem
+                        onClick={() =>
+                          handleMenuClick(`/profile/${userData.user.id}`)
+                        }
+                      >
+                        loginBttn
                       </MenuItem>
                       <MenuItem onClick={() => logOut()}>Logout</MenuItem>
                     </div>
@@ -160,31 +152,52 @@ const Header = (props) => {
               <div className={classes.headerOptions}>
                 {userData.user ? (
                   <div>
-                    <Button onClick={() => handleMenuClick("/")}>Home</Button>
-                    <Button onClick={() => handleMenuClick("/profile")}>
-                      Profile
-                    </Button>
-                    <Button onClick={() => logOut()}>Logout</Button>
-                  </div>
-                ) : (
-                  <div>
                     <Button
-                      variant="contained"
+                      className={classes.menuButton}
                       onClick={() => handleMenuClick("/")}
                     >
                       Home
                     </Button>
                     <Button
-                      variant="contained"
-                      onClick={() => handleMenuClick("/login")}
+                      className={classes.menuButton}
+                      onClick={() =>
+                        handleMenuClick(`/profile/${userData.user.id}`)
+                      }
                     >
-                      Login
+                      Profile
                     </Button>
                     <Button
-                      variant="contained"
+                      className={classes.menuButton}
+                      onClick={() => logOut()}
+                    >
+                      Logout
+                    </Button>
+                  </div>
+                ) : (
+                  <div>
+                    <Button
+                      className={classes.menuButton}
+                      onClick={() => handleMenuClick("/")}
+                    >
+                      Home
+                    </Button>
+                    <Button
+                      className={classes.menuButton}
+                      onClick={() => handleMenuClick("/about")}
+                    >
+                      About Us
+                    </Button>
+                    <Button
+                      className={classes.menuButton}
                       onClick={() => handleMenuClick("/register")}
                     >
                       Register
+                    </Button>
+                    <Button
+                      className={`${classes.menuButton} + ${classes.loginBttn}`}
+                      onClick={() => handleMenuClick("/login")}
+                    >
+                      Login
                     </Button>
                   </div>
                 )}

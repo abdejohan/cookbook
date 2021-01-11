@@ -1,33 +1,82 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/require-default-props */
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useContext, useState } from "react";
-import axios from "axios";
-import PropTypes from "prop-types";
-import SwipeableViews from "react-swipeable-views";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import { useHistory, Link } from "react-router-dom";
-import SearchIcon from "@material-ui/icons/Search";
-import InputBase from "@material-ui/core/InputBase";
+import React, { useEffect, useContext } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
+import { Typography } from "@material-ui/core";
 import UserContext from "../context/UserContext";
 import Note from "./Note";
-import Posts from "./Posts";
 import Login from "./Login";
-import Profile from "./Profile";
+import Search from "./Search";
+// import SideNotes from "./SideNotes";
+import UserProfileView from "./profilePages/UserProfileView";
+import "../App.css";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.background.paper,
+import youtube from "../media/youtube.svg";
+import folder from "../media/folder.svg";
+// backgroundImage: `url(${mobileImage})`,
+
+const useStyles = makeStyles(() => ({
+  contentContainer: {
+    display: "flex",
+    flexFlow: "column nowrap",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    borderRadius: "30px",
+    position: "relative",
   },
-  searchField: {
-    marginBottom: "20px",
+  components: {
+    width: "100%",
+    flexFlow: "column nowrap",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  sideways: {
+    paddingBottom: "100px",
+    padding: "20px",
+    backgroundColor: "white",
+    paddingLeft: "0px",
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexFlow: "column nowrap",
+  },
+  textContainer: {
+    marginBottom: "100px",
+  },
+  headText: {
+    fontSize: "4rem",
+    fontWeight: "900",
+  },
+  subText: {
+    fontSize: "2rem",
+    fontWeight: "600",
+    color: "#666666",
+    lineHeight: "1.6",
+  },
+  subText1: {
+    fontSize: "1.2rem",
+    fontWeight: "600",
+    color: "#666666",
+    lineHeight: "1.6",
+  },
+  iconContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    flexFlow: "column nowrap",
+  },
+  iconRows: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexFlow: "row nowrap",
+  },
+  icon: {
+    margin: "20px",
+    width: "50px",
+    height: "50px",
   },
 }));
 
@@ -35,67 +84,58 @@ const Home = () => {
   const { userData } = useContext(UserContext);
   const history = useHistory();
   const classes = useStyles();
-  // const theme = useTheme();
-  const [value, setValue] = useState(0);
-  const [searchResponseList, setSearchResponseList] = useState([]);
-
-  const handleSearchClick = async () => {
-    const searchElement = document.getElementById("search");
-    try {
-      const searchRequest = await axios.get(
-        `http://localhost:5000/search?term=${searchElement.value}`
-      );
-      setSearchResponseList(searchRequest.data);
-    } catch (error) {
-      console.log(`THIS MESSAGE:${error}`);
-    }
-  };
 
   useEffect(() => {
-    if (!userData.user) {
-      history.push("/login");
+    if (userData.user) {
+      if (userData.user.role === "admin") {
+        history.push("/admin");
+      }
     }
-  });
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
+  }, [history, userData.token, userData.user]);
 
   return (
-    <div>
-      <section>
-        <div className={classes.searchField}>
-          <label htmlFor="search">
-            Search for User or Recipe
-            <input id="search" type="text" placeholder="Search" />
-            <button type="submit" onClick={handleSearchClick}>
-              Skicka
-            </button>
-          </label>
-        </div>
-        <div>
-          <ul id="resultsContainer">
-            {searchResponseList ? (
-              searchResponseList.map((searchResult) => {
-                return (
-                  <li key={searchResult._id}>
-                    <Link to={`/posts/${searchResult._id}`}>
-                      {searchResult.title}
-                    </Link>
-                  </li>
-                );
-              })
-            ) : (
-              <Note />
-            )}
-          </ul>
+    <>
+      <Search />
+      <section className={classes.contentContainer}>
+        <div className={classes.components}>
+          {userData.token && <UserProfileView />}
+          <div className={classes.sideways}>
+            <article className={classes.textContainer}>
+              <Typography className={classes.headText} variant="h4">
+                YOU CREATE, WE STORE!
+              </Typography>
+              <Typography className={classes.subText}>
+                YOUR OWN VIRTUAL COOKBOOK
+              </Typography>
+              <div className={classes.iconContainer}>
+                <div className={classes.iconRows}>
+                  <img
+                    className={classes.icon}
+                    src={youtube}
+                    alt="youtube-icon"
+                  />
+                  <Typography className={classes.subText1} variant="body2">
+                    GET SHAREABLE LINK FOR YOUR PLATFORM
+                  </Typography>
+                </div>
+                <div className={classes.iconRows}>
+                  <img
+                    className={classes.icon}
+                    src={folder}
+                    alt="folder-icon"
+                  />
+                  <Typography className={classes.subText1} variant="body2">
+                    LIFE LONG STORAGE FOR YOUR RECIPE COLLECTIONS
+                  </Typography>
+                </div>
+              </div>
+            </article>
+            <Note />
+          </div>
+          {!userData.token && <Login />}
         </div>
       </section>
-    </div>
+    </>
   );
 };
 
