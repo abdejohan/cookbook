@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import SearchList from "./SearchList";
 import AdminList from "./AdminList";
 import UserContext from "../context/UserContext";
-import "../App.css";
 
 const useStyles = makeStyles(() => ({
   contentContainer: {

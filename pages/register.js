@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
@@ -61,13 +61,13 @@ const Register = () => {
   const { setUserData } = useContext(UserContext);
   const { userData } = useContext(UserContext);
   const classes = useStyles();
-  const history = useHistory();
+  const router = useRouter();
 
   useEffect(() => {
     if (userData.user) {
-      history.push("/");
+      router.push("/");
     }
-  }, [history, userData.user]);
+  }, [router, userData.user]);
 
   const onSubmit = async (data) => {
     const { email, password } = data;
@@ -83,7 +83,7 @@ const Register = () => {
         user: loginRes.data.user,
       });
       localStorage.setItem("auth-token", loginRes.data.token);
-      history.push("/");
+      router.push("/");
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);
     }

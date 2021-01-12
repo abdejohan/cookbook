@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import UserContext from "../context/UserContext";
-
-import "../App.css";
 
 const useStyles = makeStyles(() => ({
   collapseContainer: {
@@ -39,8 +37,8 @@ const AddedNote = (props) => {
       {!userData.token && (
         <p className={classes.fadedtext}>
           This link will be available for 48h. Remember to{" "}
-          <Link to="/register">Register</Link> and{" "}
-          <Link to="/login">Login</Link> to keep your content available for as
+          <Link href="/register">Register</Link> and{" "}
+          <Link href="/login">Login</Link> to keep your content available for as
           long as you like :)
         </p>
       )}

@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
-import { withRouter } from "react-router-dom";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+import { useRouter } from "next/router";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Typography from "@material-ui/core/Typography";
@@ -11,8 +11,7 @@ import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import UserContext from "../context/UserContext";
-import "../App.css";
-import frypan from "../media/frypan.svg";
+import frypan from "../public/frypan.svg";
 
 const useStyles = makeStyles(() => ({
   AppBar: {
@@ -57,12 +56,14 @@ const useStyles = makeStyles(() => ({
 const Header = (props) => {
   // eslint-disable-next-line react/prop-types
   const { history } = props;
+  const router = useRouter();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { userData, setUserData } = useContext(UserContext);
+  console.log(userData.user);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -70,13 +71,13 @@ const Header = (props) => {
 
   const handleMenuClick = (pageURL) => {
     // eslint-disable-next-line react/prop-types
-    history.push(pageURL);
+    router.push(pageURL);
     setAnchorEl(null);
   };
 
   const logOut = () => {
     // eslint-disable-next-line react/prop-types
-    history.push("/");
+    router.push("/");
     setTimeout(() => {
       setUserData({
         token: undefined,
@@ -87,7 +88,6 @@ const Header = (props) => {
   };
 
   return (
-    <div className={classes.root}>
       <AppBar position="fixed" className={classes.AppBar}>
         <div className={classes.black}>
           <Typography variant="body1">
@@ -131,13 +131,13 @@ const Header = (props) => {
                           handleMenuClick(`/profile/${userData.user.id}`)
                         }
                       >
-                        loginBttn
+                        My Page
                       </MenuItem>
                       <MenuItem onClick={() => logOut()}>Logout</MenuItem>
                     </div>
                   ) : (
                     <div>
-                      <MenuItem onClick={() => handleMenuClick("/login")}>
+                      <MenuItem onClick={() => logOut("/login")}>
                         Login
                       </MenuItem>
 
@@ -168,6 +168,12 @@ const Header = (props) => {
                     </Button>
                     <Button
                       className={classes.menuButton}
+                      onClick={() => handleMenuClick("/settings")}
+                    >
+                      Settings
+                    </Button>
+                    <Button
+                      className={`${classes.menuButton} ${classes.loginBttn}`}
                       onClick={() => logOut()}
                     >
                       Logout
@@ -196,6 +202,7 @@ const Header = (props) => {
                     <Button
                       className={`${classes.menuButton} + ${classes.loginBttn}`}
                       onClick={() => handleMenuClick("/login")}
+
                     >
                       Login
                     </Button>
@@ -206,8 +213,7 @@ const Header = (props) => {
           </div>
         </Toolbar>
       </AppBar>
-    </div>
   );
 };
 
-export default withRouter(Header);
+export default Header;

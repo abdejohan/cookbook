@@ -19,9 +19,20 @@ body {
   color: #61dafb;
 }
 
+.login-bttn {
+  color: white;
+  text-decoration: none;
+}
+
+.alignHeader {
+  position: relative;
+  top: 105px;
+}
+
 .mainContainer {
   position: relative;
   display: flex;
+  background-color: green;
   justify-content: flex-start;
   align-items: center;
   flex-flow: column nowrap;

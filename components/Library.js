@@ -1,12 +1,11 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
-import UserContext from "../../context/UserContext";
-import Note from "../Note";
+import UserContext from "../context/UserContext";
+import Note from "./Note";
 
 const useStyles = makeStyles(() => ({
   paper: {
@@ -25,6 +24,7 @@ const useStyles = makeStyles(() => ({
 
 const Library = () => {
   const [posts, setPosts] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [followPosts, setFollowPosts] = useState([]);
   const { userData } = useContext(UserContext);
   const classes = useStyles();
