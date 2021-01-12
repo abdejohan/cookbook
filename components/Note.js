@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
   empty: {},
   paper: {
     width: "100%",
-    maxWidth: "800px",
+    maxWidth: "700px",
     padding: "20px 20px",
     flexGrow: "2",
     backgroundColor: "white",
