@@ -177,13 +177,10 @@ const Note = () => {
   const onSubmit = async (data) => {
     const dataSend = data;
     dataSend.ingredients = inputFields;
-    if (userData.token) {
-      if (userData.user.userName) {
-        dataSend.postOwner = userData.user.userName;
-        dataSend.expire = false;
-      }
-    } else {
-      dataSend.expire = true;
+    console.log(dataSend);
+    console.log(userData);
+    if (!userData.token) {
+      dataSend.userId = "temp";
     }
     try {
       const addedPost = await axios.post(

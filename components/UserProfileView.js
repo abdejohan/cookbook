@@ -60,14 +60,12 @@ const useStyles = makeStyles(() => ({
 const UserProfileView = (props) => {
   // eslint-disable-next-line react/prop-types
   const { userId } = props;
-  console.log(userId);
   const classes = useStyles();
   const [user, setUser] = useState({});
   const { userData } = useContext(UserContext);
   const { role } = userData.user;
 
   useEffect(() => {
-    console.log("hej");
     const getUser = async () => {
       try {
         const fetchedUser = await axios.get(

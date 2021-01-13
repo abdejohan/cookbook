@@ -62,7 +62,6 @@ const Header = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { userData, setUserData } = useContext(UserContext);
-  console.log(userData.user);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);

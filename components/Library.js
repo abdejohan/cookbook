@@ -30,20 +30,19 @@ const Library = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    console.log("hej");
     async function userPosts() {
       try {
+        console.log(userData.token);
         const allUserPosts = await axios.get(
           `http://localhost:5000/posts/all`,
           {
             headers: {
-              "x-auth-token": userData.token,
+              myOwn: userData.user.id,
             },
           }
         );
         setPosts(allUserPosts.data);
-        console.log(allUserPosts.data);
-        console.log("SHOULD BE HERE");
+        console.log(allUserPosts);
       } catch (error) {
         console.log(`THIS MESSAGE:${error}`);
       }

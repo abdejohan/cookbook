@@ -1,20 +1,20 @@
 import React, { useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useRouter } from "next/router";
 import Search from "./Search";
 import AdminList from "./AdminList";
 import UserContext from "../context/UserContext";
 
 const Admin = () => {
   const { userData } = useContext(UserContext);
-  const history = useHistory();
+  const router = useRouter();
 
   useEffect(() => {
     if (userData.user) {
       if (userData.user.role !== "admin") {
-        history.push("/");
+        router.push("/");
       }
     }
-  }, [history, userData.user]);
+  }, [router, userData.user]);
 
   return (
     <div>
