@@ -2,6 +2,7 @@
   box-sizing: border-box;
   padding: 0px;
   margin: 0px;
+  font-family: "Yusei Magic", sans-serif !important;
 }
 /* font-family: "Lobster", cursive; */
 
@@ -9,14 +10,8 @@
   outline: none;
 }
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-}
-
-.App-link {
-  color: #61dafb;
+a {
+  text-decoration: none;
 }
 
 .login-bttn {
@@ -24,29 +19,8 @@ body {
   text-decoration: none;
 }
 
-.mainContainer {
-  position: relative;
-  display: flex;
-  background-color: green;
-  justify-content: flex-start;
-  align-items: center;
-  flex-flow: column nowrap;
-  height: 100%;
-  top: 104px;
-}
-
-.navigationLink {
-  color: black;
-  text-decoration: none;
-}
-
-.navigationLink:hover {
-  color: darkgrey;
-}
-
 .noteLink {
   font-weight: 600;
-  padding-bottom: 20px;
 }
 
 .noteLink:hover {
@@ -67,6 +41,14 @@ body {
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 }
 
-a {
-  text-decoration: none;
+.MuiInputBase-root,
+.MuiFilledInput-root,
+.MuiFilledInput-underline,
+.MuiInputBase-formControl {
+  background-color: transparent !important;
+}
+
+.buttonEffect:hover {
+  background-color: lightskyblue;
+  cursor: pointer;
 }
