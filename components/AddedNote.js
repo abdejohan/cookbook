@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
     padding: "10px",
     fontSize: "1rem",
     margin: "10px",
-  }
+  },
 }));
 
 const AddedNote = (props) => {
@@ -31,7 +31,13 @@ const AddedNote = (props) => {
 
   return (
     <div className={classes.collapseContainer}>
-      <h3 style={{paddingBottom: "10px"}}><span style={{color: "coral"}}>Success! ⭐</span> Here is your Link:</h3>
+      <h3 style={{ paddingBottom: "10px" }}>
+        Success!{" "}
+        <span role="img" aria-label="star">
+          ⭐
+        </span>{" "}
+        Here is your Link:
+      </h3>
       <span className={`noteLink ${classes.noteLink}`}>
         http://localhost:3000/posts/{noteLink}
       </span>

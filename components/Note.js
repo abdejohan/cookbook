@@ -77,7 +77,7 @@ const useStyles = makeStyles(() => ({
     width: "100%",
     resize: "none",
     display: "flex",
-    backgroundColor: "#F1F7ED"
+    backgroundColor: "#F1F7ED",
   },
   linkContainer: {
     width: "100%",
@@ -195,6 +195,7 @@ const Note = () => {
         }
       );
       setChecked(!checked);
+      // eslint-disable-next-line no-underscore-dangle
       setNoteLink(addedPost.data._id);
       if (userData.token) {
         // history.push(`/profile/library`);
@@ -210,7 +211,7 @@ const Note = () => {
         <img className={classes.icon} src={bake} alt="bake-icon" />
         <div className={`${classes.textContainer}`}>
           <Typography className={classes.noteHeaderText} variant="h6">
-            Let's Cook!
+            Let&apos;s Cook!
           </Typography>
           <Typography className={classes.noteHeaderSubText} variant="subtitle2">
             SHARE YOUR BELOVED RECIPES WITH EVERYONE
@@ -241,7 +242,7 @@ const Note = () => {
           variant="filled"
           placeholder="Description (Optional)"
         />
-        <h3 style={{textDecoration: "underline"}}>Ingredients</h3>
+        <h3 style={{ textDecoration: "underline" }}>Ingredients</h3>
         <div className={classes.ingredientContainer}>
           <p className={classes.ingredientHeader}>
             <span className={classes.ingredientHeaderText}>
@@ -256,6 +257,7 @@ const Note = () => {
             </button>
           </p>
           {inputFields.map((inputField, index) => (
+            // eslint-disable-next-line react/no-array-index-key
             <div key={index} className={classes.ingredientGroup}>
               <Fragment key={inputField}>
                 <div className={classes.empty}>
