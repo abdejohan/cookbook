@@ -71,3 +71,7 @@ a {
   background-color: lightskyblue;
   cursor: pointer;
 }
+
+.cursor {
+  cursor: pointer;
+}

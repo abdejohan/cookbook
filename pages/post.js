@@ -1,9 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import PostButtons from "./PostButtons";
+import PostButtons from "../components/PostButtons";
 
 const useStyles = makeStyles(() => ({
   postContainer: {
@@ -17,7 +17,9 @@ const useStyles = makeStyles(() => ({
 const Posts = () => {
   const [postData, setPostData] = useState({});
   const classes = useStyles();
-  const { postId } = useParams();
+  const router = useRouter();
+  const postId = router.query;
+  console.log(`POSTID IS HERE: ${postId}`);
 
   useEffect(() => {
     setTimeout(() => {

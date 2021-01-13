@@ -12,6 +12,7 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
     alignItems: "center",
     flexFlow: "column nowrap",
+    borderRadius: "0px 0px 30px 30px",
   },
   fadedtext: {
     opacity: "0.8",
@@ -41,7 +42,7 @@ const AddedNote = (props) => {
       <span className={`noteLink ${classes.noteLink}`}>
         http://localhost:3000/posts/{noteLink}
       </span>
-      <button className={classes.plusMinusBttn} type="button">
+      <button className={`cursor ${classes.plusMinusBttn}`} type="button">
         Copy to clipboard
       </button>
       {!userData.token && (

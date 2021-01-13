@@ -94,6 +94,7 @@ const useStyles = makeStyles(() => ({
     border: "none",
     padding: "20px",
     backgroundColor: "lightblue",
+    borderRadius: "0px 0px 30px 30px",
   },
   growLine: {
     display: "flex",

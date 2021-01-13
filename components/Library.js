@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import axios from "axios";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
@@ -30,6 +30,7 @@ const Library = () => {
   const classes = useStyles();
 
   useEffect(() => {
+    console.log("hej");
     async function userPosts() {
       try {
         const allUserPosts = await axios.get(
@@ -41,6 +42,8 @@ const Library = () => {
           }
         );
         setPosts(allUserPosts.data);
+        console.log(allUserPosts.data);
+        console.log("SHOULD BE HERE");
       } catch (error) {
         console.log(`THIS MESSAGE:${error}`);
       }
@@ -57,7 +60,7 @@ const Library = () => {
             posts.map((post) => {
               return (
                 <li key={post._id}>
-                  <Link to={`/posts/${post._id}`}>{post.title}</Link>
+                  <Link href={`/posts/${post._id}`}>{post.title}</Link>
                 </li>
               );
             })
@@ -71,7 +74,7 @@ const Library = () => {
             followPosts.map((followPost) => {
               return (
                 <li key={followPost._id}>
-                  <Link to={`/posts/${followPost._id}`}>
+                  <Link href={`/posts/${followPost._id}`}>
                     {followPost.title}
                   </Link>
                 </li>
