@@ -93,7 +93,11 @@ const Header = () => {
         </Typography>
       </div>
       <Toolbar>
-        <img src={frypan} className={classes.icon} alt="frypan" />
+        <img
+          src={frypan}
+          className={`tilt-icon ${classes.icon}`}
+          alt="frypan"
+        />
         <div>
           {isMobile ? (
             <div>
