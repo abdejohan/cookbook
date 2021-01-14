@@ -177,10 +177,10 @@ const Note = () => {
   const onSubmit = async (data) => {
     const dataSend = data;
     dataSend.ingredients = inputFields;
-    console.log(dataSend);
-    console.log(userData);
     if (!userData.token) {
       dataSend.userId = "temp";
+    } else {
+      dataSend.author = userData.user.userName;
     }
     try {
       const addedPost = await axios.post(
