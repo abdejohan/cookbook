@@ -3,11 +3,12 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import { Typography } from "@material-ui/core";
 import PostButtons from "../components/PostButtons";
 
 const useStyles = makeStyles(() => ({
   postContainer: {
-    backgroundColor: "green",
+    maxWidth: "800px",
     display: "flex",
     width: "100%",
     flexFlow: "column nowrap",
@@ -18,8 +19,8 @@ const Posts = () => {
   const [postData, setPostData] = useState({});
   const classes = useStyles();
   const router = useRouter();
-  const postId = router.query;
-  console.log(`POSTID IS HERE: ${postId}`);
+  const { postId } = router.query;
+  console.log(postData);
 
   useEffect(() => {
     setTimeout(() => {
@@ -40,13 +41,13 @@ const Posts = () => {
   return (
     <section className={classes.postContainer}>
       <article>
-        <h4>Title</h4>
-        <p>{postData.title}</p>
-        <h4>Description</h4>
-        <p>{postData.description}</p>
-        <h4>Ingredients</h4>
-        <h4>Instructions</h4>
-        <p>{postData.instructions}</p>
+        <Typography className="page-header">{postData.title}</Typography>
+        <Typography>{postData.postOwner}</Typography>
+        <Typography className="page-sub-header">Description</Typography>
+        <p className="plain-text">{postData.description}</p>
+        <Typography className="page-sub-header">Ingredients</Typography>
+        <Typography className="page-sub-header">Instructions</Typography>
+        <p className="plain-text">{postData.instructions}</p>
       </article>
       {Object.entries(postData).length > 0 && (
         <PostButtons postData={postData} />

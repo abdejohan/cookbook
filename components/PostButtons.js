@@ -4,10 +4,31 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 import UserContext from "../context/UserContext";
+
+const useStyles = makeStyles(() => ({
+  contentContainer: {
+    padding: "20px",
+    display: "flex",
+    width: "100%",
+    flexFlow: "column nowrap",
+  },
+  submitBttn: {
+    fontWeight: "900",
+    fontSize: "2rem",
+    color: "white",
+    border: "none",
+    padding: "20px",
+    backgroundColor: "lightblue",
+    borderRadius: "10px 10px 10px 10px",
+    margin: "10px 0px",
+  },
+}));
 
 const PostButtons = (props) => {
   const { postData } = props;
+  const classes = useStyles();
   const history = useHistory();
   const { userData } = useContext(UserContext);
   const [userId, setUserId] = useState(0);
@@ -38,29 +59,63 @@ const PostButtons = (props) => {
   }
 
   return (
-    <>
+    <div className={classes.contentContainer}>
       {userId === postData.userId && (
         <>
-          <button type="button">Copy to ClipBoard</button>
-          <button type="submit">Edit</button>
-          <button onClick={DeletePost} type="submit">
+          <button
+            className={`${classes.submitBttn} buttonEffect`}
+            type="button"
+          >
+            Copy to ClipBoard
+          </button>
+          <button
+            className={`${classes.submitBttn} buttonEffect`}
+            type="submit"
+          >
+            Edit
+          </button>
+          <button
+            className={`${classes.submitBttn} buttonEffect`}
+            onClick={DeletePost}
+            type="submit"
+          >
             Delete
           </button>
         </>
       )}
       {userId !== postData.userId && userData.token && (
         <>
-          <button type="button">Copy to ClipBoard</button>
-          <button type="submit">Follow</button>
+          <button
+            className={`${classes.submitBttn} buttonEffect`}
+            type="button"
+          >
+            Copy to ClipBoard
+          </button>
+          <button
+            className={`${classes.submitBttn} buttonEffect`}
+            type="submit"
+          >
+            Follow
+          </button>
         </>
       )}
       {!userData.token && (
         <>
-          <button type="button">Copy to ClipBoard</button>
-          <button type="submit">Follow</button>
+          <button
+            className={`${classes.submitBttn} buttonEffect`}
+            type="button"
+          >
+            Copy to ClipBoard
+          </button>
+          <button
+            className={`${classes.submitBttn} buttonEffect`}
+            type="submit"
+          >
+            Follow
+          </button>
         </>
       )}
-    </>
+    </div>
   );
 };
 

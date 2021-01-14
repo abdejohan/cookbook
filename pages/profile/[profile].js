@@ -46,8 +46,8 @@ const Profile = () => {
     <>
       {userData.token ? (
         <section className={classes.navigationContainer}>
-          <Typography variant="h6" className="page-header">
-            Hi there <span className={classes.userName}>{userName}</span>!
+          <Typography variant="h6" className="page-header" align="right">
+            Hi <span className="page-header">{userName}</span>!
           </Typography>
           <UserProfileView userId={id} />
           <Library />

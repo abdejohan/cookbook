@@ -11,6 +11,7 @@ import profile from "../public/profile.jpg";
 const useStyles = makeStyles(() => ({
   paper: {
     padding: "10px",
+    marginBottom: "20px",
     display: "flex",
     justifyContent: "center",
     alignItems: "flex-start",
@@ -43,16 +44,21 @@ const useStyles = makeStyles(() => ({
   },
   headerText: {
     alignSelf: "flex-end",
+    color: "#e3d081",
+    fontSize: "1.5rem",
   },
   mainText: {
+    padding: "3px 7px",
     fontSize: "1.2rem",
     fontFamily: "inherit",
     display: "flex",
     justifyContent: "space-between",
+    alignItems: "center",
   },
   subText: {
     color: "darkgrey",
-    fontSize: "1rem",
+    fontSize: "1.2rem",
+    fontWeight: "900",
     alignSelf: "flex-end",
   },
 }));
@@ -122,10 +128,10 @@ const UserProfileView = (props) => {
         <div className={classes.innerContainer}>
           <h2 className={classes.headerText}>Progress</h2>
           <p className={classes.mainText}>
-            Weekly: <span className={classes.subText}>12 Followers</span>
+            Weekly: <span className={classes.subText}>12 </span>
           </p>
           <p className={classes.mainText}>
-            Monthly: <span className={classes.subText}>93 Followers</span>
+            Monthly: <span className={classes.subText}>93 </span>
           </p>
         </div>
       </div>
