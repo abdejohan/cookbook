@@ -48,13 +48,10 @@ const Library = () => {
   useEffect(() => {
     async function userPosts() {
       try {
+        const userId = userData.user.id;
         const allUserPosts = await axios.get(
           `http://localhost:5000/posts/all`,
-          {
-            headers: {
-              myOwn: userData.user.id,
-            },
-          }
+          userId
         );
         setPosts(allUserPosts.data);
         console.log(allUserPosts);

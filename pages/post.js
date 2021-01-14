@@ -20,7 +20,6 @@ const Posts = () => {
   const classes = useStyles();
   const router = useRouter();
   const { postId } = router.query;
-  console.log(postData);
 
   useEffect(() => {
     setTimeout(() => {
