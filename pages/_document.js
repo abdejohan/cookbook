@@ -28,6 +28,11 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@1,900&family=Chango&family=Seymour+One&display=swap"
             rel="stylesheet"
           />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+            rel="stylesheet"
+          />
         </Head>
         <body>
           <Main />

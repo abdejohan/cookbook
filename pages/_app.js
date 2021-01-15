@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import Footer from "../components/Footer";
 import "../styles/globals.css";
 import UserContext from "../context/UserContext";
 import Header from "../components/Header";
@@ -30,6 +31,7 @@ const App = (props) => {
         <div className="siteContainer">
           <Component {...pageProps} />
         </div>
+        <Footer />
       </UserContext.Provider>
     </>
   );

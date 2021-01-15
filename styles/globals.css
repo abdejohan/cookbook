@@ -27,6 +27,16 @@ a:hover {
   color: darkgrey;
 }
 
+footer {
+  font-family: "Poppins", sans-serif !important;
+  padding: 20px;
+  background-color: #232c33;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 .plain-text {
   padding-left: 20px;
   font-size: 1.3rem;
