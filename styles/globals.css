@@ -2,56 +2,97 @@
   box-sizing: border-box;
   padding: 0px;
   margin: 0px;
+  font-family: "Yusei Magic", sans-serif !important;
 }
 /* font-family: "Lobster", cursive; */
+#__next {
+  background-color: white !important;
+}
+
+.tilt-icon:hover {
+  transform: rotate(8deg);
+}
 
 *:focus {
   outline: none;
 }
 
-html,
-body {
-  padding: 0;
-  margin: 0;
+a {
+  font-size: 1.6rem;
+  text-decoration: none;
+  color: darkslategrey;
 }
 
-.App-link {
-  color: #61dafb;
+a:hover {
+  color: darkgrey;
 }
+
+footer {
+  font-family: "Poppins", sans-serif !important;
+  padding: 20px;
+  background-color: #232c33;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.plain-text {
+  padding-left: 20px;
+  font-size: 1.3rem;
+  text-decoration: none;
+  color: darkslategrey;
+}
+
+.page-header {
+  margin-bottom: 50px !important;
+  font-family: "Chango", cursive !important;
+  color: #54494b !important;
+  width: 100% !important;
+  font-weight: 900 !important;
+  letter-spacing: -3px !important;
+  font-size: 3.5rem !important;
+}
+
+.page-sub-header {
+  font-family: "Chango", cursive !important;
+  width: 100% !important;
+  border-bottom: 8px groove #b33951 !important;
+  letter-spacing: -3px !important;
+  font-size: 2.5rem !important;
+  opacity: 0.5 !important;
+}
+
+/**
+**/
 
 .login-bttn {
   color: white;
   text-decoration: none;
 }
 
-.mainContainer {
-  position: relative;
-  display: flex;
-  background-color: green;
-  justify-content: flex-start;
-  align-items: center;
-  flex-flow: column nowrap;
-  height: 100%;
-  top: 104px;
-}
-
-.navigationLink {
-  color: black;
-  text-decoration: none;
-}
-
-.navigationLink:hover {
-  color: darkgrey;
-}
-
 .noteLink {
   font-weight: 600;
-  padding-bottom: 20px;
 }
 
 .noteLink:hover {
   color: blue;
   text-decoration: underline;
+}
+
+.siteContainer {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0px auto;
+  padding-top: 120px;
+  padding-bottom: 100px;
+  height: auto;
+  background-color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column nowrap;
 }
 
 .shadow {
@@ -67,6 +108,18 @@ body {
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 }
 
-a {
-  text-decoration: none;
+.MuiInputBase-root,
+.MuiFilledInput-root,
+.MuiFilledInput-underline,
+.MuiInputBase-formControl {
+  background-color: transparent !important;
+}
+
+.buttonEffect:hover {
+  background-color: lightskyblue;
+  cursor: pointer;
+}
+
+.cursor {
+  cursor: pointer;
 }

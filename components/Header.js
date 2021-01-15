@@ -53,9 +53,8 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Header = (props) => {
+const Header = () => {
   // eslint-disable-next-line react/prop-types
-  const { history } = props;
   const router = useRouter();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -63,7 +62,6 @@ const Header = (props) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { userData, setUserData } = useContext(UserContext);
-  console.log(userData.user);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -88,131 +86,132 @@ const Header = (props) => {
   };
 
   return (
-      <AppBar position="fixed" className={classes.AppBar}>
-        <div className={classes.black}>
-          <Typography variant="body1">
-            Focus on the create side of cooking!
-          </Typography>
-        </div>
-        <Toolbar>
-          <img src={frypan} className={classes.icon} alt="frypan" />
-          <div>
-            {isMobile ? (
-              <div>
-                <IconButton
-                  edge="end"
-                  color="inherit"
-                  aria-label="menu"
-                  onClick={handleMenu}
-                >
-                  <MenuIcon />
-                </IconButton>
+    <AppBar position="fixed" className={classes.AppBar}>
+      <div className={classes.black}>
+        <Typography variant="body1">
+          Focus on the create side of cooking!
+        </Typography>
+      </div>
+      <Toolbar>
+        <img
+          src={frypan}
+          className={`tilt-icon ${classes.icon}`}
+          alt="frypan"
+        />
+        <div>
+          {isMobile ? (
+            <div>
+              <IconButton
+                edge="end"
+                color="inherit"
+                aria-label="menu"
+                onClick={handleMenu}
+              >
+                <MenuIcon />
+              </IconButton>
 
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={open}
-                  onClose={() => setAnchorEl(null)}
-                >
-                  <MenuItem onClick={() => handleMenuClick("/")}>Home</MenuItem>
-                  {userData.user ? (
-                    <div>
-                      <MenuItem
-                        onClick={() =>
-                          handleMenuClick(`/profile/${userData.user.id}`)
-                        }
-                      >
-                        My Page
-                      </MenuItem>
-                      <MenuItem onClick={() => logOut()}>Logout</MenuItem>
-                    </div>
-                  ) : (
-                    <div>
-                      <MenuItem onClick={() => logOut("/login")}>
-                        Login
-                      </MenuItem>
-
-                      <MenuItem onClick={() => handleMenuClick("/register")}>
-                        Register
-                      </MenuItem>
-                    </div>
-                  )}
-                </Menu>
-              </div>
-            ) : (
-              <div className={classes.headerOptions}>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={open}
+                onClose={() => setAnchorEl(null)}
+              >
+                <MenuItem onClick={() => handleMenuClick("/")}>Home</MenuItem>
                 {userData.user ? (
                   <div>
-                    <Button
-                      className={classes.menuButton}
-                      onClick={() => handleMenuClick("/")}
-                    >
-                      Home
-                    </Button>
-                    <Button
-                      className={classes.menuButton}
+                    <MenuItem
                       onClick={() =>
                         handleMenuClick(`/profile/${userData.user.id}`)
                       }
                     >
-                      Profile
-                    </Button>
-                    <Button
-                      className={classes.menuButton}
-                      onClick={() => handleMenuClick("/settings")}
-                    >
-                      Settings
-                    </Button>
-                    <Button
-                      className={`${classes.menuButton} ${classes.loginBttn}`}
-                      onClick={() => logOut()}
-                    >
-                      Logout
-                    </Button>
+                      My Page
+                    </MenuItem>
+                    <MenuItem onClick={() => logOut()}>Logout</MenuItem>
                   </div>
                 ) : (
                   <div>
-                    <Button
-                      className={classes.menuButton}
-                      onClick={() => handleMenuClick("/")}
-                    >
-                      Home
-                    </Button>
-                    <Button
-                      className={classes.menuButton}
-                      onClick={() => handleMenuClick("/about")}
-                    >
-                      About Us
-                    </Button>
-                    <Button
-                      className={classes.menuButton}
-                      onClick={() => handleMenuClick("/register")}
-                    >
-                      Register
-                    </Button>
-                    <Button
-                      className={`${classes.menuButton} + ${classes.loginBttn}`}
-                      onClick={() => handleMenuClick("/login")}
+                    <MenuItem onClick={() => logOut("/login")}>Login</MenuItem>
 
-                    >
-                      Login
-                    </Button>
+                    <MenuItem onClick={() => handleMenuClick("/register")}>
+                      Register
+                    </MenuItem>
                   </div>
                 )}
-              </div>
-            )}
-          </div>
-        </Toolbar>
-      </AppBar>
+              </Menu>
+            </div>
+          ) : (
+            <div className={classes.headerOptions}>
+              {userData.user ? (
+                <div>
+                  <Button
+                    className={classes.menuButton}
+                    onClick={() => handleMenuClick("/")}
+                  >
+                    Home
+                  </Button>
+                  <Button
+                    className={classes.menuButton}
+                    onClick={() =>
+                      handleMenuClick(`/profile/${userData.user.id}`)
+                    }
+                  >
+                    Profile
+                  </Button>
+                  <Button
+                    className={classes.menuButton}
+                    onClick={() => handleMenuClick("/settings")}
+                  >
+                    Settings
+                  </Button>
+                  <Button
+                    className={`${classes.menuButton} ${classes.loginBttn}`}
+                    onClick={() => logOut()}
+                  >
+                    Logout
+                  </Button>
+                </div>
+              ) : (
+                <div>
+                  <Button
+                    className={classes.menuButton}
+                    onClick={() => handleMenuClick("/")}
+                  >
+                    Home
+                  </Button>
+                  <Button
+                    className={classes.menuButton}
+                    onClick={() => handleMenuClick("/about")}
+                  >
+                    About Us
+                  </Button>
+                  <Button
+                    className={classes.menuButton}
+                    onClick={() => handleMenuClick("/register")}
+                  >
+                    Register
+                  </Button>
+                  <Button
+                    className={`${classes.menuButton} + ${classes.loginBttn}`}
+                    onClick={() => handleMenuClick("/login")}
+                  >
+                    Login
+                  </Button>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </Toolbar>
+    </AppBar>
   );
 };
 

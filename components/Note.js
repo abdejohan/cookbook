@@ -1,9 +1,5 @@
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable react/prop-types */
-/* eslint-disable no-underscore-dangle */
 import React, { useContext, useState, Fragment } from "react";
 import axios from "axios";
-// import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -21,7 +17,6 @@ const useStyles = makeStyles(() => ({
   paper: {
     width: "100%",
     maxWidth: "700px",
-    padding: "20px 20px",
     flexGrow: "2",
     backgroundColor: "white",
     alignItems: "center",
@@ -71,22 +66,18 @@ const useStyles = makeStyles(() => ({
     width: "200px",
     flexGrow: 2,
   },
-
   form: {
     padding: "10px",
     width: "100%",
-    maxWidth: "1000px",
-    display: "flex",
-    flexFlow: "column nowrap",
-    alignItems: "flex-start",
   },
   textarea: {
-    padding: "10px 0px",
+    margin: "10px 0px",
     borderRadius: "10px 0px 10px 0px",
     border: "none",
     width: "100%",
     resize: "none",
     display: "flex",
+    backgroundColor: "#F1F7ED",
   },
   linkContainer: {
     width: "100%",
@@ -98,11 +89,12 @@ const useStyles = makeStyles(() => ({
   },
   submitBttn: {
     fontWeight: "900",
-    fontSize: "1.5rem",
+    fontSize: "2rem",
     color: "white",
     border: "none",
     padding: "20px",
     backgroundColor: "lightblue",
+    borderRadius: "0px 0px 30px 30px",
   },
   growLine: {
     display: "flex",
@@ -134,10 +126,12 @@ const useStyles = makeStyles(() => ({
     borderRadius: "5px",
     display: "flex",
     flexFlow: "column nowrap",
+    flexGrow: "2",
   },
   noteHeaderText: {
     color: "#FF7F51",
     fontWeight: "900",
+    fontSize: "3rem",
   },
   noteHeaderSubText: {
     color: "#FF9B54",
@@ -183,13 +177,10 @@ const Note = () => {
   const onSubmit = async (data) => {
     const dataSend = data;
     dataSend.ingredients = inputFields;
-    if (userData.token) {
-      if (userData.user.userName) {
-        dataSend.postOwner = userData.user.userName;
-        dataSend.expire = false;
-      }
+    if (!userData.token) {
+      dataSend.userId = "temp";
     } else {
-      dataSend.expire = true;
+      dataSend.author = userData.user.userName;
     }
     try {
       const addedPost = await axios.post(
@@ -202,6 +193,7 @@ const Note = () => {
         }
       );
       setChecked(!checked);
+      // eslint-disable-next-line no-underscore-dangle
       setNoteLink(addedPost.data._id);
       if (userData.token) {
         // history.push(`/profile/library`);
@@ -212,16 +204,15 @@ const Note = () => {
   };
 
   return (
-    <Paper elevation={0} className={`shadowSharp ${classes.paper}`}>
+    <Paper elevation={0} className={`shadow ${classes.paper}`}>
       <div className={classes.headTextContainer}>
         <img className={classes.icon} src={bake} alt="bake-icon" />
-        <div className={`${classes.textContainer} shadowSharp`}>
+        <div className={`${classes.textContainer}`}>
           <Typography className={classes.noteHeaderText} variant="h6">
-            GENERATE LINK
+            Let&apos;s Cook!
           </Typography>
           <Typography className={classes.noteHeaderSubText} variant="subtitle2">
-            YOUR NOTE WILL BE SAVED FOR 24H, SIGN IN AND ADD IT TO YOUR
-            COLLECTION TO KEEP IT FOREVER.
+            SHARE YOUR BELOVED RECIPES WITH EVERYONE
           </Typography>
         </div>
       </div>
@@ -237,7 +228,7 @@ const Note = () => {
           id="title"
           inputRef={register}
           variant="filled"
-          defaultValue="Title"
+          placeholder="Title"
         />
         <TextField
           className={`${classes.description} ${classes.textarea}`}
@@ -247,9 +238,9 @@ const Note = () => {
           rows={4}
           inputRef={register}
           variant="filled"
-          defaultValue="Description (Optional)"
+          placeholder="Description (Optional)"
         />
-        <h3>Ingredients</h3>
+        <h3 style={{ textDecoration: "underline" }}>Ingredients</h3>
         <div className={classes.ingredientContainer}>
           <p className={classes.ingredientHeader}>
             <span className={classes.ingredientHeaderText}>
@@ -264,6 +255,7 @@ const Note = () => {
             </button>
           </p>
           {inputFields.map((inputField, index) => (
+            // eslint-disable-next-line react/no-array-index-key
             <div key={index} className={classes.ingredientGroup}>
               <Fragment key={inputField}>
                 <div className={classes.empty}>
@@ -312,12 +304,12 @@ const Note = () => {
           rows={8}
           inputRef={register}
           variant="filled"
-          defaultValue="Instructions"
+          placeholder="Instructions"
         />
         <div className={`shadow ${classes.linkContainer}`}>
           <input
             type="submit"
-            className={classes.submitBttn}
+            className={`${classes.submitBttn} buttonEffect`}
             value="Generate &#x21E8;"
           />
           <Collapse in={checked} collapsedHeight={0}>
