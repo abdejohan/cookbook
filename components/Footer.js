@@ -1,5 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import EmailIcon from "@material-ui/icons/Email";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import GitHubIcon from "@material-ui/icons/GitHub";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -11,19 +14,29 @@ const useStyles = makeStyles(() => ({
     fontFamily: `"Poppins", sans-serif !important`,
     color: "#DADFF7",
     listStyleType: "none",
-    fontSize: "1.7rem",
+    fontSize: "1.3rem",
     fontWeight: "700",
     paddingBottom: "20px",
   },
   listItem: {
-    alignItems: "flex-end",
+    color: "#DADFF7",
+    alignItems: "center",
     justifyContent: "flex-end",
+    fontSize: "0.9rem",
+    fontFamily: `"Poppins", sans-serif !important`,
     display: "flex",
   },
   link: {
+    listStyleType: "none",
     fontFamily: `"Poppins", sans-serif !important`,
-    fontSize: "1.4rem",
+    fontSize: "1.1rem",
     color: "#5A7D7C",
+  },
+  alignLeft: {
+    justifyContent: "flex-start !important",
+    listStyleType: "none",
+    alignItems: "center",
+    display: "flex",
   },
 }));
 
@@ -33,40 +46,41 @@ const Footer = () => {
     <footer className={classes.footer}>
       <div className={classes.container}>
         <ul>
-          <li className={classes.listHeader}>contact</li>
+          <li className={classes.listHeader}>this site was made by</li>
+          <li className={classes.listItem}>Johan Abdé</li>
           <li className={classes.listItem}>
-            <a className={classes.link} href="/">
-              Email
-            </a>
-          </li>
-          <li className={classes.listItem}>
-            <a className={classes.link} href="/">
-              aedIn
-            </a>
-          </li>
-          <li className={classes.listItem}>
-            <a className={classes.link} href="/">
-              GitHub
+            Student @&nbsp;
+            <a className={classes.link} href="www.chasacademy.se">
+              Chas Academy
             </a>
           </li>
         </ul>
       </div>
       <div className={classes.container}>
         <ul>
-          <li className={classes.listHeader}>Contact</li>
-          <li className={classes.listItem}>
-            <a className={classes.link} href="/">
-              Email
+          <li className={classes.listHeader}>contact</li>
+          <li className={(classes.listItem, classes.alignLeft)}>
+            <GitHubIcon fontSize="small" />
+            <a className={classes.link} href="https://github.com/abdejohan/">
+              github.com/abdejohan/
             </a>
           </li>
-          <li className={classes.listItem}>
-            <a className={classes.link} href="/">
-              aedIn
+          <li className={(classes.listItem, classes.alignLeft)}>
+            <EmailIcon fontSize="small" />
+            <a
+              className={classes.link}
+              href="mailto: johan.abde@chasacademy.se"
+            >
+              johan.abde@chasacademy.se
             </a>
           </li>
-          <li className={classes.listItem}>
-            <a className={classes.link} href="/">
-              GitHub
+          <li className={(classes.listItem, classes.alignLeft)}>
+            <LinkedInIcon fontSize="small" />
+            <a
+              className={classes.link}
+              href="https://www.linkedin.com/in/johan-abd%C3%A9-85394382/"
+            >
+              linkedin.com/in/johan-abdé-85394382/
             </a>
           </li>
         </ul>
@@ -77,10 +91,10 @@ const Footer = () => {
           <li className={classes.listItem}>
             <a
               className={classes.link}
-              href="https://www.flaticon.com/authors/mangsaabguru"
-              title="mangsaabguru"
+              href="https://www.flaticon.com/authors/freepik"
+              title="Freepik"
             >
-              mangsaabguru
+              Freepik
             </a>
           </li>
           <li className={classes.listItem}>
@@ -95,10 +109,20 @@ const Footer = () => {
           <li className={classes.listItem}>
             <a
               className={classes.link}
-              href="https://www.flaticon.com/authors/freepik"
-              title="Freepik"
+              href="https://www.flaticon.com/authors/mangsaabguru"
+              title="mangsaabguru"
             >
-              Freepik
+              mangsaabguru
+            </a>
+          </li>
+          <li className={classes.listItem}>
+            From&nbsp;
+            <a
+              className={classes.link}
+              href="https://www.flaticon.com/"
+              title="flaticon"
+            >
+              flaticon.com
             </a>
           </li>
         </ul>

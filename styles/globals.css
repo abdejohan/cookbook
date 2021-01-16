@@ -123,3 +123,8 @@ footer {
 .cursor {
   cursor: pointer;
 }
+
+.MuiSvgIcon-root {
+  margin-right: 6px !important;
+  color: #dadff7;
+}
