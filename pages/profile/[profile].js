@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
 import UserContext from "../../context/UserContext";
 import Library from "../../components/Library";
 import UserProfileView from "../../components/UserProfileView";
@@ -32,7 +31,7 @@ const Profile = () => {
   const classes = useStyles();
   const { userData } = useContext(UserContext);
   const router = useRouter();
-  const { id, userName } = userData.user;
+  const { id } = userData.user;
 
   useEffect(() => {
     if (userData.user) {
@@ -46,9 +45,6 @@ const Profile = () => {
     <>
       {userData.token ? (
         <section className={classes.navigationContainer}>
-          <Typography variant="h6" className="page-header" align="right">
-            Hi <span className="page-header">{userName}</span>!
-          </Typography>
           <UserProfileView userId={id} />
           <Library />
         </section>

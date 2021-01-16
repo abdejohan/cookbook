@@ -4,7 +4,6 @@
   margin: 0px;
   font-family: "Yusei Magic", sans-serif !important;
 }
-/* font-family: "Lobster", cursive; */
 #__next {
   background-color: white !important;
 }
@@ -29,11 +28,11 @@ a:hover {
 
 footer {
   font-family: "Poppins", sans-serif !important;
-  padding: 20px;
+  padding: 50px;
   background-color: #232c33;
   display: flex;
   flex-flow: row wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-evenly;
 }
 
@@ -85,7 +84,6 @@ footer {
   max-width: 1000px;
   margin: 0px auto;
   padding-top: 120px;
-  padding-bottom: 100px;
   height: auto;
   background-color: white;
 

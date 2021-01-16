@@ -9,10 +9,6 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           {/* PWA primary color */}
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-          />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
             href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap"
@@ -21,11 +17,6 @@ export default class MyDocument extends Document {
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
             href="https://fonts.googleapis.com/css2?family=Chango&display=swap"
-            rel="stylesheet"
-          />
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@1,900&family=Chango&family=Seymour+One&display=swap"
             rel="stylesheet"
           />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
