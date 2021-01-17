@@ -75,8 +75,8 @@ footer {
   font-family: "Chango", cursive !important;
   color: #54494b !important;
   font-weight: 900 !important;
-  letter-spacing: -3px !important;
-  font-size: 3.5rem !important;
+  letter-spacing: -5px !important;
+  font-size: 3rem !important;
 }
 
 .page-sub-header {
@@ -97,6 +97,7 @@ footer {
 }
 
 .noteLink {
+  line-break: anywhere;
   font-weight: 600;
 }
 
@@ -109,10 +110,10 @@ footer {
   width: 100%;
   max-width: 1000px;
   margin: 0px auto;
-  padding-top: 120px;
+  margin-top: 110px;
   height: auto;
   background-color: white;
-
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -139,6 +140,12 @@ footer {
   background-color: transparent !important;
 }
 
+@media only screen and (max-width: 600px) {
+  .Toolbar {
+    align-self: flex-end;
+  }
+}
+
 .buttonEffect:hover {
   background-color: lightskyblue;
   cursor: pointer;
@@ -154,6 +161,7 @@ footer {
 }
 
 .gradient-text {
+  font-family: "Chango", cursive !important;
   background: -webkit-linear-gradient(
     left,
     orange,

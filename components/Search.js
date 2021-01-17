@@ -16,6 +16,7 @@ const useStyles = makeStyles(() => ({
   },
   searchContainer: {
     backgroundColor: "#C9DBBA",
+    minWidth: "300px",
     width: "56%",
     flexGrow: "2",
     display: "flex",

@@ -39,9 +39,7 @@ const AddedNote = (props) => {
         </span>{" "}
         Here is your Link:
       </h3>
-      <span className={`noteLink ${classes.noteLink}`}>
-        http://localhost:3000/posts/{noteLink}
-      </span>
+      <span className="noteLink">http://localhost:3000/posts/{noteLink}</span>
       <button className={`cursor ${classes.plusMinusBttn}`} type="button">
         Copy to clipboard
       </button>

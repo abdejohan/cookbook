@@ -11,7 +11,7 @@ import profile from "../public/profile.jpg";
 
 const useStyles = makeStyles(() => ({
   paper: {
-    padding: "10px",
+    padding: "20px",
     marginBottom: "20px",
     display: "flex",
     justifyContent: "center",
@@ -19,7 +19,8 @@ const useStyles = makeStyles(() => ({
     flexFlow: "row wrap",
   },
   outerContainer: {
-    paddingTop: "30px",
+    marginTop: "30px",
+    padding: "20px",
     justifyContent: "space-between",
     alignItems: "flex-start",
     display: "flex",
@@ -35,9 +36,12 @@ const useStyles = makeStyles(() => ({
     padding: "20px",
   },
   innerContainer: {
+    padding: "20px",
     display: "flex",
     justifyContent: "center",
     flexFlow: "column nowrap",
+  },
+  article: {
     padding: "20px",
   },
   imageContainer: {
@@ -137,7 +141,7 @@ const UserProfileView = (props) => {
         </ul>
       </div>
       <div className={classes.outerContainer}>
-        <article className={classes.innerContainer + classes.article}>
+        <article className={classes.article}>
           <h4 className={`page-header ${classes.about}`}>About</h4>
           <p className="plain-text">
             I started From A Chef’s Kitchen in 2014 to share my passion for

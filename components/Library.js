@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
   },
   h3: {
     color: "#e3d081",
-    fontSize: "3rem",
+    fontSize: "2rem",
   },
 }));
 
@@ -86,14 +86,12 @@ const Library = () => {
                 );
               })
             ) : (
-              <p className="plain-text">
-                seems like you dont have any posts yet :/
-              </p>
+              <p className="plain-text">You dont have any posts yet :/</p>
             )}
           </ul>
         </div>
         <div className={classes.innerContainer}>
-          <h3 className={classes.h3}>FOLLOWED RECIPES</h3>
+          <h3 className={classes.h3}>SAVED RECIPES</h3>
           <ul className={classes.ul}>
             {followPosts.length > 0 ? (
               followPosts.map((followPost) => {
@@ -111,9 +109,7 @@ const Library = () => {
                 );
               })
             ) : (
-              <p className="plain-text">
-                seems like you dont follow any posts yet :/
-              </p>
+              <p className="plain-text">You dont follow any posts yet :/</p>
             )}
           </ul>
         </div>

@@ -92,7 +92,7 @@ const Header = () => {
           SHARING IS CARING
         </Typography>
       </div>
-      <Toolbar>
+      <Toolbar className="Toolbar">
         <img
           src={frypan}
           className={`tilt-icon ${classes.icon}`}
@@ -133,7 +133,10 @@ const Header = () => {
                         handleMenuClick(`/profile/${userData.user.id}`)
                       }
                     >
-                      My Page
+                      Profile
+                    </MenuItem>
+                    <MenuItem onClick={() => handleMenuClick("/settings")}>
+                      Settings
                     </MenuItem>
                     <MenuItem onClick={() => logOut()}>Logout</MenuItem>
                   </div>
