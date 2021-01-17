@@ -46,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "150px",
     margin: "10px",
   },
+  link: {
+    fontSize: "0.7rem !important",
+  },
 }));
 
 export default function SignIn() {
@@ -81,9 +84,7 @@ export default function SignIn() {
   return (
     <Paper elevation={0} className={`alignHeader ${classes.paper}`}>
       <CssBaseline />
-      <Typography component="h1" variant="h5">
-        Sign in
-      </Typography>
+      <Typography className="page-header">Sign in</Typography>
       <form
         className={classes.form}
         noValidate
@@ -138,10 +139,10 @@ export default function SignIn() {
         >
           Sign In
         </Button>
-        <Link href="/register" variant="body2">
+        <Link className={classes.link} href="/register">
           Forgot password?
         </Link>
-        <Link href="/register" variant="body2">
+        <Link className={classes.link} href="/register">
           Dont have an account? Sign Up
         </Link>
       </form>

@@ -2,10 +2,18 @@
   box-sizing: border-box;
   padding: 0px;
   margin: 0px;
-  font-family: "Yusei Magic", sans-serif !important;
+  font-family: "Poppins", sans-serif !important;
 }
+/** 
+font-family: "Yusei Magic", sans-serif !important;
+**/
 #__next {
   background-color: white !important;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .tilt-icon:hover {
@@ -17,7 +25,7 @@
 }
 
 a {
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   text-decoration: none;
   color: darkslategrey;
 }
@@ -26,7 +34,12 @@ a:hover {
   color: darkgrey;
 }
 
+ul {
+  list-style-type: none;
+}
+
 footer {
+  width: 100%;
   font-family: "Poppins", sans-serif !important;
   padding: 50px;
   background-color: #232c33;
@@ -36,18 +49,31 @@ footer {
   justify-content: space-evenly;
 }
 
+.list-item {
+  font-family: "Poppins", sans-serif !important;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .plain-text {
-  padding-left: 20px;
-  font-size: 1.3rem;
+  font-family: "Poppins", sans-serif !important;
+  font-size: 1.2rem;
+  padding-left: 5px;
   text-decoration: none;
   color: darkslategrey;
 }
 
+.sec-header {
+  font-family: "Poppins", sans-serif !important;
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
 .page-header {
-  margin-bottom: 50px !important;
   font-family: "Chango", cursive !important;
   color: #54494b !important;
-  width: 100% !important;
   font-weight: 900 !important;
   letter-spacing: -3px !important;
   font-size: 3.5rem !important;
@@ -58,7 +84,7 @@ footer {
   width: 100% !important;
   border-bottom: 8px groove #b33951 !important;
   letter-spacing: -3px !important;
-  font-size: 2.5rem !important;
+  font-size: 2rem !important;
   opacity: 0.5 !important;
 }
 

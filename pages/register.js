@@ -89,11 +89,16 @@ const Register = () => {
     }
   };
   return (
-    <Paper className={classes.paper}>
-      <Typography variant="h2">Register Account</Typography>
-      <Typography variant="subtitle1">
-        Collect all your content in one place and keep track of your progress
-      </Typography>
+    <Paper elevation={0} className={classes.paper}>
+      <Typography className="page-header">Register Account</Typography>
+      <p className="plain-text">
+        Register an account to keep your favorite recipes in one place forever
+        and ever..{" "}
+        <span role="img" aria-label="pinapple">
+          {" "}
+          🍍{" "}
+        </span>
+      </p>
 
       <section className={classes.section}>
         <form
@@ -129,7 +134,6 @@ const Register = () => {
                 Admin
               </option>
             </select>
-            <br />
           </div>
           <TextField
             className={classes.textField}
