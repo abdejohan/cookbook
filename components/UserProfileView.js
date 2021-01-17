@@ -60,13 +60,6 @@ const useStyles = makeStyles(() => ({
     fontSize: "2rem",
     opacity: "0.7",
   },
-  mainText: {
-    fontFamily: "Poppins, sans-serif !important",
-    fontSize: "1.2rem",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
   numberText: {
     fontFamily: "Poppins, sans-serif !important",
     color: "darkgrey",
@@ -97,13 +90,6 @@ const useStyles = makeStyles(() => ({
     fontWeight: "300",
     fontSize: "1rem",
     marginBottom: "10px",
-  },
-  typeofchef: {
-    fontSize: "0.8rem",
-    opacity: "0.4",
-    position: "relative",
-    top: "-10px",
-    paddingLeft: "10px",
   },
 }));
 
@@ -139,8 +125,9 @@ const UserProfileView = (props) => {
         />
         <ul className={classes.ul}>
           <li className={classes.userName}>{user.userName}</li>
-          <li className={classes.typeofchef}>Pastry Chef</li>
-          <li className={classes.imgText}>Member since:</li>
+          <li className={classes.imgText}>Profession</li>
+          <li className={classes.imgValue}>Pastry Chef</li>
+          <li className={classes.imgText}>Member since</li>
           <li className={classes.imgValue}>January 2018</li>
           <li className={classes.imgText}>Platforms</li>
           <li className={classes.imgValue}>
@@ -152,7 +139,7 @@ const UserProfileView = (props) => {
       <div className={classes.outerContainer}>
         <article className={classes.innerContainer + classes.article}>
           <h4 className={`page-header ${classes.about}`}>About</h4>
-          <p className={classes.mainText}>
+          <p className="plain-text">
             I started From A Chef’s Kitchen in 2014 to share my passion for
             cooking and food. Here, I share easy, creative gourmet recipes from
             my kitchen. My recipes are inspired by ingredients I already have on
@@ -162,34 +149,40 @@ const UserProfileView = (props) => {
         </article>
         <div className={classes.innerContainer}>
           <h2 className={classes.headerText}>Account</h2>
-          <p className={classes.mainText}>
-            Totalt Recipes: <span className={classes.numberText}>25</span>
-          </p>
-          <p className={classes.mainText}>
-            Total Followers: <span className={classes.numberText}>1 436</span>
-          </p>
+          <ul>
+            <li className="list-item">
+              Totalt Recipes: <span className={classes.numberText}>25</span>
+            </li>
+            <li className="list-item">
+              Total Followers: <span className={classes.numberText}>1 436</span>
+            </li>
+          </ul>
         </div>
         <div className={classes.innerContainer}>
           <h2 className={classes.headerText}>Social</h2>
-          <p className={classes.mainText}>
-            Totalt Visits: <span className={classes.numberText}>18 439</span>
-          </p>
-          <p className={classes.mainText}>
-            Total Followers: <span className={classes.numberText}>1784</span>
-          </p>
-          <p className={classes.mainText}>
-            Recipes to clipboard:{" "}
-            <span className={classes.numberText}>340</span>
-          </p>
+          <ul>
+            <li className="list-item">
+              Totalt Visits: <span className={classes.numberText}>18 439</span>
+            </li>
+            <li className="list-item">
+              Total Followers: <span className={classes.numberText}>1784</span>
+            </li>
+            <li className="list-item">
+              Recipes to clipboard:{" "}
+              <span className={classes.numberText}>340</span>
+            </li>
+          </ul>
         </div>
         <div className={classes.innerContainer}>
           <h2 className={classes.headerText}>Progress</h2>
-          <p className={classes.mainText}>
-            Weekly: <span className={classes.numberText}>12 </span>
-          </p>
-          <p className={classes.mainText}>
-            Monthly: <span className={classes.numberText}>93 </span>
-          </p>
+          <ul>
+            <li className="list-item">
+              Weekly: <span className={classes.numberText}>12 </span>
+            </li>
+            <li className="list-item">
+              Monthly: <span className={classes.numberText}>93 </span>
+            </li>
+          </ul>
         </div>
       </div>
     </Paper>

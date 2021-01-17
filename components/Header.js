@@ -33,13 +33,13 @@ const useStyles = makeStyles(() => ({
     textTransform: "none",
   },
   black: {
-    padding: "20px",
+    padding: "10px",
     backgroundColor: "black",
     width: "100%",
-    height: "35px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+  },
+  blackText: {
+    fontWeight: "900",
+    fontSize: "1.1rem",
   },
   icon: {
     width: "50px",
@@ -88,8 +88,8 @@ const Header = () => {
   return (
     <AppBar position="fixed" className={classes.AppBar}>
       <div className={classes.black}>
-        <Typography variant="body1">
-          Focus on the create side of cooking!
+        <Typography align="center" className={classes.blackText}>
+          SHARING IS CARING
         </Typography>
       </div>
       <Toolbar>

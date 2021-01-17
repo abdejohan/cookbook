@@ -45,7 +45,6 @@ const useStyles = makeStyles(() => ({
     width: "80px",
     height: "80px",
     opacity: "0.2",
-    marginLeft: "50%",
   },
 }));
 

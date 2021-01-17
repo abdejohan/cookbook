@@ -6,7 +6,8 @@ import UserContext from "../context/UserContext";
 import Note from "./Note";
 import Search from "./Search";
 import youtube from "../public/youtube.svg";
-import folder from "../public/folder.svg";
+import search from "../public/search.svg";
+import responsive from "../public/responsive.svg";
 // backgroundImage: `url(${mobileImage})`,
 
 const useStyles = makeStyles(() => ({
@@ -41,12 +42,16 @@ const useStyles = makeStyles(() => ({
   headText: {
     fontSize: "4rem",
     fontWeight: "900",
+    fontFamily: "Yusei Magic, sans-serif !important",
   },
   subText: {
-    fontSize: "2rem",
+    fontSize: "1rem",
     fontWeight: "600",
     color: "#666666",
     lineHeight: "1.6",
+    position: "relative",
+    top: "-20px",
+    left: "10px",
   },
   subText1: {
     fontSize: "1.2rem",
@@ -61,6 +66,7 @@ const useStyles = makeStyles(() => ({
     flexFlow: "column nowrap",
   },
   iconRows: {
+    marginLeft: "40px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -68,6 +74,7 @@ const useStyles = makeStyles(() => ({
   },
   icon: {
     margin: "20px",
+    marginLeft: "10px",
     width: "50px",
     height: "50px",
   },
@@ -93,13 +100,23 @@ const Home = () => {
         <div className={classes.components}>
           <div className={classes.sideways}>
             <article className={classes.textContainer}>
-              <Typography className={classes.headText} variant="h4">
-                YOU CREATE, WE STORE!
-              </Typography>
-              <Typography className={classes.subText}>
-                YOUR OWN VIRTUAL COOKBOOK
+              <Typography className={classes.headText}>
+                YOU <span className="gradient-text">CREATE</span>, WE STORE!
               </Typography>
               <div className={classes.iconContainer}>
+                <Typography className={classes.subText}>
+                  YOUR OWN VIRTUAL COOKBOOK
+                </Typography>
+                <div className={classes.iconRows}>
+                  <img
+                    className={classes.icon}
+                    src={responsive}
+                    alt="folder-icon"
+                  />
+                  <Typography className={classes.subText1} variant="body2">
+                    LIFE LONG STORAGE FOR YOUR RECIPE COLLECTIONS
+                  </Typography>
+                </div>
                 <div className={classes.iconRows}>
                   <img
                     className={classes.icon}
@@ -113,11 +130,11 @@ const Home = () => {
                 <div className={classes.iconRows}>
                   <img
                     className={classes.icon}
-                    src={folder}
+                    src={search}
                     alt="folder-icon"
                   />
                   <Typography className={classes.subText1} variant="body2">
-                    LIFE LONG STORAGE FOR YOUR RECIPE COLLECTIONS
+                    KEEP TRACK OF YOUR FAVORITE CHEFS
                   </Typography>
                 </div>
               </div>
