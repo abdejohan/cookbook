@@ -13,46 +13,40 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
     display: "flex",
     flexFlow: "column nowrap",
-    margin: "0 auto",
-    padding: "20px",
-    marginTop: "20px",
     justifyContent: "flex-start",
   },
   form: {
-    height: "80%",
+    maxWidth: "650px",
+    width: "100%",
     flexGrow: "2",
-    maxWidth: "1000px",
     display: "flex",
     flexFlow: "column nowrap",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-  },
-  textField: {
-    width: "100%",
-    marginBottom: "20px",
-  },
-  section: {
-    display: "flex",
     justifyContent: "center",
     alignItems: "center",
+  },
+  textField: {
+    marginBottom: "20px",
     width: "100%",
-    padding: "20px",
   },
   roleContainer: {
+    marginBottom: "20px",
+    color: "#0000008a",
+    borderBottom: "1px solid darkgrey",
+    padding: "10px 0px",
+    width: "100%",
     display: "flex",
     flexFlow: "row nowrap",
-    justifyContent: "space-bewteen",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   selectContainer: {
+    fontSize: "1rem",
+    borderLeft: "2px solid lightgrey",
+    backgroundColor: "white",
     border: "0px solid transparent",
   },
-  submitBtn: {
-    border: "none",
-    fontSize: "1.2rem",
-    display: "flex",
-    alignSelf: "flex-end",
-    padding: "10px",
-    backgroundColor: "#C9DBBA",
+  error: {
+    color: "red",
   },
 }));
 
@@ -71,7 +65,6 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     const { email, password } = data;
-    console.log(data);
     try {
       await axios.post("http://localhost:5000/user/register", data);
       const loginRes = await axios.post("http://localhost:5000/user/login", {
@@ -100,62 +93,80 @@ const Register = () => {
         </span>
       </p>
 
-      <section className={classes.section}>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          autoComplete="off"
-          className={classes.form}
-        >
-          <TextField
-            className={classes.textField}
-            name="email"
-            inputRef={register({ required: true })}
-            label="Email"
-          />
-          {errors.email && <span>This field is required</span>}
-          <TextField
-            className={classes.textField}
-            name="userName"
-            inputRef={register}
-            label="Username"
-          />
-          {errors.userName && <span>This field is required</span>}
-          <div className={classes.roleContainer}>
-            <Typography variant="subtitle1">Role:</Typography>
-            <select
-              className={classes.selectContainer}
-              name="role"
-              ref={register}
-            >
-              <option value="Normal user">Normal user</option>
-              <option value="Content Creator">Content Creator</option>
-              <option value="Sponsor">Sponsor</option>
-              <option value="Sponsor" disabled>
-                Admin
-              </option>
-            </select>
-          </div>
-          <TextField
-            className={classes.textField}
-            type="password"
-            name="password"
-            inputRef={register({ required: true })}
-            label="Select password"
-          />
-          {errors.password && <span>This field is required</span>}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        autoComplete="off"
+        className={classes.form}
+      >
+        <TextField
+          className={classes.textField}
+          name="email"
+          inputRef={register({ required: true })}
+          label="Email"
+        />
+        {errors.email && (
+          <span className={classes.error}>Email address is required</span>
+        )}
+        <TextField
+          className={classes.textField}
+          name="userName"
+          inputRef={register({ required: true })}
+          label="Username"
+        />
+        {errors.userName && (
+          <span className={classes.error}>Username is required</span>
+        )}
+        <div className={classes.roleContainer}>
+          <Typography
+            style={{ paddingLeft: "0px", opacity: "0.7" }}
+            className="plain-text"
+          >
+            Select a role (optional)
+          </Typography>
+          <select
+            className={classes.selectContainer}
+            name="role"
+            ref={register}
+          >
+            <option value="none">-</option>
+            <option value="Normal user">Normal user</option>
+            <option value="Content Creator">Content Creator</option>
+            <option value="Sponsor">Sponsor</option>
+            <option value="Admin" disabled>
+              Admin
+            </option>
+          </select>
+        </div>
+        <TextField
+          className={classes.textField}
+          type="password"
+          name="password"
+          inputRef={register({ required: true })}
+          label="Select password"
+        />
+        {errors.password && (
+          <span className={classes.error}>Password is required</span>
+        )}
 
-          <TextField
-            className={classes.textField}
-            type="password"
-            name="passwordCheck"
-            inputRef={register({ required: true })}
-            label="Repeat password"
-          />
-          {errors.passwordCheck && <span>This field is required</span>}
+        <TextField
+          className={classes.textField}
+          type="password"
+          name="passwordCheck"
+          inputRef={register({ required: true })}
+          label="Repeat password"
+        />
+        {errors.passwordCheck && (
+          <span className={classes.error}>
+            {console.log(errors)}Passwords must match
+          </span>
+        )}
 
-          <input type="submit" className={classes.submitBtn} value="Register" />
-        </form>
-      </section>
+        <input
+          type="submit"
+          className="blue-button alt-blue-button"
+          value="Register"
+        />
+      </form>
     </Paper>
   );
 };

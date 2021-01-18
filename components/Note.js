@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
   },
   ingredientContainer: {
-    minWidth: "300px",
+    minWidth: "250px",
     width: "100%",
     display: "flex",
     flexFlow: "column nowrap",
@@ -62,7 +62,6 @@ const useStyles = makeStyles(() => ({
   ingredient: {
     border: "none",
     borderBottom: "1px lightgrey solid",
-    width: "200px",
     flexGrow: 2,
   },
   form: {
@@ -71,7 +70,7 @@ const useStyles = makeStyles(() => ({
   },
   textarea: {
     margin: "10px 0px",
-    borderRadius: "10px 0px 10px 0px",
+    borderRadius: "10px 0px 0px 0px",
     border: "none",
     width: "100%",
     resize: "none",
@@ -79,21 +78,13 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "#F1F7ED",
   },
   linkContainer: {
+    marginTop: "10px",
     width: "100%",
     alignSelf: "flex-end",
     backgroundColor: "lightblue",
     borderRadius: "5px",
     display: "flex",
     flexFlow: "column nowrap",
-  },
-  submitBttn: {
-    fontWeight: "900",
-    fontSize: "2rem",
-    color: "white",
-    border: "none",
-    padding: "20px",
-    backgroundColor: "lightblue",
-    borderRadius: "0px 0px 30px 30px",
   },
   growLine: {
     display: "flex",
@@ -118,7 +109,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Note = () => {
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register, errors, reset } = useForm();
   const classes = useStyles();
   // const router = useRouter();
   const { userData } = useContext(UserContext);
@@ -175,6 +166,7 @@ const Note = () => {
       if (userData.token) {
         // history.push(`/profile/library`);
       }
+      reset();
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);
     }
@@ -200,10 +192,15 @@ const Note = () => {
             className={`${classes.title} ${classes.textarea}`}
             name="title"
             id="title"
-            inputRef={register}
+            inputRef={register({ required: true })}
             variant="filled"
             placeholder="Title"
           />
+          {errors.title && (
+            <span className={classes.error}>
+              {console.log(errors)}Oops! looks like your forgot a title
+            </span>
+          )}
           <TextField
             className={`${classes.description} ${classes.textarea}`}
             name="description"
@@ -276,14 +273,19 @@ const Note = () => {
             name="instructions"
             multiline
             rows={8}
-            inputRef={register}
+            inputRef={register({ required: true })}
             variant="filled"
             placeholder="Instructions"
           />
+          {errors.instructions && (
+            <span className={classes.error}>
+              {console.log(errors)}Instructions are required
+            </span>
+          )}
           <div className={`shadow ${classes.linkContainer}`}>
             <input
               type="submit"
-              className={`${classes.submitBttn} buttonEffect`}
+              className="blue-button"
               value="Generate &#x21E8;"
             />
             <Collapse in={checked} collapsedHeight={0}>
