@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
     listStyleType: "none",
     fontSize: "1.3rem",
     fontWeight: "700",
-    paddingBottom: "20px",
+    paddingBottom: "10px",
   },
   listItem: {
     color: "#DADFF7",
@@ -30,13 +30,12 @@ const useStyles = makeStyles(() => ({
   link: {
     listStyleType: "none",
     fontFamily: `"Poppins", sans-serif !important`,
-    fontSize: "1.1rem",
     color: "#5A7D7C",
   },
   alignLeft: {
     justifyContent: "flex-start !important",
     listStyleType: "none",
-    alignItems: "center",
+    alignItems: "flex-start",
     display: "flex",
   },
   icon: {
@@ -68,36 +67,7 @@ const Footer = () => {
         </div>
         <div className={classes.container}>
           <ul>
-            <li className={classes.listHeader}>contact</li>
-            <li className={(classes.listItem, classes.alignLeft)}>
-              <GitHubIcon fontSize="small" />
-              <a className={classes.link} href="https://github.com/abdejohan/">
-                github.com/abdejohan/
-              </a>
-            </li>
-            <li className={(classes.listItem, classes.alignLeft)}>
-              <EmailIcon fontSize="small" />
-              <a
-                className={classes.link}
-                href="mailto: johan.abde@chasacademy.se"
-              >
-                johan.abde@chasacademy.se
-              </a>
-            </li>
-            <li className={(classes.listItem, classes.alignLeft)}>
-              <LinkedInIcon fontSize="small" />
-              <a
-                className={classes.link}
-                href="https://www.linkedin.com/in/johan-abd%C3%A9-85394382/"
-              >
-                linkedin.com/in/johan-abdé-85394382/
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className={classes.container}>
-          <ul>
-            <li className={classes.listHeader}>Icons made by</li>
+            <li className={classes.listHeader}>icons made by</li>
             <li className={classes.listItem}>
               <a
                 className={classes.link}
@@ -133,6 +103,35 @@ const Footer = () => {
                 title="flaticon"
               >
                 flaticon.com
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div className={classes.container}>
+          <ul>
+            <li className={classes.listHeader}>contact</li>
+            <li className={(classes.listItem, classes.alignLeft)}>
+              <GitHubIcon fontSize="small" />
+              <a className={classes.link} href="https://github.com/abdejohan/">
+                github.com/abdejohan/
+              </a>
+            </li>
+            <li className={(classes.listItem, classes.alignLeft)}>
+              <EmailIcon fontSize="small" />
+              <a
+                className={classes.link}
+                href="mailto: johan.abde@chasacademy.se"
+              >
+                johan.abde@chasacademy.se
+              </a>
+            </li>
+            <li className={(classes.listItem, classes.alignLeft)}>
+              <LinkedInIcon fontSize="small" />
+              <a
+                className={classes.link}
+                href="https://www.linkedin.com/in/johan-abd%C3%A9-85394382/"
+              >
+                linkedin.com/in/johan-abdé-85394382/
               </a>
             </li>
           </ul>

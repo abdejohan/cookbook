@@ -25,7 +25,6 @@ font-family: "Yusei Magic", sans-serif !important;
 }
 
 a {
-  font-size: 1.2rem;
   text-decoration: none;
   color: darkslategrey;
 }
@@ -41,7 +40,7 @@ ul {
 footer {
   width: 100%;
   font-family: "Poppins", sans-serif !important;
-  padding: 50px;
+  padding: 20px;
   background-color: #232c33;
   display: flex;
   flex-flow: row wrap;
@@ -140,18 +139,34 @@ footer {
   background-color: transparent !important;
 }
 
-@media only screen and (max-width: 600px) {
+@media (max-width: 600px) {
   .Toolbar {
     align-self: flex-end;
   }
+
+  footer {
+    justify-content: flex-end;
+  }
 }
 
-.buttonEffect:hover {
+.alt-blue-button {
+  font-size: 1.5rem;
+  border-radius: 10px !important;
+  margin: 20px;
+}
+
+.blue-button {
+  font-weight: 900;
+  font-size: 2rem;
+  color: white;
+  border: none;
+  padding: 10px 50px;
+  background-color: lightblue;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.blue-button:hover {
   background-color: lightskyblue;
-  cursor: pointer;
-}
-
-.cursor {
   cursor: pointer;
 }
 

@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -15,7 +14,6 @@ import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    width: "100%",
     padding: "20px",
     borderRadius: "0px",
     display: "flex",
@@ -31,9 +29,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
-  submit: {
-    maxWidth: "500px",
-  },
   inputContainer: {
     display: "flex",
     flexFlow: "row wrap",
@@ -42,12 +37,8 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   inputField: {
-    width: "48%",
-    minWidth: "150px",
+    minWidth: "260px",
     margin: "10px",
-  },
-  link: {
-    fontSize: "0.7rem !important",
   },
 }));
 
@@ -130,21 +121,17 @@ export default function SignIn() {
           }
           label="Remember me"
         />
-        <Button
+        <button
           type="submit"
           fullWidth
           variant="contained"
           color="primary"
-          className={classes.submit}
+          className="blue-button alt-blue-button"
         >
           Sign In
-        </Button>
-        <Link className={classes.link} href="/register">
-          Forgot password?
-        </Link>
-        <Link className={classes.link} href="/register">
-          Dont have an account? Sign Up
-        </Link>
+        </button>
+        <Link href="/register">Forgot password?</Link>
+        <Link href="/register">Dont have an account? Sign Up</Link>
       </form>
     </Paper>
   );
