@@ -16,6 +16,7 @@ const useStyles = makeStyles(() => ({
     justifyContent: "flex-start",
   },
   form: {
+    marginTop: "30px",
     maxWidth: "650px",
     width: "100%",
     flexGrow: "2",

@@ -161,12 +161,12 @@ footer {
   color: white;
   border: none;
   padding: 10px 50px;
-  background-color: lightblue;
+  background-color: lightskyblue;
   border-radius: 0px 0px 10px 10px;
 }
 
 .blue-button:hover {
-  background-color: lightskyblue;
+  background-color: lightblue;
   cursor: pointer;
 }
 
