@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   inputField: {
     minWidth: "260px",
     margin: "10px",
+    width: "100%",
   },
 }));
 
@@ -88,7 +89,6 @@ export default function SignIn() {
             margin="normal"
             inputRef={register}
             required
-            fullWidth
             id="email"
             label="Email Address"
             name="email"
@@ -100,7 +100,6 @@ export default function SignIn() {
             margin="normal"
             inputRef={register}
             required
-            fullWidth
             name="password"
             label="Password"
             type="password"
@@ -123,7 +122,6 @@ export default function SignIn() {
         />
         <button
           type="submit"
-          fullWidth
           variant="contained"
           color="primary"
           className="blue-button alt-blue-button"
