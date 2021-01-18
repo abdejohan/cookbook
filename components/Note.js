@@ -146,29 +146,49 @@ const Note = () => {
     const dataSend = data;
     dataSend.ingredients = inputFields;
     if (!userData.token) {
-      dataSend.userId = "temp";
-    } else {
-      dataSend.author = userData.user.userName;
-    }
-    try {
-      const addedPost = await axios.post(
-        "http://localhost:5000/posts",
-        dataSend,
-        {
-          headers: {
-            "x-auth-token": userData.token,
-          },
-        }
-      );
-      setChecked(!checked);
-      // eslint-disable-next-line no-underscore-dangle
-      setNoteLink(addedPost.data._id);
-      if (userData.token) {
-        // history.push(`/profile/library`);
+      console.log("NO USER REGISTERED");
+      dataSend.author = "temp";
+      try {
+        const addedPost = await axios.post(
+          "http://localhost:5000/posts/no-user",
+          dataSend,
+          {
+            headers: {
+              "x-auth-token": userData.token,
+            },
+          }
+        );
+        setChecked(!checked);
+        // eslint-disable-next-line no-underscore-dangle
+        setNoteLink(addedPost.data._id);
+        reset();
+      } catch (error) {
+        console.log(`THIS MESSAGE:${error}`);
       }
-      reset();
-    } catch (error) {
-      console.log(`THIS MESSAGE:${error}`);
+    } else {
+      console.log("USER REGISTERED! ! !");
+      dataSend.author = userData.user.userName;
+      dataSend.userId = userData.user.id;
+      try {
+        const addedPost = await axios.post(
+          "http://localhost:5000/posts",
+          dataSend,
+          {
+            headers: {
+              "x-auth-token": userData.token,
+            },
+          }
+        );
+        setChecked(!checked);
+        // eslint-disable-next-line no-underscore-dangle
+        setNoteLink(addedPost.data._id);
+        if (userData.token) {
+          // history.push(`/profile/library`);
+        }
+        reset();
+      } catch (error) {
+        console.log(`THIS MESSAGE:${error}`);
+      }
     }
   };
 
