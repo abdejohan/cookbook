@@ -6,20 +6,19 @@ import { useRouter } from "next/router";
 import Paper from "@material-ui/core/Paper";
 import axios from "axios";
 import YouTubeIcon from "@material-ui/icons/YouTube";
-import UserContext from "../context/UserContext";
 import profile from "../public/profile.jpg";
+import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles(() => ({
   paper: {
     padding: "20px",
     marginBottom: "20px",
     display: "flex",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    flexFlow: "row wrap",
+    justifyContent: "flex-start",
+    alignItems: "flex-end",
+    flexFlow: "column nowrap",
   },
   outerContainer: {
-    marginTop: "30px",
     padding: "20px",
     justifyContent: "space-between",
     alignItems: "flex-start",
@@ -72,11 +71,7 @@ const useStyles = makeStyles(() => ({
     alignSelf: "flex-end",
     marginLeft: "10px",
   },
-  about: {
-    alignSelf: "flex-end",
-    marginBottom: "0px !important",
-    fontSize: "2rem !important",
-  },
+  about: {},
   ul: {
     listStyleType: "none",
     padding: "0px 20px",
@@ -95,21 +90,29 @@ const useStyles = makeStyles(() => ({
     fontSize: "1rem",
     marginBottom: "10px",
   },
+  buttonContainer: {
+    marginTop: "20px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexFlow: "row wrap",
+  },
 }));
 
-const UserProfileView = (props) => {
-  // eslint-disable-next-line react/prop-types
-  const { userId } = props;
-  const classes = useStyles();
+const User = (props) => {
   const [user, setUser] = useState({});
   const { userData } = useContext(UserContext);
-  const { role } = userData.user;
+  const classes = useStyles();
+  // eslint-disable-next-line react/prop-types
+  const { loggedInUserId } = props;
+  const router = useRouter();
+  const { searchedUserId } = router.query;
 
   useEffect(() => {
     const getUser = async () => {
       try {
         const fetchedUser = await axios.get(
-          `http://localhost:5000/user/${userId}`
+          `http://localhost:5000/user/${loggedInUserId || searchedUserId}`
         );
         setUser(fetchedUser.data);
       } catch (error) {
@@ -117,10 +120,10 @@ const UserProfileView = (props) => {
       }
     };
     getUser();
-  }, [userId]);
+  }, [loggedInUserId, searchedUserId]);
 
   return (
-    <Paper elevation={1} className={classes.paper}>
+    <Paper elevation={0} className={classes.paper}>
       <div className={classes.profileInfo}>
         <img
           className={classes.imageContainer}
@@ -139,6 +142,32 @@ const UserProfileView = (props) => {
             <a href="https://www.youtube.com">youtube.com/StaceyCooks</a>
           </li>
         </ul>
+        {searchedUserId &&
+          userData.token &&
+          searchedUserId !== userData.user.id && (
+            <div className={classes.buttonContainer}>
+              <button
+                className="alt-blue-button blue-button"
+                name="follow"
+                type="button"
+                onClick={() => {
+                  console.log("followed!");
+                }}
+              >
+                Follow
+              </button>
+              <button
+                className="alt-blue-button blue-button"
+                name="library"
+                type="button"
+                onClick={() => {
+                  console.log("recipes HERE!");
+                }}
+              >
+                Recipes
+              </button>
+            </div>
+          )}
       </div>
       <div className={classes.outerContainer}>
         <article className={classes.article}>
@@ -193,4 +222,4 @@ const UserProfileView = (props) => {
   );
 };
 
-export default UserProfileView;
+export default User;

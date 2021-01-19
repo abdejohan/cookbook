@@ -24,6 +24,7 @@ const useStyles = makeStyles(() => ({
     marginBottom: "50px",
   },
   subText: {
+    textAlign: "center",
     fontSize: "1rem",
     fontWeight: "600",
     color: "#666666",
@@ -40,11 +41,10 @@ const useStyles = makeStyles(() => ({
     marginTop: "30px",
     display: "flex",
     justifyContent: "center",
-    alignItems: "flex-start",
+    alignItems: "center",
     flexFlow: "column nowrap",
   },
   iconRows: {
-    marginLeft: "30px",
     paddingBottom: "20px",
     display: "flex",
     justifyContent: "center",

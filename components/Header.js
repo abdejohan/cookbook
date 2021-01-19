@@ -142,7 +142,9 @@ const Header = () => {
                   </div>
                 ) : (
                   <div>
-                    <MenuItem onClick={() => logOut("/login")}>Login</MenuItem>
+                    <MenuItem onClick={() => handleMenuClick("/login")}>
+                      Login
+                    </MenuItem>
 
                     <MenuItem onClick={() => handleMenuClick("/register")}>
                       Register
