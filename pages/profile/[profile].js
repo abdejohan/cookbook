@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import UserContext from "../../context/UserContext";
 import Library from "../../components/Library";
-import UserProfileView from "../../components/UserProfileView";
+import User from "../[user]";
 
 const Profile = () => {
   const { userData } = useContext(UserContext);
@@ -14,8 +14,6 @@ const Profile = () => {
       if (userData.user.role === "admin") {
         router.push("/admin");
       }
-    } else {
-      router.push("/");
     }
   }, [router, userData.user]);
 
@@ -23,7 +21,7 @@ const Profile = () => {
     <>
       {userData.token ? (
         <>
-          <UserProfileView userId={id} />
+          <User loggedInUserId={id} />
           <Library />
         </>
       ) : (

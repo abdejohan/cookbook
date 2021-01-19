@@ -32,7 +32,7 @@ const useStyles = makeStyles(() => ({
     width: "100%",
   },
   searchField: {
-    marginLeft: "20px",
+    marginLeft: "6px",
     backgroundColor: "#C9DBBA",
     display: "flex",
     border: "none",

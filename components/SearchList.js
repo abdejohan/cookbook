@@ -4,40 +4,19 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import { useHistory, Link } from "react-router-dom";
+import Link from "next/link";
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
     display: "flex",
-    flexFlow: "column nowrap",
+    flexFlow: "row wrap",
     justifyContent: "center",
     alignItems: "flex-start",
-    width: "90%",
+    width: "100%",
     padding: "20px",
   },
-  contentContainer: {
-    width: "100%",
-  },
-  title: {
-    fontSize: "1.3rem",
-  },
-  listContainer: {
-    width: "100%",
-    paddingLeft: "0px",
-    listStyleType: "none",
-  },
-  listItem: {
-    color: "#525252",
-    border: "1px solid lightgrey",
-    borderRadius: "30px",
-    marginBottom: "5px",
-    padding: "10px 15px",
-    display: "flex",
-    justifyContent: "center",
-    flexFlow: "column nowrap",
-    width: "100%",
-    fontSize: "1.1rem",
-    textDecoration: "none",
+  resultsContainer: {
+    padding: "20px",
   },
 }));
 
@@ -46,7 +25,6 @@ const SearchList = (props) => {
   const [searchResponseList, setSearchResponseList] = useState([]);
   const [userSearchResponseList, setUserSearchResponseList] = useState([]);
   const classes = useStyles();
-  const history = useHistory();
 
   useEffect(() => {
     const getSearchResults = async () => {
@@ -54,11 +32,10 @@ const SearchList = (props) => {
         const searchRequest = await axios.get(
           `http://localhost:5000/search?term=${searchInput}`
         );
-        console.log(searchRequest);
         const userSearchRequest = await axios.get(
           `http://localhost:5000/search/user?term=${searchInput}`
         );
-
+        console.log(userSearchRequest);
         setSearchResponseList(searchRequest.data);
         setUserSearchResponseList(userSearchRequest.data);
       } catch (error) {
@@ -70,36 +47,48 @@ const SearchList = (props) => {
 
   return (
     <section className={classes.mainContainer}>
-      {searchResponseList.length > 0 && (
-        <div className={classes.contentContainer}>
-          <h4 className={classes.title}>Recipes found..</h4>
-          <ul className={classes.listContainer}>
+      {searchResponseList.length > 0 ? (
+        <div className={classes.resultsContainer}>
+          <h4 className="sec-header">recipes</h4>
+          <ul>
             {searchResponseList.map((searchResult) => {
               return (
-                <li key={searchResult._id}>
+                <li className="list-item" key={searchResult._id}>
                   <Link
-                    className={classes.listItem}
-                    to={`/posts/${searchResult._id}`}
+                    href={{
+                      pathname: "/post",
+                      query: { postId: searchResult._id },
+                    }}
                   >
                     {searchResult.title}
-                    {searchResult.postOwner}
                   </Link>
                 </li>
               );
             })}
           </ul>
         </div>
+      ) : (
+        <div>
+          <p className="plain-text">
+            No recipes found...{" "}
+            <span role="img" aria-label="sad smilie">
+              😞
+            </span>{" "}
+          </p>
+        </div>
       )}
-      {userSearchResponseList.length > 0 && (
-        <div className={classes.contentContainer}>
-          <h4 className={classes.title}>Users found..</h4>
-          <ul className={classes.listContainer}>
+      {userSearchResponseList.length > 0 ? (
+        <div className={classes.resultsContainer}>
+          <h4 className="sec-header">chefs</h4>
+          <ul>
             {userSearchResponseList.map((searchResult) => {
               return (
-                <li key={searchResult._id}>
+                <li className="list-item" key={searchResult._id}>
                   <Link
-                    className={classes.listItem}
-                    to={`/user/${searchResult._id}`}
+                    href={{
+                      pathname: "/user",
+                      query: { searchedUserId: searchResult._id },
+                    }}
                   >
                     {searchResult.userName}
                   </Link>
@@ -107,6 +96,15 @@ const SearchList = (props) => {
               );
             })}
           </ul>
+        </div>
+      ) : (
+        <div>
+          <p className="plain-text">
+            No users found...{" "}
+            <span role="img" aria-label="sad smilie">
+              😞
+            </span>{" "}
+          </p>
         </div>
       )}
     </section>
