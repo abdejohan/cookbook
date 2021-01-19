@@ -6,7 +6,8 @@ import UserContext from "../context/UserContext";
 import Note from "./Note";
 import Search from "./Search";
 import youtube from "../public/youtube.svg";
-import folder from "../public/folder.svg";
+import search from "../public/search.svg";
+import responsive from "../public/responsive.svg";
 // backgroundImage: `url(${mobileImage})`,
 
 const useStyles = makeStyles(() => ({
@@ -19,34 +20,15 @@ const useStyles = makeStyles(() => ({
     borderRadius: "30px",
     position: "relative",
   },
-  components: {
-    width: "100%",
-    flexFlow: "column nowrap",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  sideways: {
-    backgroundColor: "white",
-    paddingLeft: "0px",
-    width: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexFlow: "column nowrap",
-  },
   textContainer: {
     marginBottom: "50px",
   },
-  headText: {
-    fontSize: "4rem",
-    fontWeight: "900",
-  },
   subText: {
-    fontSize: "2rem",
+    fontSize: "1rem",
     fontWeight: "600",
     color: "#666666",
     lineHeight: "1.6",
+    marginLeft: "10px",
   },
   subText1: {
     fontSize: "1.2rem",
@@ -55,19 +37,22 @@ const useStyles = makeStyles(() => ({
     lineHeight: "1.6",
   },
   iconContainer: {
+    marginTop: "30px",
     display: "flex",
     justifyContent: "center",
     alignItems: "flex-start",
     flexFlow: "column nowrap",
   },
   iconRows: {
+    marginLeft: "30px",
+    paddingBottom: "20px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     flexFlow: "row nowrap",
   },
   icon: {
-    margin: "20px",
+    marginRight: "10px",
     width: "50px",
     height: "50px",
   },
@@ -90,41 +75,39 @@ const Home = () => {
     <>
       <Search />
       <section className={classes.contentContainer}>
-        <div className={classes.components}>
-          <div className={classes.sideways}>
-            <article className={classes.textContainer}>
-              <Typography className={classes.headText} variant="h4">
-                YOU CREATE, WE STORE!
+        <article className={classes.textContainer}>
+          <Typography style={{ lineHeight: "43px" }} className="page-header">
+            YOU <span className="gradient-text">CREATE</span>, WE STORE!
+          </Typography>
+          <Typography className={classes.subText}>
+            YOUR OWN VIRTUAL COOKBOOK
+          </Typography>
+          <div className={classes.iconContainer}>
+            <div className={classes.iconRows}>
+              <img
+                className={classes.icon}
+                src={responsive}
+                alt="folder-icon"
+              />
+              <Typography className={classes.subText1} variant="body2">
+                LIFE LONG STORAGE FOR YOUR RECIPE COLLECTIONS
               </Typography>
-              <Typography className={classes.subText}>
-                YOUR OWN VIRTUAL COOKBOOK
+            </div>
+            <div className={classes.iconRows}>
+              <img className={classes.icon} src={youtube} alt="youtube-icon" />
+              <Typography className={classes.subText1} variant="body2">
+                GET SHAREABLE LINK FOR YOUR PLATFORM
               </Typography>
-              <div className={classes.iconContainer}>
-                <div className={classes.iconRows}>
-                  <img
-                    className={classes.icon}
-                    src={youtube}
-                    alt="youtube-icon"
-                  />
-                  <Typography className={classes.subText1} variant="body2">
-                    GET SHAREABLE LINK FOR YOUR PLATFORM
-                  </Typography>
-                </div>
-                <div className={classes.iconRows}>
-                  <img
-                    className={classes.icon}
-                    src={folder}
-                    alt="folder-icon"
-                  />
-                  <Typography className={classes.subText1} variant="body2">
-                    LIFE LONG STORAGE FOR YOUR RECIPE COLLECTIONS
-                  </Typography>
-                </div>
-              </div>
-            </article>
+            </div>
+            <div className={classes.iconRows}>
+              <img className={classes.icon} src={search} alt="folder-icon" />
+              <Typography className={classes.subText1} variant="body2">
+                KEEP TRACK OF YOUR FAVORITE CHEFS
+              </Typography>
+            </div>
           </div>
-          <Note />
-        </div>
+        </article>
+        <Note />
       </section>
     </>
   );

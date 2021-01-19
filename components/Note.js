@@ -8,7 +8,6 @@ import Collapse from "@material-ui/core/Collapse";
 import { Typography } from "@material-ui/core";
 import UserContext from "../context/UserContext";
 import AddedNote from "./AddedNote";
-import bake from "../public/bake.svg";
 
 // import Button from "@material-ui/core/Button";
 
@@ -25,7 +24,7 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
   },
   ingredientContainer: {
-    minWidth: "300px",
+    minWidth: "250px",
     width: "100%",
     display: "flex",
     flexFlow: "column nowrap",
@@ -63,7 +62,6 @@ const useStyles = makeStyles(() => ({
   ingredient: {
     border: "none",
     borderBottom: "1px lightgrey solid",
-    width: "200px",
     flexGrow: 2,
   },
   form: {
@@ -72,7 +70,7 @@ const useStyles = makeStyles(() => ({
   },
   textarea: {
     margin: "10px 0px",
-    borderRadius: "10px 0px 10px 0px",
+    borderRadius: "10px 0px 0px 0px",
     border: "none",
     width: "100%",
     resize: "none",
@@ -80,21 +78,13 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "#F1F7ED",
   },
   linkContainer: {
+    marginTop: "10px",
     width: "100%",
     alignSelf: "flex-end",
     backgroundColor: "lightblue",
     borderRadius: "5px",
     display: "flex",
     flexFlow: "column nowrap",
-  },
-  submitBttn: {
-    fontWeight: "900",
-    fontSize: "2rem",
-    color: "white",
-    border: "none",
-    padding: "20px",
-    backgroundColor: "lightblue",
-    borderRadius: "0px 0px 30px 30px",
   },
   growLine: {
     display: "flex",
@@ -109,39 +99,17 @@ const useStyles = makeStyles(() => ({
   headText: {
     padding: "10px",
   },
-  icon: {
-    margin: "20px",
-    width: "50px",
-    height: "50px",
-  },
-  headTextContainer: {
-    display: "flex",
-    flexFlow: "row nowrap",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  textContainer: {
-    padding: "20px",
-    marginLeft: "40px",
-    borderRadius: "5px",
-    display: "flex",
-    flexFlow: "column nowrap",
-    flexGrow: "2",
-  },
-  noteHeaderText: {
-    color: "#FF7F51",
-    fontWeight: "900",
-    fontSize: "3rem",
-  },
-  noteHeaderSubText: {
+  noteHeader: {
+    display: "none",
     color: "#FF9B54",
     fontWeight: "800",
-    fontSize: "0.8rem",
+    fontSize: "2.8rem",
+    padding: "20px",
   },
 }));
 
 const Note = () => {
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register, errors, reset } = useForm();
   const classes = useStyles();
   // const router = useRouter();
   const { userData } = useContext(UserContext);
@@ -178,146 +146,175 @@ const Note = () => {
     const dataSend = data;
     dataSend.ingredients = inputFields;
     if (!userData.token) {
-      dataSend.userId = "temp";
-    } else {
-      dataSend.author = userData.user.userName;
-    }
-    try {
-      const addedPost = await axios.post(
-        "http://localhost:5000/posts",
-        dataSend,
-        {
-          headers: {
-            "x-auth-token": userData.token,
-          },
-        }
-      );
-      setChecked(!checked);
-      // eslint-disable-next-line no-underscore-dangle
-      setNoteLink(addedPost.data._id);
-      if (userData.token) {
-        // history.push(`/profile/library`);
+      console.log("NO USER REGISTERED");
+      dataSend.author = "temp";
+      try {
+        const addedPost = await axios.post(
+          "http://localhost:5000/posts/no-user",
+          dataSend,
+          {
+            headers: {
+              "x-auth-token": userData.token,
+            },
+          }
+        );
+        setChecked(!checked);
+        // eslint-disable-next-line no-underscore-dangle
+        setNoteLink(addedPost.data._id);
+        reset();
+      } catch (error) {
+        console.log(`THIS MESSAGE:${error}`);
       }
-    } catch (error) {
-      console.log(`THIS MESSAGE:${error}`);
+    } else {
+      console.log("USER REGISTERED! ! !");
+      dataSend.author = userData.user.userName;
+      dataSend.userId = userData.user.id;
+      try {
+        const addedPost = await axios.post(
+          "http://localhost:5000/posts",
+          dataSend,
+          {
+            headers: {
+              "x-auth-token": userData.token,
+            },
+          }
+        );
+        setChecked(!checked);
+        // eslint-disable-next-line no-underscore-dangle
+        setNoteLink(addedPost.data._id);
+        if (userData.token) {
+          // history.push(`/profile/library`);
+        }
+        reset();
+      } catch (error) {
+        console.log(`THIS MESSAGE:${error}`);
+      }
     }
   };
 
   return (
-    <Paper elevation={0} className={`shadow ${classes.paper}`}>
-      <div className={classes.headTextContainer}>
-        <img className={classes.icon} src={bake} alt="bake-icon" />
-        <div className={`${classes.textContainer}`}>
-          <Typography className={classes.noteHeaderText} variant="h6">
-            Let&apos;s Cook!
-          </Typography>
-          <Typography className={classes.noteHeaderSubText} variant="subtitle2">
-            SHARE YOUR BELOVED RECIPES WITH EVERYONE
-          </Typography>
-        </div>
-      </div>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className={classes.form}
-        noValidate
-        autoComplete="off"
-      >
-        <TextField
-          className={`${classes.title} ${classes.textarea}`}
-          name="title"
-          id="title"
-          inputRef={register}
-          variant="filled"
-          placeholder="Title"
-        />
-        <TextField
-          className={`${classes.description} ${classes.textarea}`}
-          name="description"
-          id="description"
-          multiline
-          rows={4}
-          inputRef={register}
-          variant="filled"
-          placeholder="Description (Optional)"
-        />
-        <h3 style={{ textDecoration: "underline" }}>Ingredients</h3>
-        <div className={classes.ingredientContainer}>
-          <p className={classes.ingredientHeader}>
-            <span className={classes.ingredientHeaderText}>
-              Amount | Ingredient
-            </span>
-            <button
-              className={classes.plusMinusBttn}
-              type="button"
-              onClick={() => handleAddFields()}
-            >
-              +
-            </button>
-          </p>
-          {inputFields.map((inputField, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <div key={index} className={classes.ingredientGroup}>
-              <Fragment key={inputField}>
-                <div className={classes.empty}>
-                  <label htmlFor="volume">
-                    <input
-                      type="text"
-                      className={classes.amount}
-                      id="volume"
-                      name="volume"
-                      value={inputField.volume}
-                      onChange={(event) => handleInputChange(index, event)}
-                    />
-                  </label>
-                </div>
-                <div className={classes.growLine}>
-                  <label className={classes.labelGrow} htmlFor="ingredient">
-                    <input
-                      type="text"
-                      className={classes.ingredient}
-                      id="ingredient"
-                      name="ingredient"
-                      value={inputField.ingredient}
-                      onChange={(event) => handleInputChange(index, event)}
-                    />
-                  </label>
-                </div>
-
-                <div className={classes.empty}>
-                  <button
-                    className={classes.plusMinusBttn}
-                    type="button"
-                    onClick={() => handleRemoveFields(index)}
-                  >
-                    -
-                  </button>
-                </div>
-              </Fragment>
-            </div>
-          ))}
-        </div>
-        <TextField
-          className={`${classes.instructions} ${classes.textarea}`}
-          id="instructions"
-          name="instructions"
-          multiline
-          rows={8}
-          inputRef={register}
-          variant="filled"
-          placeholder="Instructions"
-        />
-        <div className={`shadow ${classes.linkContainer}`}>
-          <input
-            type="submit"
-            className={`${classes.submitBttn} buttonEffect`}
-            value="Generate &#x21E8;"
+    <>
+      <Paper elevation={0} className={`shadow ${classes.paper}`}>
+        <Typography className={classes.noteHeader} variant="subtitle2">
+          FILL OUT THE RECIPE TEMPLETE AND WE WILL DO THE REST{" "}
+          <span role="img" aria-label="chef-icon">
+            {" "}
+            👨‍🍳{" "}
+          </span>
+        </Typography>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className={classes.form}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            className={`${classes.title} ${classes.textarea}`}
+            name="title"
+            id="title"
+            inputRef={register({ required: true })}
+            variant="filled"
+            placeholder="Title"
           />
-          <Collapse in={checked} collapsedHeight={0}>
-            <AddedNote noteLink={noteLink} />
-          </Collapse>
-        </div>
-      </form>
-    </Paper>
+          {errors.title && (
+            <span className={classes.error}>
+              {console.log(errors)}Oops! looks like your forgot a title
+            </span>
+          )}
+          <TextField
+            className={`${classes.description} ${classes.textarea}`}
+            name="description"
+            id="description"
+            multiline
+            rows={4}
+            inputRef={register}
+            variant="filled"
+            placeholder="Description (Optional)"
+          />
+          <h3 style={{ textDecoration: "underline" }}>Ingredients</h3>
+          <div className={classes.ingredientContainer}>
+            <p className={classes.ingredientHeader}>
+              <span className={classes.ingredientHeaderText}>
+                Amount | Ingredient
+              </span>
+              <button
+                className={classes.plusMinusBttn}
+                type="button"
+                onClick={() => handleAddFields()}
+              >
+                +
+              </button>
+            </p>
+            {inputFields.map((inputField, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <div key={index} className={classes.ingredientGroup}>
+                <Fragment key={inputField}>
+                  <div className={classes.empty}>
+                    <label htmlFor="volume">
+                      <input
+                        type="text"
+                        className={classes.amount}
+                        id="volume"
+                        name="volume"
+                        value={inputField.volume}
+                        onChange={(event) => handleInputChange(index, event)}
+                      />
+                    </label>
+                  </div>
+                  <div className={classes.growLine}>
+                    <label className={classes.labelGrow} htmlFor="ingredient">
+                      <input
+                        type="text"
+                        className={classes.ingredient}
+                        id="ingredient"
+                        name="ingredient"
+                        value={inputField.ingredient}
+                        onChange={(event) => handleInputChange(index, event)}
+                      />
+                    </label>
+                  </div>
+
+                  <div className={classes.empty}>
+                    <button
+                      className={classes.plusMinusBttn}
+                      type="button"
+                      onClick={() => handleRemoveFields(index)}
+                    >
+                      -
+                    </button>
+                  </div>
+                </Fragment>
+              </div>
+            ))}
+          </div>
+          <TextField
+            className={`${classes.instructions} ${classes.textarea}`}
+            id="instructions"
+            name="instructions"
+            multiline
+            rows={8}
+            inputRef={register({ required: true })}
+            variant="filled"
+            placeholder="Instructions"
+          />
+          {errors.instructions && (
+            <span className={classes.error}>
+              {console.log(errors)}Instructions are required
+            </span>
+          )}
+          <div className={`shadow ${classes.linkContainer}`}>
+            <input
+              type="submit"
+              className="blue-button"
+              value="Generate &#x21E8;"
+            />
+            <Collapse in={checked} collapsedHeight={0}>
+              <AddedNote noteLink={noteLink} />
+            </Collapse>
+          </div>
+        </form>
+      </Paper>
+    </>
   );
 };
 

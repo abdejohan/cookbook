@@ -33,13 +33,13 @@ const useStyles = makeStyles(() => ({
     textTransform: "none",
   },
   black: {
-    padding: "20px",
+    padding: "10px",
     backgroundColor: "black",
     width: "100%",
-    height: "35px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+  },
+  blackText: {
+    fontWeight: "900",
+    fontSize: "1.1rem",
   },
   icon: {
     width: "50px",
@@ -60,7 +60,7 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
   const { userData, setUserData } = useContext(UserContext);
 
   const handleMenu = (event) => {
@@ -88,11 +88,11 @@ const Header = () => {
   return (
     <AppBar position="fixed" className={classes.AppBar}>
       <div className={classes.black}>
-        <Typography variant="body1">
-          Focus on the create side of cooking!
+        <Typography align="center" className={classes.blackText}>
+          SHARING IS CARING
         </Typography>
       </div>
-      <Toolbar>
+      <Toolbar className="Toolbar">
         <img
           src={frypan}
           className={`tilt-icon ${classes.icon}`}
@@ -133,7 +133,10 @@ const Header = () => {
                         handleMenuClick(`/profile/${userData.user.id}`)
                       }
                     >
-                      My Page
+                      Profile
+                    </MenuItem>
+                    <MenuItem onClick={() => handleMenuClick("/settings")}>
+                      Settings
                     </MenuItem>
                     <MenuItem onClick={() => logOut()}>Logout</MenuItem>
                   </div>
