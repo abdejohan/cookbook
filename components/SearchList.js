@@ -9,14 +9,25 @@ import Link from "next/link";
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
     display: "flex",
-    flexFlow: "row wrap",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    width: "100%",
-    padding: "20px",
+    flexFlow: "column nowrap",
+    justifyContent: "flex-start",
   },
   resultsContainer: {
-    padding: "20px",
+    paddingTop: "0px",
+    margin: "20px",
+    marginTop: "0px",
+  },
+  text: {
+    opacity: "0.4",
+    position: "relative",
+    top: "-10px",
+    left: "-20px",
+    fontSize: "1rem !important",
+  },
+  flexContainer: {
+    display: "flex",
+    flexFlow: "row wrap",
+    justifyContent: "flex-start",
   },
 }));
 
@@ -47,66 +58,69 @@ const SearchList = (props) => {
 
   return (
     <section className={classes.mainContainer}>
-      {searchResponseList.length > 0 ? (
-        <div className={classes.resultsContainer}>
-          <h4 className="sec-header">recipes</h4>
-          <ul>
-            {searchResponseList.map((searchResult) => {
-              return (
-                <li className="list-item" key={searchResult._id}>
-                  <Link
-                    href={{
-                      pathname: "/post",
-                      query: { postId: searchResult._id },
-                    }}
-                  >
-                    {searchResult.title}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      ) : (
-        <div>
-          <p className="plain-text">
-            No recipes found...{" "}
-            <span role="img" aria-label="sad smilie">
-              😞
-            </span>{" "}
-          </p>
-        </div>
-      )}
-      {userSearchResponseList.length > 0 ? (
-        <div className={classes.resultsContainer}>
-          <h4 className="sec-header">chefs</h4>
-          <ul>
-            {userSearchResponseList.map((searchResult) => {
-              return (
-                <li className="list-item" key={searchResult._id}>
-                  <Link
-                    href={{
-                      pathname: "/user",
-                      query: { searchedUserId: searchResult._id },
-                    }}
-                  >
-                    {searchResult.userName}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      ) : (
-        <div>
-          <p className="plain-text">
-            No users found...{" "}
-            <span role="img" aria-label="sad smilie">
-              😞
-            </span>{" "}
-          </p>
-        </div>
-      )}
+      <h6 className={`plain-text ${classes.text}`}>search results..</h6>
+      <div className={classes.flexContainer}>
+        {searchResponseList.length > 0 ? (
+          <div className={classes.resultsContainer}>
+            <h4 className="sec-header">recipes</h4>
+            <ul>
+              {searchResponseList.map((searchResult) => {
+                return (
+                  <li className="list-item" key={searchResult._id}>
+                    <Link
+                      href={{
+                        pathname: "/post",
+                        query: { postId: searchResult._id },
+                      }}
+                    >
+                      {searchResult.title}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ) : (
+          <div>
+            <p className="plain-text">
+              No recipes found...{" "}
+              <span role="img" aria-label="sad smilie">
+                😞
+              </span>{" "}
+            </p>
+          </div>
+        )}
+        {userSearchResponseList.length > 0 ? (
+          <div className={classes.resultsContainer}>
+            <h4 className="sec-header">chefs</h4>
+            <ul>
+              {userSearchResponseList.map((searchResult) => {
+                return (
+                  <li className="list-item" key={searchResult._id}>
+                    <Link
+                      href={{
+                        pathname: "/user",
+                        query: { searchedUserId: searchResult._id },
+                      }}
+                    >
+                      {searchResult.userName}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ) : (
+          <div>
+            <p className="plain-text">
+              No users found...{" "}
+              <span role="img" aria-label="sad smilie">
+                😞
+              </span>{" "}
+            </p>
+          </div>
+        )}
+      </div>
     </section>
   );
 };

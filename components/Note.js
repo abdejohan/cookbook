@@ -194,7 +194,7 @@ const Note = () => {
 
   return (
     <>
-      <Paper elevation={0} className={`shadow ${classes.paper}`}>
+      <Paper elevation={0} className={classes.paper}>
         <Typography className={classes.noteHeader} variant="subtitle2">
           FILL OUT THE RECIPE TEMPLETE AND WE WILL DO THE REST{" "}
           <span role="img" aria-label="chef-icon">

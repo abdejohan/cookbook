@@ -19,7 +19,6 @@ const useStyles = makeStyles(() => ({
     flexFlow: "column nowrap",
   },
   outerContainer: {
-    marginTop: "30px",
     padding: "20px",
     justifyContent: "space-between",
     alignItems: "flex-start",
@@ -72,11 +71,7 @@ const useStyles = makeStyles(() => ({
     alignSelf: "flex-end",
     marginLeft: "10px",
   },
-  about: {
-    alignSelf: "flex-end",
-    marginBottom: "0px !important",
-    fontSize: "2rem !important",
-  },
+  about: {},
   ul: {
     listStyleType: "none",
     padding: "0px 20px",
@@ -96,11 +91,11 @@ const useStyles = makeStyles(() => ({
     marginBottom: "10px",
   },
   buttonContainer: {
+    marginTop: "20px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     flexFlow: "row wrap",
-    margin: "20px",
   },
 }));
 
@@ -128,7 +123,7 @@ const User = (props) => {
   }, [loggedInUserId, searchedUserId]);
 
   return (
-    <Paper elevation={1} className={classes.paper}>
+    <Paper elevation={0} className={classes.paper}>
       <div className={classes.profileInfo}>
         <img
           className={classes.imageContainer}
@@ -147,30 +142,32 @@ const User = (props) => {
             <a href="https://www.youtube.com">youtube.com/StaceyCooks</a>
           </li>
         </ul>
-        {searchedUserId && userData.token && (
-          <div className={classes.buttonContainer}>
-            <button
-              className="alt-blue-button blue-button"
-              name="follow"
-              type="button"
-              onClick={() => {
-                console.log("followed!");
-              }}
-            >
-              Follow
-            </button>
-            <button
-              className="alt-blue-button blue-button"
-              name="library"
-              type="button"
-              onClick={() => {
-                console.log("recipes HERE!");
-              }}
-            >
-              Recipes
-            </button>
-          </div>
-        )}
+        {searchedUserId &&
+          userData.token &&
+          searchedUserId !== userData.user.id && (
+            <div className={classes.buttonContainer}>
+              <button
+                className="alt-blue-button blue-button"
+                name="follow"
+                type="button"
+                onClick={() => {
+                  console.log("followed!");
+                }}
+              >
+                Follow
+              </button>
+              <button
+                className="alt-blue-button blue-button"
+                name="library"
+                type="button"
+                onClick={() => {
+                  console.log("recipes HERE!");
+                }}
+              >
+                Recipes
+              </button>
+            </div>
+          )}
       </div>
       <div className={classes.outerContainer}>
         <article className={classes.article}>
