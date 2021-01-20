@@ -139,6 +139,11 @@ footer {
   background-color: transparent !important;
 }
 
+.MuiFormControl-root,
+.MuiTextField-root {
+  width: 100%;
+}
+
 @media (max-width: 600px) {
   .Toolbar {
     align-self: flex-end;

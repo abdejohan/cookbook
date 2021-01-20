@@ -14,14 +14,28 @@ const useStyles = makeStyles(() => ({
     padding: "20px",
     display: "flex",
     justifyContent: "center",
-    alignItem: "center",
+    alignItems: "center",
     flexFlow: "column nowrap",
+  },
+  form: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexFlow: "column nowrap",
+    marginTop: "50px",
+    marginBottom: "100px",
+  },
+  ul: {
+    width: "80%",
   },
   deleteBttn: {
     padding: "10px",
   },
   listItem: {
-    marginBottom: "20px",
+    marginBottom: "30px",
+    marginTop: "10px",
+    opacity: "0.7",
   },
 }));
 
@@ -30,6 +44,7 @@ const Settings = () => {
   const router = useRouter();
   const { handleSubmit, register } = useForm();
   const { userData, setUserData } = useContext(UserContext);
+  console.log(userData);
 
   const onSubmit = async (data) => {
     const dataSend = data;
@@ -42,7 +57,7 @@ const Settings = () => {
           "x-auth-token": userData.token,
         },
       });
-      // router.push(`/profile/${userData.user.id}`);
+      router.push(`/profile/${userData.user.id}`);
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);
     }
@@ -71,29 +86,16 @@ const Settings = () => {
   return (
     <Paper elevation={0} className={classes.paper}>
       <Typography className="page-header">Account settings</Typography>
-      <h6 className="sec-header">Delete Account</h6>
-      <p className="plain-text">
-        Your account and all your saved recipes will disapear
-      </p>
-      <button
-        type="button"
-        className={classes.deleteBttn}
-        onClick={() => {
-          DeleteUser();
-        }}
-      >
-        Delete
-      </button>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <ul>
+      <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+        <ul className={classes.ul}>
           <li className="sec-header">Change Username</li>
           <li className={`list-item ${classes.listItem}`}>
             <TextField
               name="userName"
               id="userName"
               inputRef={register}
-              variant="filled"
-              value={userData.user.userName}
+              variant="outlined"
+              defaultValue={userData.user.userName}
             />
           </li>
           <li className="sec-header">Change Profession</li>
@@ -102,8 +104,8 @@ const Settings = () => {
               name="Profession"
               id="Profession"
               inputRef={register}
-              variant="filled"
-              value={userData.user.profession}
+              variant="outlined"
+              defaultValue={userData.user.profession}
               rows={1}
             />
           </li>
@@ -113,16 +115,29 @@ const Settings = () => {
               name="about"
               id="about"
               inputRef={register}
-              variant="filled"
+              variant="outlined"
               multiline
               rows={4}
-              value={userData.user.about}
+              defaultValue={userData.user.about}
             />
           </li>
         </ul>
 
-        <input type="submit" />
+        <input type="submit" className="blue-button alt-blue-button" />
       </form>
+      <h6 className="sec-header">Delete Account</h6>
+      <p className="plain-text">
+        Your account and all your saved recipes will disappear
+      </p>
+      <button
+        type="button"
+        className="blue-button alt-blue-button"
+        onClick={() => {
+          DeleteUser();
+        }}
+      >
+        Delete
+      </button>
     </Paper>
   );
 };
