@@ -4,5 +4,5 @@ export default createContext({
   userData: {
     token: null,
     user: {},
-  }
+  },
 });

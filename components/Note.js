@@ -146,7 +146,6 @@ const Note = () => {
     const dataSend = data;
     dataSend.ingredients = inputFields;
     if (!userData.token) {
-      console.log("NO USER REGISTERED");
       dataSend.author = "temp";
       try {
         const addedPost = await axios.post(
