@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Typography, Paper } from "@material-ui/core";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,10 +6,8 @@ import { useForm } from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
 import UserContext from "../context/UserContext";
 
-// import Note from "../Note";
-
 const useStyles = makeStyles(() => ({
-  paper: {
+  section: {
     padding: "20px",
     display: "flex",
     justifyContent: "center",
@@ -47,7 +44,6 @@ const Settings = () => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    console.log("useEffect in settings");
     const fetchUser = async () => {
       try {
         const fetchedUser = await axios.get("http://localhost:5000/user/", {
@@ -100,8 +96,8 @@ const Settings = () => {
   };
 
   return (
-    <Paper elevation={0} className={classes.paper}>
-      <Typography className="page-header">Account settings</Typography>
+    <section className={classes.section}>
+      <h2 className="page-header">Account settings</h2>
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
         <ul className={classes.ul}>
           <li className="sec-header">Change Username</li>
@@ -155,7 +151,7 @@ const Settings = () => {
       >
         Delete
       </button>
-    </Paper>
+    </section>
   );
 };
 

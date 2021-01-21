@@ -9,11 +9,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/router";
-import Paper from "@material-ui/core/Paper";
 import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
+  section: {
     padding: "20px",
     borderRadius: "0px",
     display: "flex",
@@ -73,7 +72,7 @@ export default function SignIn() {
   };
 
   return (
-    <Paper elevation={0} className={`alignHeader ${classes.paper}`}>
+    <section className={`alignHeader ${classes.section}`}>
       <CssBaseline />
       <Typography className="page-header">Sign in</Typography>
       <form
@@ -130,6 +129,6 @@ export default function SignIn() {
         <Link href="/register">Forgot password?</Link>
         <Link href="/register">Dont have an account? Sign Up</Link>
       </form>
-    </Paper>
+    </section>
   );
 }

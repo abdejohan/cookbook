@@ -1,15 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import axios from "axios";
 import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles(() => ({
-  paper: {
+  section: {
     alignItems: "center",
     display: "flex",
     flexFlow: "column nowrap",
@@ -83,8 +81,8 @@ const Register = () => {
     }
   };
   return (
-    <Paper elevation={0} className={classes.paper}>
-      <Typography className="page-header">Register Account</Typography>
+    <section className={classes.section}>
+      <h2 className="page-header">Register Account</h2>
       <p className="plain-text">
         Register an account to keep your favorite recipes in one place forever
         and ever..{" "}
@@ -97,6 +95,7 @@ const Register = () => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         autoComplete="off"
+        aria-label="register account"
         className={classes.form}
       >
         <TextField
@@ -118,12 +117,12 @@ const Register = () => {
           <span className={classes.error}>Username is required</span>
         )}
         <div className={classes.roleContainer}>
-          <Typography
+          <h3
             style={{ paddingLeft: "0px", opacity: "0.7" }}
             className="plain-text"
           >
             Select a role (optional)
-          </Typography>
+          </h3>
           <select
             className={classes.selectContainer}
             name="role"
@@ -168,7 +167,7 @@ const Register = () => {
           value="Register"
         />
       </form>
-    </Paper>
+    </section>
   );
 };
 

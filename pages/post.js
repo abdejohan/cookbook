@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import { Typography } from "@material-ui/core";
 import PostButtons from "../components/PostButtons";
 
 const useStyles = makeStyles(() => ({
@@ -40,12 +39,12 @@ const Posts = () => {
   return (
     <section className={classes.postContainer}>
       <article>
-        <Typography className="page-header">{postData.title}</Typography>
-        <Typography>{postData.postOwner}</Typography>
-        <Typography className="page-sub-header">Description</Typography>
+        <h4 className="page-header">{postData.title}</h4>
+        <h4>{postData.postOwner}</h4>
+        <h4 className="page-sub-header">Description</h4>
         <p className="plain-text">{postData.description}</p>
-        <Typography className="page-sub-header">Ingredients</Typography>
-        <Typography className="page-sub-header">Instructions</Typography>
+        <h4 className="page-sub-header">Ingredients</h4>
+        <h4 className="page-sub-header">Instructions</h4>
         <p className="plain-text">{postData.instructions}</p>
       </article>
       {Object.entries(postData).length > 0 && (

@@ -8,7 +8,7 @@ import profile from "../public/profile.jpg";
 import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles(() => ({
-  paper: {
+  section: {
     padding: "20px",
     marginBottom: "20px",
     display: "flex",
@@ -123,7 +123,7 @@ const User = (props) => {
   }, [loggedInUserId, searchedUserId]);
 
   return (
-    <section className={classes.paper}>
+    <section className={classes.section}>
       <section className={classes.profileInfo}>
         <img
           className={classes.imageContainer}

@@ -18,11 +18,11 @@ const Admin = () => {
   }, [router, user]);
 
   return (
-    <div>
+    <section>
       <h2>Search for a user or post to delete it from the database</h2>
       <Search />
       <AdminList />
-    </div>
+    </section>
   );
 };
 
