@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
 import UserContext from "../context/UserContext";
 import Note from "./Note";
@@ -8,7 +7,6 @@ import Search from "./Search";
 import youtube from "../public/youtube.svg";
 import search from "../public/search.svg";
 import responsive from "../public/responsive.svg";
-// backgroundImage: `url(${mobileImage})`,
 
 const useStyles = makeStyles(() => ({
   contentContainer: {
@@ -76,36 +74,34 @@ const Home = () => {
       <Search />
       <section className={classes.contentContainer}>
         <article className={classes.textContainer}>
-          <Typography style={{ lineHeight: "43px" }} className="page-header">
+          <h1 style={{ lineHeight: "43px" }} className="page-header">
             YOU <span className="gradient-text">CREATE</span>, WE STORE!
-          </Typography>
-          <Typography className={classes.subText}>
-            YOUR OWN VIRTUAL COOKBOOK
-          </Typography>
-          <div className={classes.iconContainer}>
+          </h1>
+          <h4 className={classes.subText}>YOUR OWN VIRTUAL COOKBOOK</h4>
+          <section className={classes.iconContainer}>
             <div className={classes.iconRows}>
               <img
                 className={classes.icon}
                 src={responsive}
                 alt="folder-icon"
               />
-              <Typography className={classes.subText1} variant="body2">
+              <h3 className={classes.subText1}>
                 LIFE LONG STORAGE FOR YOUR RECIPE COLLECTIONS
-              </Typography>
+              </h3>
             </div>
             <div className={classes.iconRows}>
               <img className={classes.icon} src={youtube} alt="youtube-icon" />
-              <Typography className={classes.subText1} variant="body2">
+              <h3 className={classes.subText1}>
                 GET SHAREABLE LINK FOR YOUR PLATFORM
-              </Typography>
+              </h3>
             </div>
             <div className={classes.iconRows}>
               <img className={classes.icon} src={search} alt="folder-icon" />
-              <Typography className={classes.subText1} variant="body2">
+              <h3 className={classes.subText1}>
                 KEEP TRACK OF YOUR FAVORITE CHEFS
-              </Typography>
+              </h3>
             </div>
-          </div>
+          </section>
         </article>
         <Note />
       </section>

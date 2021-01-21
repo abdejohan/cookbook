@@ -5,7 +5,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { useRouter } from "next/router";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
@@ -88,9 +87,9 @@ const Header = () => {
   return (
     <AppBar position="fixed" className={classes.AppBar}>
       <div className={classes.black}>
-        <Typography align="center" className={classes.blackText}>
+        <h3 align="center" className={classes.blackText}>
           SHARING IS CARING
-        </Typography>
+        </h3>
       </div>
       <Toolbar className="Toolbar">
         <img
@@ -145,10 +144,10 @@ const Header = () => {
                     <MenuItem onClick={() => handleMenuClick("/login")}>
                       Login
                     </MenuItem>
-
                     <MenuItem onClick={() => handleMenuClick("/register")}>
                       Register
                     </MenuItem>
+                    h3
                   </div>
                 )}
               </Menu>

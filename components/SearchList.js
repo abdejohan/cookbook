@@ -58,7 +58,7 @@ const SearchList = (props) => {
 
   return (
     <section className={classes.mainContainer}>
-      <h6 className={`plain-text ${classes.text}`}>search results..</h6>
+      <h5 className={`plain-text ${classes.text}`}>search results..</h5>
       <div className={classes.flexContainer}>
         {searchResponseList.length > 0 ? (
           <div className={classes.resultsContainer}>

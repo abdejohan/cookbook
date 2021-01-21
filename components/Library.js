@@ -2,13 +2,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import Link from "next/link";
 import axios from "axios";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles(() => ({
-  paper: {
+  section: {
     marginTop: "20px",
     padding: "10px",
     alignItems: "flex-start",
@@ -66,10 +64,10 @@ const Library = () => {
 
   return (
     <>
-      <Paper elevation={0} className={classes.paper}>
-        <Typography variant="h6" className="page-sub-header">
+      <section className={classes.section}>
+        <h3 variant="h6" className="page-sub-header">
           Library
-        </Typography>
+        </h3>
         <div className={classes.innerContainer}>
           <h3 className={classes.h3}>MY RECIPES</h3>
           <ul className={classes.ul}>
@@ -90,7 +88,7 @@ const Library = () => {
             )}
           </ul>
         </div>
-        <div className={classes.innerContainer}>
+        <section className={classes.innerContainer}>
           <h3 className={classes.h3}>SAVED RECIPES</h3>
           <ul className={classes.ul}>
             {followPosts.length > 0 ? (
@@ -112,8 +110,8 @@ const Library = () => {
               <p className="plain-text">You dont follow any posts yet :/</p>
             )}
           </ul>
-        </div>
-      </Paper>
+        </section>
+      </section>
     </>
   );
 };
