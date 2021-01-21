@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Typography, Paper } from "@material-ui/core";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -44,8 +44,24 @@ const Settings = () => {
   const router = useRouter();
   const { handleSubmit, register } = useForm();
   const { userData, setUserData } = useContext(UserContext);
-  console.log(userData);
+  const [user, setUser] = useState({});
 
+  useEffect(() => {
+    console.log("useEffect in settings");
+    const fetchUser = async () => {
+      try {
+        const fetchedUser = await axios.get("http://localhost:5000/user/", {
+          headers: {
+            "x-auth-token": userData.token,
+          },
+        });
+        setUser(fetchedUser.data);
+      } catch (error) {
+        console.log(`THIS MESSAGE:${error}`);
+      }
+    };
+    fetchUser();
+  }, [userData.token]);
   const onSubmit = async (data) => {
     const dataSend = data;
     Object.keys(dataSend).forEach(
@@ -91,21 +107,23 @@ const Settings = () => {
           <li className="sec-header">Change Username</li>
           <li className={`list-item ${classes.listItem}`}>
             <TextField
-              name="userName"
-              id="userName"
+              name="username"
+              id="username"
               inputRef={register}
               variant="outlined"
-              defaultValue={userData.user.userName}
+              multiline
+              defaultValue={user.userName}
             />
           </li>
           <li className="sec-header">Change Profession</li>
           <li className={`list-item ${classes.listItem}`}>
             <TextField
-              name="Profession"
-              id="Profession"
+              name="profession"
+              id="profession"
               inputRef={register}
               variant="outlined"
-              defaultValue={userData.user.profession}
+              multiline
+              defaultValue={user.profession}
               rows={1}
             />
           </li>
@@ -116,9 +134,9 @@ const Settings = () => {
               id="about"
               inputRef={register}
               variant="outlined"
+              defaultValue={user.about}
               multiline
               rows={4}
-              defaultValue={userData.user.about}
             />
           </li>
         </ul>
