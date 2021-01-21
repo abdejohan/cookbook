@@ -124,7 +124,6 @@ const Settings = () => {
               variant="outlined"
               multiline
               defaultValue={user.profession}
-              rows={1}
             />
           </li>
           <li className="sec-header">Change About</li>

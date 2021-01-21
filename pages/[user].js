@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRouter } from "next/router";
-import Paper from "@material-ui/core/Paper";
 import axios from "axios";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import profile from "../public/profile.jpg";
