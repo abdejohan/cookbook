@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -12,7 +11,6 @@ import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
   section: {
-    borderRadius: "0px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -62,7 +60,9 @@ export default function SignIn() {
       if (loginRes.data.user.role === "admin") {
         router.push("/admin");
       } else {
-        router.push(`/profile/${loginRes.data.user.id}`);
+        // eslint-disable-next-line no-underscore-dangle
+        router.push(`/profile/${loginRes.data.user._id}`);
+        console.log(loginRes.data);
       }
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);
@@ -71,7 +71,6 @@ export default function SignIn() {
 
   return (
     <section className={`alignHeader ${classes.section}`}>
-      <CssBaseline />
       <h2 className="page-header">Sign in</h2>
       <form
         className={classes.form}
