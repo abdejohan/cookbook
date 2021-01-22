@@ -31,11 +31,7 @@ const App = () => {
     checkLoggedIn();
   }, [setUserData]);
 
-  return (
-    <>
-      <Home />
-    </>
-  );
+  return <Home />;
 };
 
 export default App;

@@ -7,7 +7,7 @@ import User from "../[user]";
 const Profile = () => {
   const { userData } = useContext(UserContext);
   const router = useRouter();
-  const { id } = userData.user;
+  const { profile } = router.query;
 
   useEffect(() => {
     if (userData.user) {
@@ -21,7 +21,7 @@ const Profile = () => {
     <>
       {userData.token ? (
         <>
-          <User loggedInUserId={id} />
+          <User loggedInUserId={profile} />
           <Library />
         </>
       ) : (

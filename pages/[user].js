@@ -8,7 +8,7 @@ import profile from "../public/profile.jpg";
 import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles(() => ({
-  paper: {
+  section: {
     padding: "20px",
     marginBottom: "20px",
     display: "flex",
@@ -45,11 +45,14 @@ const useStyles = makeStyles(() => ({
     borderRadius: "5px",
   },
   imageContainer: {
-    display: "block",
+    display: "flex",
     borderRadius: "50%",
-    height: "300px",
-    width: "300px",
-    backgroundColor: "red",
+    height: "200px",
+    width: "200px",
+    backgroundColor: "darkgrey",
+    padding: "5px",
+    marginBottom: "30px",
+    marginTop: "30px",
   },
   userName: {
     fontSize: "3rem",
@@ -87,6 +90,7 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
     alignItems: "center",
     flexFlow: "row wrap",
+    width: "100%",
   },
   chef: {
     marginBottom: "-20px",
@@ -115,6 +119,7 @@ const User = (props) => {
           `http://localhost:5000/user/${loggedInUserId || searchedUserId}`
         );
         setUser(fetchedUser.data);
+        console.log(fetchedUser.data);
       } catch (error) {
         console.log(`THIS MESSAGE:${error}`);
       }
@@ -123,7 +128,7 @@ const User = (props) => {
   }, [loggedInUserId, searchedUserId]);
 
   return (
-    <section className={classes.paper}>
+    <section className={classes.section}>
       <section className={classes.profileInfo}>
         <img
           className={classes.imageContainer}
@@ -145,6 +150,20 @@ const User = (props) => {
             <a href="https://www.youtube.com">youtube.com/</a>
           </li>
         </ul>
+        {!userData.token && (
+          <div className={classes.buttonContainer}>
+            <button
+              className="alt-blue-button blue-button"
+              name="library"
+              type="button"
+              onClick={() => {
+                console.log("recipes HERE!");
+              }}
+            >
+              Recipes
+            </button>
+          </div>
+        )}
         {searchedUserId &&
           userData.token &&
           searchedUserId !== userData.user.id && (
@@ -175,7 +194,7 @@ const User = (props) => {
       <section className={classes.outerContainer}>
         <article className={classes.article}>
           <h4 className={`page-header ${classes.about}`}>About</h4>
-          <p className="plain-text">{userData.user.about}</p>
+          <p className="plain-text">{user.about}</p>
         </article>
         <div className={classes.innerContainer}>
           <h2 className={classes.headerText}>Account</h2>

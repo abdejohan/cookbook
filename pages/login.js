@@ -1,21 +1,16 @@
 import React, { useContext } from "react";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "next/link";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/router";
-import Paper from "@material-ui/core/Paper";
 import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    padding: "20px",
-    borderRadius: "0px",
+  section: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -65,7 +60,9 @@ export default function SignIn() {
       if (loginRes.data.user.role === "admin") {
         router.push("/admin");
       } else {
-        router.push(`/profile/${loginRes.data.user.id}`);
+        // eslint-disable-next-line no-underscore-dangle
+        router.push(`/profile/${loginRes.data.user._id}`);
+        console.log(loginRes.data);
       }
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);
@@ -73,9 +70,8 @@ export default function SignIn() {
   };
 
   return (
-    <Paper elevation={0} className={`alignHeader ${classes.paper}`}>
-      <CssBaseline />
-      <Typography className="page-header">Sign in</Typography>
+    <section className={`alignHeader ${classes.section}`}>
+      <h2 className="page-header">Sign in</h2>
       <form
         className={classes.form}
         noValidate
@@ -130,6 +126,6 @@ export default function SignIn() {
         <Link href="/register">Forgot password?</Link>
         <Link href="/register">Dont have an account? Sign Up</Link>
       </form>
-    </Paper>
+    </section>
   );
 }

@@ -31,14 +31,14 @@ const AddedNote = (props) => {
   const { userData } = useContext(UserContext);
 
   return (
-    <div className={classes.collapseContainer}>
-      <h3 style={{ paddingBottom: "10px" }}>
+    <section className={classes.collapseContainer}>
+      <h4 style={{ paddingBottom: "10px" }}>
         Success!{" "}
         <span role="img" aria-label="star">
           ⭐
         </span>{" "}
         Here is your Link:
-      </h3>
+      </h4>
       <span className="noteLink">http://localhost:3000/posts/{noteLink}</span>
       <button className={`buttonEffect ${classes.plusMinusBttn}`} type="button">
         Copy to clipboard
@@ -51,7 +51,7 @@ const AddedNote = (props) => {
           long as you like :)
         </p>
       )}
-    </div>
+    </section>
   );
 };
 

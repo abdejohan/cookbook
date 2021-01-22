@@ -3,9 +3,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
 import Collapse from "@material-ui/core/Collapse";
-import { Typography } from "@material-ui/core";
 import UserContext from "../context/UserContext";
 import AddedNote from "./AddedNote";
 
@@ -13,7 +11,7 @@ import AddedNote from "./AddedNote";
 
 const useStyles = makeStyles(() => ({
   empty: {},
-  paper: {
+  section: {
     width: "100%",
     maxWidth: "700px",
     flexGrow: "2",
@@ -193,18 +191,19 @@ const Note = () => {
 
   return (
     <>
-      <Paper elevation={0} className={classes.paper}>
-        <Typography className={classes.noteHeader} variant="subtitle2">
+      <section className={classes.section}>
+        <h3 className={classes.noteHeader}>
           FILL OUT THE RECIPE TEMPLETE AND WE WILL DO THE REST{" "}
           <span role="img" aria-label="chef-icon">
             {" "}
             👨‍🍳{" "}
           </span>
-        </Typography>
+        </h3>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className={classes.form}
           noValidate
+          aria-label="Add recipe"
           autoComplete="off"
         >
           <TextField
@@ -312,7 +311,7 @@ const Note = () => {
             </Collapse>
           </div>
         </form>
-      </Paper>
+      </section>
     </>
   );
 };
