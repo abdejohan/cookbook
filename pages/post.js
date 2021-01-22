@@ -7,15 +7,24 @@ import PostButtons from "../components/PostButtons";
 
 const useStyles = makeStyles(() => ({
   postContainer: {
-    maxWidth: "800px",
+    maxWidth: "600px",
     display: "flex",
     width: "100%",
     flexFlow: "column nowrap",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  article: {
+    width: "100%",
+  },
+  ul: {
+    padding: "5px",
   },
 }));
 
 const Posts = () => {
   const [postData, setPostData] = useState({});
+  const [ingredients, setIngredients] = useState([]);
   const classes = useStyles();
   const router = useRouter();
   const { postId } = router.query;
@@ -28,6 +37,7 @@ const Posts = () => {
             `http://localhost:5000/posts/${postId}`
           );
           setPostData(fetchedPost.data);
+          setIngredients(fetchedPost.data.ingredients);
         } catch (error) {
           console.log(`THIS MESSAGE:${error}`);
         }
@@ -38,13 +48,22 @@ const Posts = () => {
 
   return (
     <section className={classes.postContainer}>
-      <article>
-        <h4 className="page-header">{postData.title}</h4>
+      <h4 className="page-header">{postData.title}</h4>
+      <article className={classes.article}>
         <h4>{postData.postOwner}</h4>
-        <h4 className="page-sub-header">Description</h4>
+        <h4 className="sec-header">Description</h4>
         <p className="plain-text">{postData.description}</p>
-        <h4 className="page-sub-header">Ingredients</h4>
-        <h4 className="page-sub-header">Instructions</h4>
+        <h4 className="sec-header">Ingredients</h4>
+        <ol className={classes.ul}>
+          {ingredients.map((ingredient) => {
+            return (
+              <li className="list-item" key={ingredient}>
+                {ingredient}
+              </li>
+            );
+          })}
+        </ol>
+        <h4 className="sec-header">Instructions</h4>
         <p className="plain-text">{postData.instructions}</p>
       </article>
       {Object.entries(postData).length > 0 && (
