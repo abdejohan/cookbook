@@ -125,6 +125,7 @@ const Header = () => {
                 onClose={() => setAnchorEl(null)}
               >
                 <MenuItem onClick={() => handleMenuClick("/")}>Home</MenuItem>
+
                 {userData.user ? (
                   <div>
                     <MenuItem
@@ -137,6 +138,9 @@ const Header = () => {
                     <MenuItem onClick={() => handleMenuClick("/settings")}>
                       Settings
                     </MenuItem>
+                    <MenuItem onClick={() => handleMenuClick("/about")}>
+                      About Us
+                    </MenuItem>
                     <MenuItem onClick={() => logOut()}>Logout</MenuItem>
                   </div>
                 ) : (
@@ -147,7 +151,9 @@ const Header = () => {
                     <MenuItem onClick={() => handleMenuClick("/register")}>
                       Register
                     </MenuItem>
-                    h3
+                    <MenuItem onClick={() => handleMenuClick("/about")}>
+                      About Us
+                    </MenuItem>
                   </div>
                 )}
               </Menu>
@@ -162,6 +168,7 @@ const Header = () => {
                   >
                     Home
                   </Button>
+
                   <Button
                     className={classes.menuButton}
                     onClick={() =>
@@ -175,6 +182,12 @@ const Header = () => {
                     onClick={() => handleMenuClick("/settings")}
                   >
                     Settings
+                  </Button>
+                  <Button
+                    className={classes.menuButton}
+                    onClick={() => handleMenuClick("/about")}
+                  >
+                    About Us
                   </Button>
                   <Button
                     className={`${classes.menuButton} ${classes.loginBttn}`}
@@ -193,15 +206,15 @@ const Header = () => {
                   </Button>
                   <Button
                     className={classes.menuButton}
-                    onClick={() => handleMenuClick("/about")}
-                  >
-                    About Us
-                  </Button>
-                  <Button
-                    className={classes.menuButton}
                     onClick={() => handleMenuClick("/register")}
                   >
                     Register
+                  </Button>
+                  <Button
+                    className={classes.menuButton}
+                    onClick={() => handleMenuClick("/about")}
+                  >
+                    About Us
                   </Button>
                   <Button
                     className={`${classes.menuButton} + ${classes.loginBttn}`}
