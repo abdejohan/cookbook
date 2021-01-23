@@ -77,7 +77,7 @@ const PostButtons = (props) => {
       )}
       {!userData.token && (
         <button className="blue-button alt-blue-button" type="button">
-          ClipBoard <FileCopyIcon color="action" />
+          Clipboard <FileCopyIcon color="action" />
         </button>
       )}
     </div>

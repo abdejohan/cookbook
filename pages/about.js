@@ -8,9 +8,10 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
     alignItems: "center",
     flexFlow: "column nowrap",
+    padding: "10px",
   },
   header: {
-    marginBottom: "50px",
+    marginBottom: "30px",
   },
   orange: {
     color: "orange",

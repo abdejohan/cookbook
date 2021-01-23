@@ -10,6 +10,7 @@ import responsive from "../public/responsive.svg";
 
 const useStyles = makeStyles(() => ({
   contentContainer: {
+    padding: "10px",
     display: "flex",
     flexFlow: "column nowrap",
     justifyContent: "center",
@@ -20,6 +21,9 @@ const useStyles = makeStyles(() => ({
   },
   textContainer: {
     marginBottom: "50px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   subText: {
     textAlign: "center",
@@ -27,7 +31,6 @@ const useStyles = makeStyles(() => ({
     fontWeight: "600",
     color: "#666666",
     lineHeight: "1.6",
-    marginLeft: "10px",
   },
   subText1: {
     fontSize: "1.2rem",
