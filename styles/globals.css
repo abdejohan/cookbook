@@ -66,7 +66,7 @@ footer {
 
 .sec-header {
   font-family: "Poppins", sans-serif !important;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 800;
 }
 
@@ -74,21 +74,14 @@ footer {
   font-family: "Chango", cursive !important;
   color: #54494b !important;
   font-weight: 900 !important;
-  letter-spacing: -5px !important;
-  font-size: 3rem !important;
-}
-
-.page-sub-header {
-  font-family: "Chango", cursive !important;
-  width: 100% !important;
-  border-bottom: 8px groove #b33951 !important;
   letter-spacing: -3px !important;
-  font-size: 2rem !important;
-  opacity: 0.5 !important;
+  font-size: 2.3rem !important;
 }
 
-/**
-**/
+.alignLeft {
+  margin: 5px 0px;
+  align-self: flex-start;
+}
 
 .login-bttn {
   color: white;
@@ -112,7 +105,6 @@ footer {
   margin-top: 110px;
   height: auto;
   background-color: white;
-  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;

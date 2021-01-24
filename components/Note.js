@@ -63,7 +63,6 @@ const useStyles = makeStyles(() => ({
     flexGrow: 2,
   },
   form: {
-    padding: "10px",
     width: "100%",
   },
   textarea: {

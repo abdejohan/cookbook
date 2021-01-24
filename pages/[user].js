@@ -119,7 +119,6 @@ const User = (props) => {
           `http://localhost:5000/user/${loggedInUserId || searchedUserId}`
         );
         setUser(fetchedUser.data);
-        console.log(fetchedUser.data);
       } catch (error) {
         console.log(`THIS MESSAGE:${error}`);
       }

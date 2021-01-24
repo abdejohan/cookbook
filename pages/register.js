@@ -12,12 +12,12 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexFlow: "column nowrap",
     justifyContent: "flex-start",
+    padding: "20px",
   },
   form: {
     marginTop: "30px",
     maxWidth: "650px",
     width: "100%",
-    flexGrow: "2",
     display: "flex",
     flexFlow: "column nowrap",
     justifyContent: "center",
@@ -39,8 +39,9 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
   },
   selectContainer: {
+    opacity: "0.7",
     fontSize: "1rem",
-    borderLeft: "2px solid lightgrey",
+    width: "100%",
     backgroundColor: "white",
     border: "0px solid transparent",
   },
@@ -117,19 +118,12 @@ const Register = () => {
           <span className={classes.error}>Username is required</span>
         )}
         <div className={classes.roleContainer}>
-          <h3
-            style={{ paddingLeft: "0px", opacity: "0.7" }}
-            className="plain-text"
-          >
-            Select a role (optional)
-          </h3>
           <select
             className={classes.selectContainer}
             name="role"
             ref={register}
           >
-            <option value="none">-</option>
-            <option value="Normal user">Normal user</option>
+            <option value="none">Role (optional)</option>
             <option value="Content Creator">Content Creator</option>
             <option value="Sponsor">Sponsor</option>
             <option value="Admin" disabled>

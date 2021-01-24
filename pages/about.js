@@ -3,15 +3,15 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
   article: {
-    marginTop: "20px",
     maxWidth: "500px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     flexFlow: "column nowrap",
+    padding: "10px",
   },
   header: {
-    marginBottom: "50px",
+    marginBottom: "30px",
   },
   orange: {
     color: "orange",
