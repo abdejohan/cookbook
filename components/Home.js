@@ -23,7 +23,8 @@ const useStyles = makeStyles(() => ({
     marginBottom: "50px",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-start",
+    flexFlow: "column nowrap",
   },
   subText: {
     textAlign: "center",
@@ -39,6 +40,7 @@ const useStyles = makeStyles(() => ({
     lineHeight: "1.6",
   },
   iconContainer: {
+    width: "100%",
     marginTop: "30px",
     display: "flex",
     justifyContent: "center",

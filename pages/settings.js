@@ -8,7 +8,7 @@ import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles(() => ({
   section: {
-    padding: "20px",
+    padding: "10px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -23,16 +23,8 @@ const useStyles = makeStyles(() => ({
     marginTop: "50px",
     marginBottom: "100px",
   },
-  ul: {
-    width: "80%",
-  },
   deleteBttn: {
     padding: "10px",
-  },
-  listItem: {
-    marginBottom: "30px",
-    marginTop: "10px",
-    opacity: "0.7",
   },
 }));
 
@@ -58,6 +50,7 @@ const Settings = () => {
     };
     fetchUser();
   }, [userData.token]);
+
   const onSubmit = async (data) => {
     const dataSend = data;
     Object.keys(dataSend).forEach(
@@ -99,44 +92,39 @@ const Settings = () => {
     <section className={classes.section}>
       <h2 className="page-header">Account settings</h2>
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-        <ul className={classes.ul}>
-          <li className="sec-header">Change Username</li>
-          <li className={`list-item ${classes.listItem}`}>
-            <TextField
-              name="username"
-              id="username"
-              inputRef={register}
-              variant="outlined"
-              multiline
-              defaultValue={user.userName}
-            />
-          </li>
-          <li className="sec-header">Change Profession</li>
-          <li className={`list-item ${classes.listItem}`}>
-            <TextField
-              name="profession"
-              id="profession"
-              inputRef={register}
-              variant="outlined"
-              multiline
-              defaultValue={user.profession}
-            />
-          </li>
-          <li className="sec-header">Change About</li>
-          <li className={`list-item ${classes.listItem}`}>
-            <TextField
-              name="about"
-              id="about"
-              inputRef={register}
-              variant="outlined"
-              defaultValue={user.about}
-              multiline
-              rows={4}
-            />
-          </li>
-        </ul>
-
-        <input type="submit" className="blue-button alt-blue-button" />
+        <h3 className="sec-header alignLeft">Change username</h3>
+        <TextField
+          name="username"
+          id="username"
+          inputRef={register}
+          variant="outlined"
+          multiline
+          defaultValue={user.userName}
+        />
+        <h3 className="sec-header alignLeft">Change profession</h3>
+        <TextField
+          name="profession"
+          id="profession"
+          inputRef={register}
+          variant="outlined"
+          multiline
+          defaultValue={user.profession}
+        />
+        <h3 className="sec-header alignLeft">Change about</h3>
+        <TextField
+          name="about"
+          id="about"
+          inputRef={register}
+          variant="outlined"
+          defaultValue={user.about}
+          multiline
+          rows={4}
+        />
+        <input
+          type="submit"
+          value="Change"
+          className="blue-button alt-blue-button"
+        />
       </form>
       <h6 className="sec-header">Delete Account</h6>
       <p className="plain-text">
