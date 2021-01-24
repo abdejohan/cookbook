@@ -12,15 +12,16 @@ const useStyles = makeStyles(() => ({
     alignItems: "flex-start",
     display: "flex",
     flexFlow: "row wrap",
-    justifyContent: "space-around",
-    maxWidth: "1200px",
+    justifyContent: "flex-start",
+    maxWidth: "650px",
     width: "100%",
   },
   innerContainer: {
     display: "flex",
+    margin: "10px",
     flexFlow: "column nowrap",
     alignItems: "flex-start",
-    width: "50%",
+    maxWidth: "300px",
   },
   ul: {
     listStyleType: "none",
@@ -40,6 +41,8 @@ const Library = () => {
   const [posts, setPosts] = useState([]);
   // eslint-disable-next-line no-unused-vars
   const [followPosts, setFollowPosts] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  const [followUser, setFollowuser] = useState([]);
   const { userData } = useContext(UserContext);
   const classes = useStyles();
 
@@ -65,10 +68,8 @@ const Library = () => {
   return (
     <>
       <section className={classes.section}>
-        <h3 variant="h6" className="page-sub-header">
-          Library
-        </h3>
-        <div className={classes.innerContainer}>
+        <h3 className="sec-page-header">Library</h3>
+        <section className={classes.innerContainer}>
           <h3 className={classes.h3}>MY RECIPES</h3>
           <ul className={classes.ul}>
             {posts.length > 0 ? (
@@ -87,7 +88,7 @@ const Library = () => {
               <p className="plain-text">You dont have any posts yet :/</p>
             )}
           </ul>
-        </div>
+        </section>
         <section className={classes.innerContainer}>
           <h3 className={classes.h3}>SAVED RECIPES</h3>
           <ul className={classes.ul}>
@@ -110,6 +111,27 @@ const Library = () => {
               <p className="plain-text">You dont follow any posts yet :/</p>
             )}
           </ul>
+        </section>
+        <section className={classes.innerContainer}>
+          <h3 className={classes.h3}>FOLLOWS</h3>
+          {followUser.length > 0 ? (
+            followUser.map((user) => {
+              return (
+                <li className={classes.li} key={user._id}>
+                  <Link
+                    href={{
+                      pathname: "/user",
+                      query: { postId: user._id },
+                    }}
+                  >
+                    {user.title}
+                  </Link>
+                </li>
+              );
+            })
+          ) : (
+            <p className="plain-text">You dont follow any other users yet :/</p>
+          )}
         </section>
       </section>
     </>

@@ -4,33 +4,32 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useRouter } from "next/router";
 import axios from "axios";
 import YouTubeIcon from "@material-ui/icons/YouTube";
-import profile from "../public/profile.jpg";
+import chef from "../public/chef.svg";
 import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles(() => ({
   section: {
-    padding: "20px",
-    marginBottom: "20px",
+    margin: "20px 0px",
     display: "flex",
     justifyContent: "flex-start",
     alignItems: "flex-end",
     flexFlow: "column nowrap",
+    maxWidth: "650px",
+    width: "100%",
   },
   outerContainer: {
-    padding: "20px",
+    width: "100%",
     justifyContent: "space-between",
     alignItems: "flex-start",
     display: "flex",
     flexWrap: "wrap",
     flexDirection: "row-reverse",
-    maxWidth: "800px",
   },
   profileInfo: {
     width: "100%",
     display: "flex",
     justifyContent: "space-evenly",
     flexFlow: "row wrap",
-    padding: "20px",
   },
   innerContainer: {
     padding: "20px",
@@ -39,10 +38,8 @@ const useStyles = makeStyles(() => ({
     flexFlow: "column nowrap",
   },
   article: {
-    padding: "20px",
     width: "100%",
-    border: "1px solid lightgrey",
-    borderRadius: "5px",
+    padding: "10px",
   },
   imageContainer: {
     display: "flex",
@@ -55,7 +52,10 @@ const useStyles = makeStyles(() => ({
     marginTop: "30px",
   },
   userName: {
-    fontSize: "3rem",
+    opacity: "0.6",
+    color: "orange",
+    fontSize: "2.5rem",
+    fontStyle: "italic",
     letterSpacing: "-3px",
     width: "200px",
   },
@@ -74,14 +74,14 @@ const useStyles = makeStyles(() => ({
   imgText: {
     fontWeight: "700",
     opacity: "0.8",
-    fontSize: "1.4rem",
+    fontSize: "1.2rem",
   },
   imgValue: {
     display: "flex",
     alignItems: "center",
     opacity: "0.7",
     fontWeight: "300",
-    fontSize: "1rem",
+    fontSize: "0.8rem",
     marginBottom: "10px",
   },
   buttonContainer: {
@@ -93,13 +93,20 @@ const useStyles = makeStyles(() => ({
     width: "100%",
   },
   chef: {
-    marginBottom: "-20px",
+    marginBottom: "-15px",
     paddingLeft: "5px",
+    fontWeight: "800",
   },
   about: {
     width: "100%",
     lineHeight: "1em",
     marginBottom: "10px",
+  },
+  ul: {
+    display: "flex",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    flexFlow: "column nowrap",
   },
 }));
 
@@ -129,12 +136,8 @@ const User = (props) => {
   return (
     <section className={classes.section}>
       <section className={classes.profileInfo}>
-        <img
-          className={classes.imageContainer}
-          src={profile}
-          alt="user profile"
-        />
-        <ul>
+        <img className={classes.imageContainer} src={chef} alt="user profile" />
+        <ul className={classes.ul}>
           <li className={`${classes.imgValue} ${classes.chef}`}>Chef</li>
           <li className={classes.userName}>{user.userName}</li>
           <li className={classes.imgText}>Profession</li>
@@ -192,7 +195,7 @@ const User = (props) => {
       </section>
       <section className={classes.outerContainer}>
         <article className={classes.article}>
-          <h4 className={`page-header ${classes.about}`}>About</h4>
+          <h4 className={`sec-page-header ${classes.about}`}>About</h4>
           <p className="plain-text">{user.about}</p>
         </article>
         <div className={classes.innerContainer}>
