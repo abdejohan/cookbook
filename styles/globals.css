@@ -71,11 +71,24 @@ footer {
 }
 
 .page-header {
+  width: 100%;
   font-family: "Chango", cursive !important;
   color: #54494b !important;
   font-weight: 900 !important;
   letter-spacing: -3px !important;
   font-size: 2.3rem !important;
+}
+
+.sec-page-header {
+  width: 100%;
+  font-family: "Chango", cursive !important;
+  color: #54494b !important;
+  font-weight: 700 !important;
+  letter-spacing: -1px !important;
+  font-size: 1.7rem !important;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .alignLeft {
