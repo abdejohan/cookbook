@@ -146,7 +146,7 @@ const Note = () => {
       dataSend.author = "temp";
       try {
         const addedPost = await axios.post(
-          "http://localhost:5000/posts/no-user",
+          "https://cookbook-db.herokuapp.com/posts/no-user",
           dataSend,
           {
             headers: {
@@ -167,7 +167,7 @@ const Note = () => {
       dataSend.userId = userData.user.id;
       try {
         const addedPost = await axios.post(
-          "http://localhost:5000/posts",
+          "https://cookbook-db.herokuapp.com/posts",
           dataSend,
           {
             headers: {

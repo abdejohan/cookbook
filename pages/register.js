@@ -66,11 +66,14 @@ const Register = () => {
   const onSubmit = async (data) => {
     const { email, password } = data;
     try {
-      await axios.post("http://localhost:5000/user/register", data);
-      const loginRes = await axios.post("http://localhost:5000/user/login", {
-        email,
-        password,
-      });
+      await axios.post("https://cookbook-db.herokuapp.com/user/register", data);
+      const loginRes = await axios.post(
+        "https://cookbook-db.herokuapp.com/user/login",
+        {
+          email,
+          password,
+        }
+      );
       setUserData({
         token: loginRes.data.token,
         user: loginRes.data.user,

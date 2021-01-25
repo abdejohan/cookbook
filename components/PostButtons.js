@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core/styles";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import UserContext from "../context/UserContext";
@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
 const PostButtons = (props) => {
   const { postData } = props;
   const classes = useStyles();
-  const history = useHistory();
+  const router = useRouter();
   const { userData } = useContext(UserContext);
   const [userId, setUserId] = useState(0);
 
@@ -34,13 +34,15 @@ const PostButtons = (props) => {
 
   async function DeletePost() {
     try {
-      await axios.delete(`http://localhost:5000/posts/${postData._id}`, {
-        headers: {
-          "x-auth-token": userData.token,
-        },
-      });
-      history.push("/profile/library");
-      console.log("post deleted");
+      await axios.delete(
+        `https://cookbook-db.herokuapp.com/posts/${postData._id}`,
+        {
+          headers: {
+            "x-auth-token": userData.token,
+          },
+        }
+      );
+      router.push("/profile/library");
     } catch (error) {
       console.log(`THIS MESSAGE:${error}`);
     }

@@ -17,14 +17,17 @@ const App = () => {
         token = "";
       }
       const tokenRes = await axios.post(
-        "http://localhost:5000/user/tokenIsValid",
+        "https://cookbook-db.herokuapp.com/user/tokenIsValid",
         null,
         { headers: { "x-auth-token": token } }
       );
       if (tokenRes.data) {
-        const userRes = await axios.get("http://localhost:5000/user/", {
-          headers: { "x-auth-token": token },
-        });
+        const userRes = await axios.get(
+          "https://cookbook-db.herokuapp.com/user/",
+          {
+            headers: { "x-auth-token": token },
+          }
+        );
         setUserData({ token, user: userRes.data });
       }
     };

@@ -49,7 +49,7 @@ export default function SignIn() {
     const loginUser = { email, password };
     try {
       const loginRes = await axios.post(
-        "http://localhost:5000/user/login",
+        "https://cookbook-db.herokuapp.com/user/login",
         loginUser
       );
       setUserData({

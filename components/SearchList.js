@@ -41,10 +41,10 @@ const SearchList = (props) => {
     const getSearchResults = async () => {
       try {
         const searchRequest = await axios.get(
-          `http://localhost:5000/search?term=${searchInput}`
+          `https://cookbook-db.herokuapp.com/search?term=${searchInput}`
         );
         const userSearchRequest = await axios.get(
-          `http://localhost:5000/search/user?term=${searchInput}`
+          `https://cookbook-db.herokuapp.com/search/user?term=${searchInput}`
         );
         console.log(userSearchRequest);
         setSearchResponseList(searchRequest.data);
