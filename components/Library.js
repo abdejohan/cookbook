@@ -50,7 +50,7 @@ const Library = () => {
     async function userPosts() {
       try {
         const allUserPosts = await axios.get(
-          `http://localhost:5000/posts/all`,
+          `https://cookbook-db.herokuapp.com/posts/all`,
           {
             headers: {
               userId: userData.user.id,

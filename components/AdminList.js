@@ -21,11 +21,11 @@ const AdminList = (props) => {
     const getSearchResults = async () => {
       try {
         const searchRequest = await axios.get(
-          `http://localhost:5000/search?term=${searchInput}`
+          `https://cookbook-db.herokuapp.com/search?term=${searchInput}`
         );
 
         const userSearchRequest = await axios.get(
-          `http://localhost:5000/search/user?term=${searchInput}`
+          `https://cookbook-db.herokuapp.com/user?term=${searchInput}`
         );
 
         setSearchResponseList(searchRequest.data);
@@ -42,7 +42,7 @@ const AdminList = (props) => {
     console.log(userData.token);
     try {
       const deletedPost = await axios.delete(
-        `http://localhost:5000/admin/${postId}`,
+        `https://cookbook-db.herokuapp.com/admin/${postId}`,
         {
           headers: {
             "x-auth-token": userData.token,
@@ -60,7 +60,7 @@ const AdminList = (props) => {
     console.log(userId);
     try {
       const deletedPost = await axios.delete(
-        `http://localhost:5000/admin/user/${userId}`,
+        `https://cookbook-db.herokuapp.com/admin/user/${userId}`,
         {
           headers: {
             "x-auth-token": userData.token,

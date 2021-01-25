@@ -123,7 +123,9 @@ const User = (props) => {
     const getUser = async () => {
       try {
         const fetchedUser = await axios.get(
-          `http://localhost:5000/user/${loggedInUserId || searchedUserId}`
+          `https://cookbook-db.herokuapp.com/user/${
+            loggedInUserId || searchedUserId
+          }`
         );
         setUser(fetchedUser.data);
       } catch (error) {

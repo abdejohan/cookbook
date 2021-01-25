@@ -56,7 +56,7 @@ const Posts = () => {
     async function fetchPost() {
       try {
         const fetchedPost = await axios.get(
-          `http://localhost:5000/posts/${postId}`
+          `https://cookbook-db.herokuapp.com/posts/${postId}`
         );
         setPostData(fetchedPost.data);
         setIngredients(fetchedPost.data.ingredients);

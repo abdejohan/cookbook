@@ -38,11 +38,14 @@ const Settings = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const fetchedUser = await axios.get("http://localhost:5000/user/", {
-          headers: {
-            "x-auth-token": userData.token,
-          },
-        });
+        const fetchedUser = await axios.get(
+          "https://cookbook-db.herokuapp.com/user/",
+          {
+            headers: {
+              "x-auth-token": userData.token,
+            },
+          }
+        );
         setUser(fetchedUser.data);
       } catch (error) {
         console.log(`THIS MESSAGE:${error}`);
@@ -57,7 +60,7 @@ const Settings = () => {
       (k) => !dataSend[k] && dataSend[k] !== undefined && delete dataSend[k]
     );
     try {
-      await axios.patch("http://localhost:5000/user/update", dataSend, {
+      await axios.patch("https://cookbook-db.herokuapp.com/update", dataSend, {
         headers: {
           "x-auth-token": userData.token,
         },
@@ -70,7 +73,7 @@ const Settings = () => {
 
   const DeleteUser = async () => {
     try {
-      await axios.delete(`http://localhost:5000/user/delete`, {
+      await axios.delete(`https://cookbook-db.herokuapp.com/user/delete`, {
         headers: {
           "x-auth-token": userData.token,
         },
