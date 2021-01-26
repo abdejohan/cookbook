@@ -71,7 +71,6 @@ footer {
 }
 
 .page-header {
-  width: 100%;
   font-family: "Chango", cursive !important;
   color: #54494b !important;
   font-weight: 900 !important;
@@ -156,6 +155,7 @@ footer {
   }
 
   footer {
+    padding: 0px;
     justify-content: flex-end;
   }
 }

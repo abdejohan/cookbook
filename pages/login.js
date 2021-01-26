@@ -71,7 +71,7 @@ export default function SignIn() {
 
   return (
     <section className={`alignHeader ${classes.section}`}>
-      <h2 className="page-header">Sign in</h2>
+      <h2 className="page-header no-width">Sign in</h2>
       <form
         className={classes.form}
         noValidate

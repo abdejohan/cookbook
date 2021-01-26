@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexFlow: "column nowrap",
     justifyContent: "flex-start",
+    marginTop: "15px",
   },
   resultsContainer: {
     paddingTop: "0px",
@@ -81,7 +82,8 @@ const SearchList = (props) => {
             </ul>
           </div>
         ) : (
-          <div>
+          <div className={classes.resultsContainer}>
+            <h4 className="sec-header">recipes</h4>
             <p className="plain-text">
               No recipes found...{" "}
               <span role="img" aria-label="sad smilie">
@@ -111,7 +113,8 @@ const SearchList = (props) => {
             </ul>
           </div>
         ) : (
-          <div>
+          <div className={classes.resultsContainer}>
+            <h4 className="sec-header">chefs</h4>
             <p className="plain-text">
               No users found...{" "}
               <span role="img" aria-label="sad smilie">
