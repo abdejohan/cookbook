@@ -8,7 +8,6 @@ import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles(() => ({
   section: {
-    margin: "10px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

@@ -12,7 +12,6 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexFlow: "column nowrap",
     justifyContent: "flex-start",
-    margin: "10px",
   },
   form: {
     marginTop: "30px",
