@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import axios from "axios";
-import Home from "../components/Home";
-import UserContext from "../context/UserContext";
+import Home from "./components/Home";
+import UserContext from "./context/UserContext";
 
 const App = () => {
   const { setUserData } = useContext(UserContext);
