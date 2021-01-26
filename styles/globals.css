@@ -111,9 +111,8 @@ footer {
 }
 
 .siteContainer {
+  padding: 10px;
   width: 100%;
-  max-width: 1000px;
-  margin: 0px auto;
   margin-top: 110px;
   height: auto;
   background-color: white;

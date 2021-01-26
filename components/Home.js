@@ -10,7 +10,6 @@ import responsive from "../public/responsive.svg";
 
 const useStyles = makeStyles(() => ({
   contentContainer: {
-    padding: "10px",
     display: "flex",
     flexFlow: "column nowrap",
     justifyContent: "center",
