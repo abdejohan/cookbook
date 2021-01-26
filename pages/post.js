@@ -7,12 +7,12 @@ import PostButtons from "../components/PostButtons";
 
 const useStyles = makeStyles(() => ({
   postContainer: {
-    padding: "20px",
+    padding: "10px",
     maxWidth: "650px",
     display: "flex",
     width: "100%",
     flexFlow: "column nowrap",
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "center",
   },
   article: {

@@ -6,29 +6,22 @@ import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles(() => ({
   contentContainer: {
-    padding: "30px 0px",
+    margin: "30px 0px",
     backgroundColor: "white",
     display: "flex",
     flexFlow: "column nowrap",
     justifyContent: "center",
     alignItems: "center",
-    width: "50%",
   },
   searchContainer: {
     backgroundColor: "#C9DBBA",
-    width: "100%",
-    minWidth: "300px",
-    flexGrow: "2",
     display: "flex",
     justifyContent: "center",
-    padding: "6px",
+    padding: "4px",
     borderRadius: "50px",
   },
   searchLabel: {
     display: "flex",
-    justifyContent: "center",
-    flexFlow: "column nowrap",
-    flexGrow: "2",
   },
   searchField: {
     lineHeight: "33px",

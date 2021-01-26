@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
   empty: {},
   section: {
     width: "100%",
-    maxWidth: "700px",
+    maxWidth: "450px",
     flexGrow: "2",
     backgroundColor: "white",
     alignItems: "center",
