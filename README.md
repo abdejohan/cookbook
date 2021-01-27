@@ -1,6 +1,10 @@
 # Virtual Cookbook!
 
 School project built with MERN stack that lets user store recipes, follow other users they find interesting and also add other peoples recipes to their own list.
+Check it out!
+
+Hosted at [u11-fullstack.vercel.app/](https://u11-fullstack-agxx9hrjt.vercel.app/)
+
 
 ## Built With
 
