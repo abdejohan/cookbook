@@ -40,7 +40,7 @@ const AddedNote = (props) => {
         Here is your Link:
       </h4>
       <span className="noteLink">
-        https://cookbook-db.herokuapp.com/posts/{noteLink}
+        https://u11-fullstack-c0k39qdes.vercel.app/post?postId={noteLink}
       </span>
       <button className={`buttonEffect ${classes.plusMinusBttn}`} type="button">
         Copy to clipboard
