@@ -22,6 +22,7 @@ const useStyles = makeStyles(() => ({
   },
   searchLabel: {
     display: "flex",
+    flex: "1",
   },
   searchField: {
     lineHeight: "33px",
@@ -64,8 +65,8 @@ const Search = () => {
   }, [role, userData.user]);
 
   return (
-    <section className={`${classes.contentContainer}`}>
-      <div className={classes.searchContainer}>
+    <section className={`${classes.contentContainer} searchBarContainer`}>
+      <div className={`searchBar ${classes.searchContainer}`}>
         <label htmlFor="search" className={classes.searchLabel}>
           <input
             className={classes.searchField}

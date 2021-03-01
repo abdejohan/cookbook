@@ -159,6 +159,14 @@ footer {
   }
 }
 
+.searchBarContainer {
+  width: 100%;
+}
+.searchBar {
+  width: 100%;
+  max-width: 600px;
+}
+
 .alt-blue-button {
   font-size: 1.5rem !important;
   border-radius: 10px !important;
